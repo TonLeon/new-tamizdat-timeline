@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Новый тамиздат: хронология / The New Tamizdat: a timeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=PT+Mono&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#ECEBE6; --card:#F9F8F4; --ink:#263338; --ink-2:#58656B; --rule:#BFC3C2;
+  --stamp:#5A3E91; --pencil:#B0322A; --catalog:#CF8F88; --bar:#000;
+  --display:"Old Standard TT", "Times New Roman", Georgia, serif;
+  --text:"PT Serif", Georgia, "Times New Roman", serif;
+  --mono:"PT Mono", "Courier New", Courier, monospace;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#161C1F; --card:#1F272B; --ink:#E4E2DA; --ink-2:#A3ACAE; --rule:#3B474B;
+    --stamp:#B09AE0; --pencil:#E8847A; --catalog:#8A504B; --bar:#050606; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#161C1F; --card:#1F272B; --ink:#E4E2DA; --ink-2:#A3ACAE; --rule:#3B474B;
+  --stamp:#B09AE0; --pencil:#E8847A; --catalog:#8A504B; --bar:#050606; color-scheme:dark;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.6 var(--text);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{max-width:100%}
+a{color:inherit;text-decoration-thickness:1px;text-underline-offset:.18em}
+a:hover{text-decoration-color:var(--stamp)}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--stamp);outline-offset:3px}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* Masthead */
+.masthead{display:flex;align-items:center;gap:20px;justify-content:space-between;padding:14px clamp(16px,4vw,48px);border-bottom:1px solid var(--rule)}
+.wordmark{font:400 1.25rem/1 var(--display);text-decoration:none;white-space:nowrap}
+.section-name{flex:1;font-style:italic;color:var(--ink-2);font-size:.95rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lang{display:flex;gap:2px}
+.lang button{background:none;border:0;min-width:40px;min-height:40px;padding:0 8px;font:400 .9rem var(--mono);color:var(--ink-2);cursor:pointer;border-bottom:2px solid transparent}
+.lang button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+
+main{max-width:1180px;margin:0 auto;padding:clamp(20px,4vw,56px) clamp(16px,4vw,48px) 96px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5em;min-height:46px;padding:.55em 1.25em;border:1.5px solid var(--ink);border-radius:2px;background:transparent;color:var(--ink);font:400 1rem/1.2 var(--text);text-decoration:none;cursor:pointer}
+.btn:hover{background:color-mix(in srgb,var(--ink) 7%,transparent)}
+.btn.primary{background:var(--ink);color:var(--card)}
+.btn.primary:hover{background:color-mix(in srgb,var(--ink) 86%,var(--stamp))}
+.btn:disabled{opacity:.38;cursor:not-allowed}
+.btn.quiet{border-color:transparent;text-decoration:underline;text-underline-offset:.2em;padding-inline:.4em}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+
+/* Landing */
+.landing{max-width:60rem}
+.hero-title{font:400 clamp(3.2rem,10vw,8rem)/.92 var(--display);letter-spacing:-.015em;margin:.1em 0 .15em}
+.redact{position:relative;display:inline-block}
+.redact::after{content:"";position:absolute;left:-.04em;right:-.04em;top:.12em;bottom:.02em;background:var(--bar);transform-origin:right center;animation:lift .7s cubic-bezier(.6,.05,.3,1) forwards;animation-delay:calc(.55s + var(--i) * .28s)}
+.no-anim .redact::after{display:none}
+@keyframes lift{to{transform:scaleX(0)}}
+.hero-kicker{font:italic 400 clamp(1.2rem,2.4vw,1.6rem)/1.3 var(--display);color:var(--ink-2);margin:0 0 1.6em}
+.intro{font-size:clamp(1.08rem,1.8vw,1.28rem);line-height:1.6;max-width:34em;margin:0}
+.hero-cards{display:flex;margin:56px 0 0;padding-left:10px}
+.mini{width:118px;height:76px;flex:none;margin-left:-14px;background:var(--card);border:1px solid var(--rule);position:relative;transform:rotate(var(--r))}
+.mini::before{content:"";position:absolute;left:0;right:0;top:15px;border-top:1px solid var(--catalog)}
+.mini::after{content:"";position:absolute;left:12px;top:30px;width:58%;height:9px;background:var(--bar);box-shadow:0 16px 0 -2px var(--rule)}
+@media (max-width:600px){.mini:nth-child(n+5){display:none}}
+
+/* Rules */
+.rules{max-width:44rem}
+.rules h1,.rounds h1,.end-head h1{font:400 clamp(2.2rem,5vw,3.4rem)/1.05 var(--display);margin:0 0 .6em}
+.rule-list{list-style:none;margin:0;padding:0;counter-reset:r}
+.rule-list li{counter-increment:r;display:grid;grid-template-columns:2.6rem 1fr;gap:12px;padding:14px 0;border-top:1px solid var(--rule);font-size:1.08rem}
+.rule-list li::before{content:counter(r);font:400 1.7rem/1 var(--display);color:var(--ink-2)}
+.kbd-note{color:var(--ink-2);font-size:.95rem;border-top:1px solid var(--rule);padding-top:14px}
+
+/* Game */
+.game-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 24px;margin-bottom:28px;border-bottom:1.5px solid var(--ink);padding-bottom:12px}
+.round-name{font:400 clamp(1.5rem,3vw,2.1rem)/1.15 var(--display);margin:0}
+.progress{margin:0;color:var(--ink-2);font-style:italic}
+.board{display:grid;grid-template-columns:minmax(290px,370px) 1fr;gap:clamp(28px,5vw,64px);align-items:start}
+.deck{position:sticky;top:calc(20px + env(safe-area-inset-top,0px))}
+.deck-stack{position:relative;margin:0 0 18px}
+.stack-edge{position:absolute;inset:0;background:var(--card);border:1px solid var(--rule)}
+.stack-edge.e1{transform:translate(6px,6px) rotate(.6deg)}
+.stack-edge.e2{transform:translate(12px,12px) rotate(1.2deg)}
+.deck-hint{margin:22px 0 4px;font-size:.95rem}
+.deck-count{margin:0;color:var(--ink-2);font-style:italic;font-size:.9rem}
+.deck-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.deck-actions .selected-info{display:none}
+.deck-done{border-top:1.5px solid var(--ink);padding-top:16px}
+.deck-done p{margin:0 0 14px}
+
+/* Catalogue card */
+.card{position:relative;background:var(--card);border:1px solid var(--rule);padding:0 22px 40px}
+.card::after{content:"";position:absolute;left:50%;bottom:12px;width:13px;height:13px;margin-left:-6.5px;border-radius:50%;background:var(--paper);border:1px solid var(--rule)}
+.card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:38px;border-bottom:1px solid var(--catalog);font-style:italic;font-size:.82rem;color:var(--ink-2)}
+.card-head svg{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.card-title{font:400 1.5rem/1.14 var(--display);margin:.55em 0 .35em}
+.card-desc{margin:0;font-size:.97rem;line-height:1.55}
+.card-date{margin:16px 0 0;font:400 .85rem var(--mono);color:var(--ink-2);display:flex;gap:.6em;align-items:center}
+.card-date .bar{display:inline-block;width:9.5em;height:1.05em;background:var(--bar)}
+.card.current{cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.card.current:active{cursor:grabbing}
+.card.current.lifted{opacity:.3}
+.drag-clone{position:fixed;z-index:60;pointer-events:none;margin:0;transform:rotate(-1.6deg);box-shadow:0 14px 34px rgba(20,28,31,.22)}
+.card .grip{font:400 .78rem var(--mono);letter-spacing:.05em}
+.anchor-label{font-style:italic}
+
+/* Stamps and notes */
+.stamp{position:absolute;right:14px;top:48px;transform:rotate(-7deg);border:2px solid var(--stamp);color:var(--stamp);font:400 .74rem/1 var(--mono);letter-spacing:.06em;padding:5px 8px 4px;border-radius:3px;opacity:.88;background:color-mix(in srgb,var(--card) 80%,transparent)}
+.just-placed .stamp{animation:press .32s ease-out}
+@keyframes press{from{transform:rotate(-7deg) scale(1.5);opacity:0}to{transform:rotate(-7deg) scale(1);opacity:.88}}
+.pencil-note{margin:12px 0 0;font:italic .93rem/1.45 var(--text);color:var(--pencil);border-left:2px solid var(--pencil);padding-left:.75em}
+.just-placed .pencil-note{animation:ink .5s ease-out}
+@keyframes ink{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+.fine{font-size:.86rem;color:var(--ink-2);line-height:1.5}
+
+details.more{margin-top:14px}
+details.more summary{cursor:pointer;display:inline-block;text-decoration:underline;text-underline-offset:.2em;font-size:.92rem;list-style:none}
+details.more summary::-webkit-details-marker{display:none}
+details.more[open] summary{margin-bottom:6px}
+details.more p{margin:.4em 0;font-size:.92rem}
+details.more .src{font-size:.86rem;color:var(--ink-2)}
+
+/* Timeline */
+.tl{list-style:none;margin:0;padding:0}
+.entry,.slot{display:grid;grid-template-columns:7.6rem 22px minmax(0,1fr);column-gap:14px}
+.spine{position:relative;align-self:stretch}
+.spine::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:1.5px;margin-left:-.75px;background:var(--ink)}
+.entry .spine::after{content:"";position:absolute;left:50%;top:1.55rem;width:11px;height:11px;margin-left:-5.5px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 4px var(--paper)}
+.entry.status-corrected .spine::after{background:var(--paper);border:2px solid var(--pencil)}
+.slot.is-first .spine::before{top:50%;background:none;border-left:1.5px dashed var(--rule);width:0}
+.slot.is-last .spine::before{bottom:50%;background:none;border-left:1.5px dashed var(--rule);width:0}
+.slot.is-first.is-last .spine::before{display:none}
+.entry-date{text-align:right;padding-top:1.1rem}
+.entry-date .year{display:block;font:400 1.9rem/1 var(--display);margin-bottom:.25rem}
+.entry-date .date-text{position:relative;display:inline-block;font:400 .82rem/1.35 var(--mono);color:var(--ink-2)}
+.just-placed .date-text::after{content:"";position:absolute;inset:-1px -3px;background:var(--bar);transform-origin:right;animation:lift .55s .15s cubic-bezier(.6,.05,.3,1) forwards}
+.entry .card{margin:.35rem 0}
+.entry .card.placed{padding-bottom:36px}
+.entry .card-title{font-size:1.32rem;padding-right:84px}
+
+.slot-btn{grid-column:3;display:flex;align-items:center;gap:.7em;width:100%;min-height:44px;margin:2px 0;padding:6px 12px;border:1px dashed transparent;background:none;color:var(--ink-2);text-align:left;cursor:pointer;font:italic .9rem var(--text)}
+.slot-rule{flex:1;border-top:1px dashed var(--rule);order:2}
+.slot-label{order:1;white-space:nowrap}
+.slot-btn:hover,.slot-btn.drop-target{border-color:var(--stamp);color:var(--stamp);background:color-mix(in srgb,var(--stamp) 6%,transparent)}
+.slot-btn:hover .slot-rule,.slot-btn.drop-target .slot-rule{border-color:var(--stamp)}
+.slot-btn:disabled{cursor:default}
+.slot.selected .slot-btn{border:1.5px dashed var(--stamp);background:var(--card);color:var(--ink);padding:12px 16px;display:block;margin:6px 0;font-style:normal}
+.ghost-title{display:block;font:400 1.2rem/1.2 var(--display)}
+.ghost-hint{display:block;margin-top:4px;font:italic .85rem var(--text);color:var(--stamp)}
+.slot.rejected .slot-btn{border:1.5px dashed var(--pencil);background:var(--card);padding:12px 16px;display:block;margin:6px 0;color:var(--pencil)}
+.slot.rejected .ghost-title{text-decoration:line-through;text-decoration-thickness:2px}
+.slot.rejected .ghost-hint{color:var(--pencil)}
+.tl.final .entry{padding:6px 0}
+
+@media (max-width:860px){
+  body{font-size:16px}
+  .board{grid-template-columns:1fr}
+  .deck{position:static}
+  .card{padding:0 16px 36px}
+  .card-title{font-size:1.3rem}
+  .entry,.slot{grid-template-columns:4.7rem 16px minmax(0,1fr);column-gap:10px}
+  .entry-date .year{font-size:1.45rem}
+  .entry-date .date-text{font-size:.72rem}
+  .entry .card-title{font-size:1.18rem;padding-right:0}
+  .stamp{position:static;display:inline-block;margin-top:12px;transform:rotate(-4deg)}
+  .just-placed .stamp{animation:none}
+  .game.has-selection .deck-actions{position:fixed;left:0;right:0;bottom:0;z-index:40;margin:0;padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px));background:var(--paper);border-top:1.5px solid var(--ink);align-items:center}
+  .game.has-selection .deck-actions .selected-info{display:block;flex:1 1 100%;margin:0;font:400 1rem/1.2 var(--display)}
+  .game.has-selection .deck-actions .btn{flex:1}
+}
+
+/* Rounds */
+.rounds{max-width:52rem}
+.drawers{list-style:none;margin:0;padding:0}
+.drawer{display:grid;grid-template-columns:3.2rem 1fr;gap:16px;width:100%;text-align:left;background:none;border:0;border-top:1.5px solid var(--ink);padding:20px 4px 24px;cursor:pointer;position:relative}
+.drawer:hover .drawer-title{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.15em}
+.drawer-no{font:400 1.8rem/1 var(--display);color:var(--ink-2)}
+.drawer-title{display:block;font:400 1.6rem/1.15 var(--display)}
+.drawer-blurb{display:block;margin-top:6px;color:var(--ink-2)}
+.drawer .stamp{top:22px}
+@media (max-width:640px){.drawer .stamp{position:static;display:inline-block;margin-top:10px}}
+
+/* End */
+.end-head{max-width:50rem;margin-bottom:40px}
+.score{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin:0 0 18px}
+.score-num{font:400 clamp(2.6rem,6vw,4rem)/1 var(--display)}
+.conclusion{font-size:1.1rem;max-width:36em;margin:0}
+.end-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:start}
+.end-grid h2{font:400 1.7rem/1.15 var(--display);margin:0 0 .5em;border-bottom:1.5px solid var(--ink);padding-bottom:10px}
+.reward{position:sticky;top:calc(20px + env(safe-area-inset-top,0px))}
+.postcard{margin:0;perspective:1800px}
+.pc-inner{position:relative;aspect-ratio:3/2;transition:transform .8s cubic-bezier(.4,.1,.2,1);transform-style:preserve-3d}
+.pc-inner.flipped{transform:rotateY(180deg)}
+.pc-inner canvas{position:absolute;inset:0;width:100%;height:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--rule)}
+.pc-inner .pc-back{transform:rotateY(180deg)}
+.pc-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.email-panel{margin-top:16px;padding:16px;border:1px solid var(--rule);background:var(--card)}
+.email-panel label{display:block;font-size:.92rem;margin-bottom:6px}
+.email-row{display:flex;gap:10px;flex-wrap:wrap}
+.email-row input{flex:1 1 220px;min-height:46px;padding:0 12px;border:1.5px solid var(--ink);border-radius:2px;background:var(--paper);color:var(--ink);font:400 1rem var(--mono)}
+.status-msg{min-height:1.4em;margin:10px 0 0;font-style:italic;font-size:.92rem}
+.unlocked{margin-top:30px;border-top:1px solid var(--rule);padding-top:18px}
+.unlocked .fine{margin:0}
+.unlocked h3{font:400 1.45rem/1.2 var(--display);margin:.2em 0 .3em}
+.unlocked p{margin:.3em 0 .7em}
+@media (max-width:860px){.end-grid{grid-template-columns:1fr}.reward{position:static}}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .redact::after{display:none}
+  .just-placed .date-text::after{display:none}
+}
+</style>
+</head>
+<body>
+<header class="masthead">
+  <span class="section-name" id="section-name"></span>
+  <div class="lang" role="group" id="lang-group">
+    <button type="button" data-lang="en" lang="en">EN</button>
+    <button type="button" data-lang="ru" lang="ru">RU</button>
+  </div>
+</header>
+<main id="app"></main>
+<div id="live" class="sr-only" aria-live="polite"></div>
+
+<!-- =====================================================================
+     DATA LAYER
+     All game content lives here, separate from the interface.
+     - events: one entry per event card. Dates are ranges (start/end, ISO),
+       so year-only or month-only events are compared safely.
+     - rounds: which events make up a timeline, which one starts on the board,
+       and which postcard it rewards. Add a round by adding an object.
+     - archive: objects and postcards used as rewards.
+     Replace with the verified dataset when ready; image fields are null for now.
+     ===================================================================== -->
+<script>
+const TAMIZDAT_DATA = {
+  config: {
+    archiveUrl: "https://tamizdatproject.org/archive/banned-books-now/",
+    newsletterUrl: "https://tamizdatproject.org/",
+    // Future: an endpoint that emails the postcard. Null = the page opens the player's own mail app.
+    postcardEmailEndpoint: null
+  },
+  events: {
+    "babel-press": {
+      kind: "publisher",
+      date: { start: "2019-01-01", end: "2020-12-31", precision: "year", label: { ru: "2019 / 2020", en: "2019 / 2020" }, yearLabel: "2019 / 2020" },
+      title: { ru: "Издательская программа «Бабеля»", en: "Babel starts publishing" },
+      text: {
+        ru: "У тель-авивского книжного магазина «Бабель» появляется собственная издательская программа. Первый проект — переиздание «Города Эн» Леонида Добычина.",
+        en: "The Tel Aviv bookshop Babel launches its own publishing program. Its first project is a new edition of Leonid Dobychin’s The Town of N."
+      },
+      note: {
+        ru: "Само издательство отсчитывает начало от 2019 года, но библиографически издание «Города Эн» датируется 2020-м. Поэтому здесь верна любая позиция в пределах этих двух лет.",
+        en: "The press dates its beginning to 2019, though the edition of The Town of N is catalogued as 2020. Any position within those two years counts."
+      },
+      source: { label: "Prague Book Tower, archive 2024", url: "https://praguebooktower.cz/archiv2024" },
+      image: null
+    },
+    "ponyatye": {
+      kind: "book",
+      date: { start: "2022-01-01", end: "2022-12-31", precision: "year", label: { ru: "2022", en: "2022" } },
+      title: { ru: "Антология «Понятые и свидетели»", en: "The anthology Poniatye i svideteli" },
+      text: {
+        ru: "«Бабель» выпускает два тома антивоенной поэтической антологии «Понятые и свидетели. Хроники военного времени». Первый том собирает стихи первых пятидесяти дней войны.",
+        en: "Babel publishes two volumes of the anti-war poetry anthology Poniatye i svideteli: Chronicles of Wartime. The first volume gathers poems from the war’s first fifty days."
+      },
+      note: {
+        ru: "Известен только год выхода, поэтому засчитывается любая позиция внутри этого года.",
+        en: "Only the year of publication is known, so any position within that year counts."
+      },
+      source: { label: "Apple Podcasts: interview with the publishers", url: "https://podcasts.apple.com/us/podcast/%D1%8D%D1%82%D0%BE-%D0%BF%D0%BE%D1%8D%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%81%D0%B2%D0%B8%D0%B4%D0%B5%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%B0-%D0%B4%D0%BB%D1%8F-%D0%B1%D1%83%D0%B4%D1%83%D1%89%D0%B5%D0%B3%D0%BE-%D1%81%D1%83%D0%B4%D0%B0-%D0%B8%D0%B7%D0%B4%D0%B0%D1%82%D0%B5%D0%BB%D1%8C/id1470431436?i=1000566615620" },
+      image: null
+    },
+    "freedom-letters": {
+      kind: "publisher",
+      date: { start: "2023-04-04", end: "2023-04-04", precision: "day", label: { ru: "4 апреля 2023", en: "4 April 2023" } },
+      title: { ru: "Основано Freedom Letters", en: "Freedom Letters is founded" },
+      text: {
+        ru: "Георгий Урушадзе объявляет о создании издательства Freedom Letters, которое выпускает в том числе тексты, невозможные к публикации в России.",
+        en: "Georgy Urushadze announces Freedom Letters, a press whose list includes texts that cannot be published in Russia."
+      },
+      note: {
+        ru: "Дата — день, когда Георгий Урушадзе объявил о создании издательства.",
+        en: "The date is the day Georgy Urushadze announced the new press."
+      },
+      source: { label: "Freedom Letters: about the press", url: "https://freedomletters.org/service/about" },
+      image: null
+    },
+    "vidim-books": {
+      kind: "publisher",
+      kindLabel: { ru: "издательство и дистрибуция", en: "publisher and distributor" },
+      date: { start: "2023-01-01", end: "2023-12-31", precision: "year", label: { ru: "2023", en: "2023" } },
+      title: { ru: "Vidim Books", en: "Vidim Books" },
+      text: {
+        ru: "Мария Алеф, Александр Гаврилов и Данила Стратович основывают Vidim Books — издательство и одновременно международную систему распространения неподцензурных русскоязычных книг.",
+        en: "Maria Alef, Alexander Gavrilov and Danila Stratovich found Vidim Books, a press that doubles as an international distribution network for uncensored Russian-language books."
+      },
+      note: {
+        ru: "Известен только год основания: засчитывается любая позиция среди событий этого года.",
+        en: "Only the founding year is known: any position among that year’s events counts."
+      },
+      source: { label: "Pulitzer Center: Notes From Russia’s Literary Underground", url: "https://pulitzercenter.org/stories/notes-russias-literary-underground" },
+      image: null
+    },
+    "meduza-press": {
+      kind: "publisher",
+      date: { start: "2023-08-15", end: "2023-08-15", precision: "day", label: { ru: "15 августа 2023", en: "15 August 2023" } },
+      title: { ru: "У «Медузы» появляется издательство", en: "Meduza launches a press" },
+      text: {
+        ru: "«Медуза» объявляет о запуске собственного книжного издательства. Книги будут доступны и читателям в России — через приложение.",
+        en: "Meduza announces its own book publishing house. Readers inside Russia will be able to get its books through the Meduza app."
+      },
+      note: {
+        ru: "Дата — объявление о запуске. Первые книги вышли осенью того же года.",
+        en: "The date is the launch announcement. The first books followed that autumn."
+      },
+      source: { label: "Meduza", url: "https://meduza.io/feature/2023/08/15/meduza-zapuskaet-svoe-izdatelstvo-v-oktyabre-2023-goda-vyydet-pervaya-kniga-moya-lyubimaya-strana-eleny-kostyuchenko/" },
+      image: null
+    },
+    "babel-berlin": {
+      kind: "bookshop",
+      date: { start: "2023-09-01", end: "2023-09-30", precision: "month", label: { ru: "сентябрь 2023", en: "September 2023" } },
+      title: { ru: "Babel Books Berlin", en: "Babel Books Berlin opens" },
+      text: {
+        ru: "В Берлине открывается книжный магазин Babel Books Berlin.",
+        en: "The bookshop Babel Books Berlin opens its doors in Berlin."
+      },
+      note: {
+        ru: "Известен месяц открытия, но не точный день.",
+        en: "The month of the opening is known, not the exact day."
+      },
+      source: { label: "Babel Books Berlin: about us", url: "https://babelbooksberlin.com/pages/about" },
+      image: null
+    },
+    "meduza-books": {
+      kind: "book",
+      date: { start: "2023-10-20", end: "2023-10-20", precision: "day", label: { ru: "20 октября 2023", en: "20 October 2023" } },
+      title: { ru: "Первые книги «Медузы»", en: "Meduza’s first books" },
+      text: {
+        ru: "Выходят первые книги издательства «Медузы»: «Моя любимая страна» Елены Костюченко и — совместно с Zygaro — «Война и наказание» Михаила Зыгаря.",
+        en: "Meduza’s press releases its first books: Elena Kostyuchenko’s Moya lyubimaya strana (My Beloved Country) and, with Zygaro, Mikhail Zygar’s Voina i nakazanie (War and Punishment)."
+      },
+      note: {
+        ru: "Обе книги поступили в продажу в день выхода.",
+        en: "Both books went on sale on the day of release."
+      },
+      source: { label: "Meduza", url: "https://meduza.io/feature/2023/10/20/v-izdatelstve-meduzy-vyhodyat-srazu-dve-knigi-eleny-kostyuchenko-i-mihaila-zygarya-vy-mozhete-ih-kupit-uzhe-segodnya/" },
+      image: null
+    },
+    "fokus": {
+      kind: "book",
+      kindLabel: { ru: "книга и издательский проект", en: "book and publishing project" },
+      date: { start: "2024-01-01", end: "2024-12-31", precision: "year", label: { ru: "2024", en: "2024" } },
+      title: { ru: "«Фокус» Марии Степановой", en: "Maria Stepanova’s Fokus" },
+      text: {
+        ru: "В рамках транснационального издательского «Проекта 24» выходит «Фокус» Марии Степановой.",
+        en: "Maria Stepanova’s Fokus appears from Project 24, a transnational publishing initiative."
+      },
+      note: {
+        ru: "Точная дата основания «Проекта 24» пока не установлена, поэтому здесь отмечен выход конкретной книги. Известен только год: засчитывается любая позиция внутри него.",
+        en: "The founding date of Project 24 has not been established, so the timeline marks this book instead. Only the year is known: any position within it counts."
+      },
+      source: { label: "24: Fokus", url: "https://24.place/books/fokus/" },
+      image: null
+    },
+    "prague-book-tower": {
+      kind: "fair",
+      date: { start: "2024-09-13", end: "2024-09-15", precision: "day", label: { ru: "13–15 сентября 2024", en: "13–15 September 2024" } },
+      title: { ru: "Пражская книжная башня", en: "Prague Book Tower" },
+      text: {
+        ru: "В Праге проходит первая международная ярмарка новой волны русскоязычной литературы — «Пражская книжная башня».",
+        en: "Prague hosts Prague Book Tower, the first international fair of the new wave of Russian-language literature."
+      },
+      note: {
+        ru: "Участвовали 16 издательств и 4 литературных журнала. По словам организаторов, посетители называли её «ярмаркой нового тамиздата».",
+        en: "Sixteen publishers and four literary journals took part. The organisers report that visitors called it the fair of the new tamizdat."
+      },
+      source: { label: "Prague Book Tower, archive 2024", url: "https://praguebooktower.cz/archiv2024" },
+      image: null
+    },
+    "dar-prize": {
+      kind: "prize",
+      date: { start: "2024-09-27", end: "2024-09-27", precision: "day", label: { ru: "27 сентября 2024", en: "27 September 2024" } },
+      title: { ru: "Премия «Дар»", en: "The Dar prize" },
+      text: {
+        ru: "Учреждена литературная премия «Дар» — для поддержки литературы на русском языке вне зависимости от гражданства и места жительства автора.",
+        en: "The Dar literary prize is established to support writing in Russian, whatever the author’s citizenship or place of residence."
+      },
+      note: {
+        ru: "Дата — объявление об учреждении премии.",
+        en: "The date is the announcement of the prize."
+      },
+      source: { label: "Dar Prize", url: "https://darprize.com/2024/09/27/literaturnaya-premiya-dar/" },
+      image: null
+    },
+    "pkhentz": {
+      kind: "book",
+      kindLabel: { ru: "переиздание", en: "new edition" },
+      date: { start: "2024-11-15", end: "2024-11-15", precision: "day", label: { ru: "15 ноября 2024", en: "15 November 2024" } },
+      title: { ru: "«Пхенц» Абрама Терца", en: "Abram Tertz’s Pkhentz" },
+      text: {
+        ru: "Нью-йоркский Tamizdat Project выпускает «Пхенц» Абрама Терца (Андрея Синявского) отдельным двуязычным изданием, в новом переводе Эйнсли Морс при участии Кевина Риса.",
+        en: "New York’s Tamizdat Project publishes Abram Tertz’s (Andrei Sinyavsky’s) Pkhentz as a freestanding bilingual edition, in a new translation by Ainsley Morse with Kevin Reese."
+      },
+      note: {
+        ru: "Рассказ написан в 1957 году и впервые вышел на Западе после процесса Синявского и Даниэля 1966 года. Эта книга связывает старый тамиздат с новым.",
+        en: "Written in 1957, the story first appeared in the West after the 1966 Sinyavsky–Daniel trial. The book links the old tamizdat with the new."
+      },
+      source: { label: "Tamizdat Project: Pkhentz", url: "https://tamizdatproject.org/programs/publishing/pkhentz/" },
+      image: null
+    },
+    "idiot-books": {
+      kind: "bookshop",
+      date: { start: "2025-02-01", end: "2025-02-28", precision: "month", label: { ru: "февраль 2025", en: "February 2025" } },
+      title: { ru: "Idiot Books в Лондоне", en: "Idiot Books in London" },
+      text: {
+        ru: "В Лондоне открывается русскоязычный книжный магазин Idiot Books.",
+        en: "Idiot Books, a Russian-language bookshop, opens in London."
+      },
+      note: {
+        ru: "Известен месяц открытия, но не точный день.",
+        en: "The month of the opening is known, not the exact day."
+      },
+      source: { label: "The Insider: Tamizdat partisans", url: "https://theins.press/en/society/282649" },
+      image: null
+    },
+    "bebelplatz": {
+      kind: "fair",
+      date: { start: "2025-04-03", end: "2025-04-06", precision: "day", label: { ru: "3–6 апреля 2025", en: "3–6 April 2025" } },
+      title: { ru: "Ярмарка Berlin Bebelplatz", en: "The Berlin Bebelplatz fair" },
+      text: {
+        ru: "В Берлине впервые проходит книжная ярмарка русскоязычной литературы Berlin Bebelplatz.",
+        en: "Berlin holds its first Berlin Bebelplatz fair of Russian-language books."
+      },
+      note: {
+        ru: "В первой ярмарке участвовали около 30 независимых издательств и литературных проектов.",
+        en: "Around thirty independent publishers and literary projects took part in the first fair."
+      },
+      source: { label: "Novaya Gazeta Europe", url: "https://novayagazeta.eu/amp/articles/2025/04/07/prosto-potomu-chto-eti-knigi-dolzhny-byt" },
+      image: null
+    }
+  },
+  // One chronology for now. A future "old tamizdat" chronology is another object here,
+  // with its own events list; the timeline chooser appears automatically once there are two.
+  rounds: [
+    {
+      id: "modern",
+      title: { ru: "Новый тамиздат", en: "The new Tamizdat" },
+      blurb: { ru: "Независимое русскоязычное книгоиздание после 2019 года.", en: "Independent Russian-language publishing since 2019." },
+      // Pool of events; each game draws `draw` of them, so every replay is a new set.
+      events: ["babel-press", "ponyatye", "freedom-letters", "vidim-books", "meduza-press", "babel-berlin", "meduza-books", "fokus", "prague-book-tower", "dar-prize", "pkhentz", "idiot-books", "bebelplatz"],
+      draw: 7,
+      postcard: "random"
+    }
+  ],
+  archive: {
+    objects: {
+      pkhentz: {
+        author: { ru: "Абрам Терц", en: "Abram Tertz" },
+        title: { ru: "Пхенц", en: "Pkhentz" },
+        imprint: { ru: "Нью-Йорк: Tamizdat Project, 2024", en: "New York: Tamizdat Project, 2024" },
+        description: {
+          ru: "Рассказ эпохи оттепели о советском бухгалтере, который на самом деле — пришелец с другой планеты: он прячет своё похожее на кактус тело и бережёт обрывки забытого языка. Издание Tamizdat Project впервые публикует текст отдельной книгой, вместе с новым английским переводом.",
+          en: "A Thaw-era story about a Soviet accountant who is secretly an alien, hiding a cactus-like body and holding on to scraps of a forgotten language. Tamizdat Project’s edition is the first to publish it as a book of its own, with a new English translation."
+        },
+        link: "https://tamizdatproject.org/programs/publishing/pkhentz/",
+        image: null
+      }
+    },
+    postcards: {
+      "pkhentz-trial": {
+        object: "pkhentz",
+        fact: {
+          ru: "Написанный в 1957 году «Пхенц» впервые вышел на Западе после показательного процесса 1966 года, когда Андрея Синявского (Абрама Терца) и Юлия Даниэля осудили за публикации за границей.",
+          en: "Written in 1957, Pkhentz first appeared in the West after the 1966 show trial in Moscow, when Andrei Sinyavsky (Abram Tertz) and Yuli Daniel were sentenced for publishing their work abroad."
+        }
+      },
+      "pkhentz-series": {
+        object: "pkhentz",
+        fact: {
+          ru: "«Пхенц» открывает серию Tamizdat Project «XX век» под номером 1: двуязычная книга в мягкой обложке, 60 страниц, 110 × 170 мм.",
+          en: "Pkhentz is No. 1 in Tamizdat Project’s XX Century series: a bilingual paperback of 60 pages, 110 × 170 mm."
+        }
+      }
+    }
+  }
+};
+</script>
+
+<!-- ===================== INTERFACE STRINGS ===================== -->
+<script>
+const I18N = {
+  en: {
+    docTitle: "The New Tamizdat: a timeline",
+    sectionName: "The New Tamizdat: a timeline game",
+    langGroup: "Language",
+    heroWords: ["The new", "Tamizdat"],
+    heroSub: "A timeline in seven cards",
+    intro: "Can you reconstruct the history of the new Tamizdat? Place seven events from the world of independent publishing, censorship, and literary exile in chronological order.",
+    howToPlay: "How to play",
+    chooseTimeline: "Choose a timeline",
+    rulesTitle: "How to play",
+    rules: [
+      "Each timeline has seven event cards. One is already in place to start you off.",
+      "Drag the top card into a gap on the timeline, or tap a gap to choose it.",
+      "Check the position, then confirm it.",
+      "If you’re right, the card stays and its date is revealed. If not, it moves to where it belongs, with a note saying why.",
+      "Some dates are known only to the year. Any position within that year counts.",
+      "Keep going until all seven events form a complete timeline."
+    ],
+    kbdNote: "With a keyboard: Tab to a gap, press Enter to choose it, then Enter again to confirm. The arrow keys move between gaps.",
+    startFirst: "Start",
+    startNow: "Start playing",
+    playAgain: "Play again with new cards",
+    progress: (n, t) => `${n} of ${t} events on the timeline`,
+    cardsLeft: n => n === 0 ? "This is the last card" : (n === 1 ? "1 more card after this one" : `${n} more cards after this one`),
+    deckLabel: "Card to place",
+    timelineLabel: "Timeline",
+    date: "Date:",
+    dateHidden: "hidden until placed",
+    drag: "drag",
+    hintPick: "Drag this card into a gap on the timeline, or tap a gap.",
+    hintConfirm: "Confirm the position, or choose another gap.",
+    confirm: "Confirm position",
+    cancel: "Cancel",
+    placeHere: "Place here",
+    ghostHint: "Confirm to place it here",
+    slotFirst: t => `Place before “${t}”`,
+    slotLast: t => `Place after “${t}”`,
+    slotBetween: (a, b) => `Place between “${a}” and “${b}”`,
+    selectedAt: "Position chosen",
+    stampCorrect: "correct",
+    stampAnchor: "Starting point",
+    noteBefore: t => `Not quite: it happened before “${t}”.`,
+    noteAfter: t => `Not quite: it happened after “${t}”.`,
+    rejected: "Not here",
+    learnMore: "Learn more",
+    source: "Source:",
+    doneText: "All seven events are on the timeline.",
+    seeResults: "See the full timeline",
+    annSelected: t => `Gap chosen. Press Enter again or use Confirm position to place “${t}”.`,
+    annCorrect: (t, d) => `Correct. “${t}”: ${d}.`,
+    annMoved: (t, d, n) => `${n} Moved to its place. Date: ${d}.`,
+    annNext: t => `Next card: “${t}”.`,
+    endTitle: "The timeline is complete",
+    scoreSub: () => "placed correctly on the first try",
+    conclusion: "Presses, bookshops, fairs and a prize, spread across several countries, now carry Russian-language literature beyond the reach of the censor — much as the tamizdat of the Soviet era once did. Seven cards, one emerging ecosystem.",
+    playAnother: "Play another timeline",
+    replay: "Replay this timeline",
+    timelineHeading: "Your timeline",
+    postcardHeading: "A postcard from Tamizdat",
+    postcardIntro: "Your reward: a card from the Tamizdat Project collection. Nothing to fill in.",
+    turnOver: "Turn over",
+    turnFront: "Turn to the front",
+    download: "Download postcard",
+    downloadSaved: "Postcard saved.",
+    downloadDeclined: "Download cancelled.",
+    downloadFailed: "This view can’t save files.",
+    emailToggle: "Send postcard to my email",
+    emailLabel: "Your email address (optional)",
+    emailOpen: "Open in my mail app",
+    emailNote: "This prototype doesn’t collect addresses. Your own mail app opens with the postcard text, addressed to you. Nothing is stored, and you won’t be subscribed to anything.",
+    explore: "Explore the archive",
+    newsletter: "Subscribe to the Tamizdat Project newsletter",
+    newsletterNote: "A separate sign-up on tamizdatproject.org.",
+    unlocked: "Unlocked from the archive",
+    openObject: "Open this book in the archive",
+    roundsTitle: "Choose a timeline",
+    best: (s, t) => `best ${s}/${t}`,
+    backStart: "Back to the start",
+    pcGreeting: "Greetings from the new Tamizdat",
+    pcTo: "To: a reader of the new tamizdat",
+    pcScore: (s, t) => `First try: ${s} of ${t}`,
+    pcMark: "New Tamizdat",
+    pcAlt: (title, fact) => `Postcard. Front: the book ${title} by Abram Tertz, Tamizdat Project, 2024. Back: ${fact}`,
+    mailSubject: "A postcard from Tamizdat",
+    kinds: { publisher: "publisher", book: "book", bookshop: "bookshop", fair: "book fair", prize: "literary prize", censorship: "censorship" }
+  },
+  ru: {
+    docTitle: "Новый тамиздат: хронология",
+    sectionName: "Новый тамиздат: игра-хронология",
+    langGroup: "Язык",
+    heroWords: ["Новый", "тамиздат"],
+    heroSub: "Хронология в семи карточках",
+    intro: "Сможете восстановить историю нового тамиздата? Расположите семь событий из истории независимого книгоиздания, цензуры и литературной эмиграции в правильном порядке.",
+    howToPlay: "Как играть",
+    chooseTimeline: "Выбрать хронологию",
+    rulesTitle: "Как играть",
+    rules: [
+      "В каждой хронологии семь карточек с событиями. Одна уже лежит на шкале — от неё и начнём.",
+      "Перетащите верхнюю карточку в промежуток на шкале или просто нажмите на промежуток.",
+      "Проверьте позицию и подтвердите её.",
+      "Если вы правы, карточка остаётся на месте и открывается дата. Если нет — она переместится туда, где должна быть, с пометкой почему.",
+      "Некоторые даты известны только с точностью до года. Тогда засчитывается любая позиция внутри этого года.",
+      "Продолжайте, пока все семь событий не сложатся в хронологию."
+    ],
+    kbdNote: "С клавиатуры: Tab — к промежутку, Enter — выбрать, Enter ещё раз — подтвердить. Стрелки переключают промежутки.",
+    startFirst: "Начать",
+    startNow: "Начать игру",
+    playAgain: "Сыграть ещё раз с новыми карточками",
+    progress: (n, t) => `На шкале ${n} из ${t} событий`,
+    cardsLeft: n => n === 0 ? "Это последняя карточка" : `После этой — ещё ${n} ${plural(n, "карточка", "карточки", "карточек")}`,
+    deckLabel: "Карточка для размещения",
+    timelineLabel: "Хронология",
+    date: "Дата:",
+    dateHidden: "скрыта до размещения",
+    drag: "тянуть",
+    hintPick: "Перетащите карточку в промежуток на шкале или нажмите на промежуток.",
+    hintConfirm: "Подтвердите позицию или выберите другой промежуток.",
+    confirm: "Подтвердить",
+    cancel: "Отменить",
+    placeHere: "Поместить сюда",
+    ghostHint: "Подтвердите, чтобы поместить сюда",
+    slotFirst: t => `Поместить перед «${t}»`,
+    slotLast: t => `Поместить после «${t}»`,
+    slotBetween: (a, b) => `Поместить между «${a}» и «${b}»`,
+    selectedAt: "Позиция выбрана",
+    stampCorrect: "верно",
+    stampAnchor: "Точка отсчёта",
+    noteBefore: t => `Не совсем: это случилось раньше, чем «${t}».`,
+    noteAfter: t => `Не совсем: это случилось позже, чем «${t}».`,
+    rejected: "Не здесь",
+    learnMore: "Подробнее",
+    source: "Источник:",
+    doneText: "Все семь событий на шкале.",
+    seeResults: "Посмотреть всю хронологию",
+    annSelected: t => `Промежуток выбран. Нажмите Enter ещё раз или «Подтвердить», чтобы поместить «${t}».`,
+    annCorrect: (t, d) => `Верно. «${t}»: ${d}.`,
+    annMoved: (t, d, n) => `${n} Карточка перемещена на своё место. Дата: ${d}.`,
+    annNext: t => `Следующая карточка: «${t}».`,
+    endTitle: "Хронология восстановлена",
+    scoreSub: () => "событий на своём месте с первой попытки",
+    conclusion: "Издательства, книжные магазины, ярмарки и премия в разных странах сегодня выводят русскоязычную литературу из-под власти цензора — так же, как когда-то это делал советский тамиздат. Семь карточек — одна складывающаяся экосистема.",
+    playAnother: "Сыграть другую хронологию",
+    replay: "Сыграть эту ещё раз",
+    timelineHeading: "Ваша хронология",
+    postcardHeading: "Открытка из тамиздата",
+    postcardIntro: "Ваша награда — открытка с книгой из коллекции Tamizdat Project. Ничего заполнять не нужно.",
+    turnOver: "Перевернуть",
+    turnFront: "Лицевой стороной",
+    download: "Скачать открытку",
+    downloadSaved: "Открытка сохранена.",
+    downloadDeclined: "Загрузка отменена.",
+    downloadFailed: "В этом окне нельзя сохранять файлы.",
+    emailToggle: "Отправить открытку себе на почту",
+    emailLabel: "Ваш адрес (необязательно)",
+    emailOpen: "Открыть в почтовой программе",
+    emailNote: "Прототип не собирает адреса. Откроется ваша почтовая программа с текстом открытки, адресованной вам. Ничего не сохраняется, и никакой подписки не будет.",
+    explore: "Открыть архив",
+    newsletter: "Подписаться на рассылку Tamizdat Project",
+    newsletterNote: "Отдельная подписка на сайте tamizdatproject.org.",
+    unlocked: "Открыто в архиве",
+    openObject: "Эта книга в архиве",
+    roundsTitle: "Выберите хронологию",
+    best: (s, t) => `лучший результат ${s}/${t}`,
+    backStart: "В начало",
+    pcGreeting: "Привет из нового тамиздата",
+    pcTo: "Кому: читателю нового тамиздата",
+    pcScore: (s, t) => `С первой попытки: ${s} из ${t}`,
+    pcMark: "Новый тамиздат",
+    pcAlt: (title, fact) => `Открытка. Лицевая сторона: книга «${title}» Абрама Терца, Tamizdat Project, 2024. Оборот: ${fact}`,
+    mailSubject: "Открытка из тамиздата",
+    kinds: { publisher: "издательство", book: "книга", bookshop: "книжный магазин", fair: "книжная ярмарка", prize: "литературная премия", censorship: "цензура" }
+  }
+};
+function plural(n, one, few, many) {
+  const m10 = n % 10, m100 = n % 100;
+  if (m10 === 1 && m100 !== 11) return one;
+  if (m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14)) return few;
+  return many;
+}
+</script>
+
+<!-- ===================== GAME LOGIC ===================== -->
+<script>
+(function () {
+  "use strict";
+  const DATA = TAMIZDAT_DATA;
+  const EV = DATA.events;
+  const app = document.getElementById("app");
+  const live = document.getElementById("live");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  const ICONS = {
+    publisher: '<path d="M4 20V9l8-5 8 5v11M3 20h18M9.5 20v-6h5v6"/>',
+    book: '<path d="M6 4h9.5A2.5 2.5 0 0 1 18 6.5V20H8.5A2.5 2.5 0 0 1 6 17.5z"/><path d="M6 17.5A2.5 2.5 0 0 1 8.5 15H18"/>',
+    bookshop: '<path d="M4 20h16M5 4v16M19 4v16M5 4h14M8.5 8v9M11.5 8v9M14.3 8.4l2.2 8.3"/>',
+    fair: '<path d="M3 20h18M5 20v-8l7-6 7 6v8M9.5 20v-5h5v5M12 6V3"/>',
+    prize: '<circle cx="12" cy="9" r="5"/><path d="M9.2 13.4 7.8 21l4.2-2.4 4.2 2.4-1.4-7.6"/>',
+    censorship: '<path d="M4 5.5h16M4 19h10"/><rect x="4" y="8.6" width="12" height="2.8" fill="currentColor" stroke="none"/><rect x="7" y="13.4" width="13" height="2.8" fill="currentColor" stroke="none"/>'
+  };
+
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  };
+
+  const state = {
+    lang: store.get("tz-lang", null) || ((navigator.language || "").toLowerCase().startsWith("ru") ? "ru" : "en"),
+    screen: "landing",
+    heroPlayed: false,
+    round: null,        // {id, events:[], anchor}
+    placed: [],         // [{id, status:'anchor'|'correct'|'corrected', note}]
+    deck: [],
+    current: null,
+    selectedSlot: null,
+    rejectedSlot: null,
+    justPlaced: null,
+    firstTry: 0,
+    busy: false,
+    focusSlot: null,
+    focusEntry: null,
+    flipped: false,
+    emailOpen: false,
+    best: store.get("tz-best", {})
+  };
+
+  /* ---------- helpers ---------- */
+  const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const t = (key, ...a) => { const v = I18N[state.lang][key]; return typeof v === "function" ? v(...a) : v; };
+  const L = o => (o ? (o[state.lang] ?? o.en ?? o.ru ?? "") : "");
+  const title = id => L(EV[id].title);
+  const dateLabel = id => L(EV[id].date.label);
+  const yearKey = id => EV[id].date.yearLabel || EV[id].date.start.slice(0, 4);
+  function announce(msg) { live.textContent = ""; setTimeout(() => { live.textContent = msg; }, 40); }
+  function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+  const wait = ms => new Promise(r => setTimeout(r, reduceMotion.matches ? 0 : ms));
+
+  /* ---------- chronology: dates are ranges; "before" only when ranges don't overlap ---------- */
+  const before = (a, b) => EV[a].date.end < EV[b].date.start;
+  function isValidSlot(slot, id) {
+    const P = state.placed;
+    for (let i = 0; i < slot; i++) if (before(id, P[i].id)) return false;
+    for (let i = slot; i < P.length; i++) if (before(P[i].id, id)) return false;
+    return true;
+  }
+  function nearestValidSlot(id, from) {
+    let best = null;
+    for (let s = 0; s <= state.placed.length; s++) {
+      if (isValidSlot(s, id) && (best === null || Math.abs(s - from) < Math.abs(best - from))) best = s;
+    }
+    return best;
+  }
+  function explain(id, slot) {
+    const P = state.placed;
+    for (let i = 0; i < slot; i++) if (before(id, P[i].id)) return { rel: "before", ref: P[i].id };
+    for (let i = P.length - 1; i >= slot; i--) if (before(P[i].id, id)) return { rel: "after", ref: P[i].id };
+    return null;
+  }
+  const sortChrono = ids => ids.slice().sort((a, b) => EV[a].date.start.localeCompare(EV[b].date.start) || EV[a].date.end.localeCompare(EV[b].date.end));
+
+  /* ---------- rounds ---------- */
+  const multi = () => DATA.rounds.length > 1;
+  function roundDef(id) { return DATA.rounds.find(r => r.id === id); }
+  function startRound(id) {
+    const def = roundDef(id);
+    let events, anchor;
+    if (def.draw && def.draw < def.events.length) {
+      events = shuffle(def.events).slice(0, def.draw);
+      const sorted = sortChrono(events);
+      anchor = sorted[2 + Math.floor(Math.random() * Math.max(1, sorted.length - 4))];
+    } else {
+      events = def.events.slice();
+      anchor = def.anchor || sortChrono(events)[Math.floor(events.length / 2)];
+    }
+    const postcards = Object.keys(DATA.archive.postcards);
+    const postcard = def.postcard === "random" ? postcards[Math.floor(Math.random() * postcards.length)] : def.postcard;
+    state.round = { id, events, anchor, postcard };
+    state.placed = [{ id: anchor, status: "anchor" }];
+    state.deck = shuffle(events.filter(e => e !== anchor));
+    state.current = state.deck.shift();
+    Object.assign(state, { selectedSlot: null, rejectedSlot: null, justPlaced: null, firstTry: 0, busy: false, flipped: false, emailOpen: false, focusSlot: null, focusEntry: null });
+    go("game");
+    announce(t("annNext", title(state.current)));
+  }
+  function go(screen) {
+    state.screen = screen;
+    render();
+    window.scrollTo({ top: 0, behavior: "auto" });
+    const h = app.querySelector("h1");
+    if (h && screen !== "landing") { h.setAttribute("tabindex", "-1"); h.focus({ preventScroll: true }); }
+  }
+
+  /* ---------- rendering ---------- */
+  function render() {
+    document.documentElement.lang = state.lang;
+    document.title = t("docTitle");
+    document.getElementById("section-name").textContent = t("sectionName");
+    const lg = document.getElementById("lang-group");
+    lg.setAttribute("aria-label", t("langGroup"));
+    lg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === state.lang)));
+    const views = { landing: viewLanding, rules: viewRules, game: viewGame, end: viewEnd, rounds: viewRounds };
+    if (drag.active) endDrag(null);
+    removeClones();
+    app.innerHTML = views[state.screen]();
+    afterRender();
+  }
+
+  function viewLanding() {
+    const w = t("heroWords");
+    const minis = [-2.5, 1.5, -1, 2.2, -1.8, .8, -.6].map(r => `<span class="mini" style="--r:${r}deg"></span>`).join("");
+    return `<section class="landing ${state.heroPlayed ? "no-anim" : ""}">
+      <h1 class="hero-title">${w.map((x, i) => `<span class="redact" style="--i:${i}">${esc(x)}</span>`).join(" ")}</h1>
+      <p class="hero-kicker">${esc(t("heroSub"))}</p>
+      <p class="intro">${esc(t("intro"))}</p>
+      <div class="actions">
+        <button class="btn primary" data-act="rules">${esc(t("howToPlay"))}</button>
+        ${multi() ? `<button class="btn" data-act="rounds">${esc(t("chooseTimeline"))}</button>` : `<button class="btn" data-act="start" data-round="${esc(DATA.rounds[0].id)}">${esc(t("startNow"))}</button>`}
+      </div>
+      <div class="hero-cards" aria-hidden="true">${minis}</div>
+    </section>`;
+  }
+
+  function viewRules() {
+    return `<section class="rules">
+      <h1>${esc(t("rulesTitle"))}</h1>
+      <ol class="rule-list">${t("rules").map(r => `<li>${esc(r)}</li>`).join("")}</ol>
+      <p class="kbd-note">${esc(t("kbdNote"))}</p>
+      <div class="actions">
+        <button class="btn primary" data-act="start" data-round="${esc(DATA.rounds[0].id)}">${esc(t("startFirst"))}</button>
+        ${multi() ? `<button class="btn" data-act="rounds">${esc(t("chooseTimeline"))}</button>` : ""}
+      </div>
+    </section>`;
+  }
+
+  function viewRounds() {
+    const roman = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII"];
+    return `<section class="rounds">
+      <h1>${esc(t("roundsTitle"))}</h1>
+      <ul class="drawers">${DATA.rounds.map((r, i) => {
+        const b = state.best[r.id];
+        return `<li><button class="drawer" data-act="start" data-round="${esc(r.id)}">
+          <span class="drawer-no" aria-hidden="true">${roman[i] || i + 1}</span>
+          <span><span class="drawer-title">${esc(L(r.title))}</span><span class="drawer-blurb">${esc(L(r.blurb))}</span></span>
+          ${b ? `<span class="stamp">${esc(t("best", b.s, b.t))}</span>` : ""}
+        </button></li>`;
+      }).join("")}</ul>
+      <div class="actions"><button class="btn quiet" data-act="landing">${esc(t("backStart"))}</button></div>
+    </section>`;
+  }
+
+  function kindLabel(id) { const e = EV[id]; return e.kindLabel ? L(e.kindLabel) : I18N[state.lang].kinds[e.kind]; }
+
+  function cardHead(id, extra) {
+    return `<div class="card-head"><span>${esc(kindLabel(id))}${extra || ""}</span><svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[EV[id].kind] || ""}</svg></div>`;
+  }
+  function imageHtml(id) {
+    const img = EV[id].image;
+    return img ? `<img src="${esc(img.src)}" alt="${esc(L(img.alt))}" loading="lazy" style="display:block;margin-top:12px">` : "";
+  }
+
+  function currentCardHtml(id) {
+    return `<article class="card current" id="current-card" aria-labelledby="current-title">
+      ${cardHead(id)}
+      <h2 class="card-title" id="current-title">${esc(title(id))}</h2>
+      <p class="card-desc">${esc(L(EV[id].text))}</p>
+      ${imageHtml(id)}
+      <p class="card-date"><span>${esc(t("date"))}</span><span class="bar" role="img" aria-label="${esc(t("dateHidden"))}"></span></p>
+    </article>`;
+  }
+
+  function placedCardHtml(p) {
+    const id = p.id, e = EV[id];
+    const anchorBit = p.status === "anchor" ? ` <span class="anchor-label">(${esc(t("stampAnchor").toLowerCase())})</span>` : "";
+    let feedback = "";
+    if (p.status === "correct") feedback = `<span class="stamp">${esc(t("stampCorrect"))}</span>`;
+    if (p.status === "corrected" && p.note) feedback = `<p class="pencil-note">${esc(t(p.note.rel === "before" ? "noteBefore" : "noteAfter", title(p.note.ref)))}</p>`;
+    return `<article class="card placed" tabindex="-1" id="entry-${esc(id)}" aria-labelledby="t-${esc(id)}">
+      ${cardHead(id, anchorBit)}
+      ${p.status === "correct" ? feedback : ""}
+      <h3 class="card-title" id="t-${esc(id)}">${esc(title(id))}</h3>
+      <p class="card-desc">${esc(L(e.text))}</p>
+      ${imageHtml(id)}
+      ${p.status === "corrected" ? feedback : ""}
+      <details class="more"><summary>${esc(t("learnMore"))}</summary>
+        <p>${esc(L(e.note))}</p>
+        <p class="src">${esc(t("source"))} <a href="${esc(e.source.url)}" target="_blank" rel="noopener">${esc(e.source.label)}</a></p>
+      </details>
+    </article>`;
+  }
+
+  function timelineHtml(interactive) {
+    const P = state.placed, n = P.length, out = [];
+    let lastYear = null;
+    for (let i = 0; i <= n; i++) {
+      if (interactive) out.push(slotHtml(i));
+      if (i < n) {
+        const p = P[i], yk = yearKey(p.id), showYear = yk !== lastYear;
+        lastYear = yk;
+        const label = dateLabel(p.id);
+        const dateText = showYear && label === yk ? "" : label;
+        out.push(`<li class="entry status-${p.status} ${p.id === state.justPlaced ? "just-placed" : ""}">
+          <div class="entry-date">${showYear ? `<span class="year">${esc(yk)}</span>` : ""}${dateText ? `<time class="date-text" datetime="${esc(EV[p.id].date.start)}">${esc(dateText)}</time>` : ""}</div>
+          <span class="spine" aria-hidden="true"></span>
+          ${placedCardHtml(p)}
+        </li>`);
+      }
+    }
+    return out.join("");
+  }
+
+  function slotHtml(i) {
+    const P = state.placed, n = P.length;
+    const sel = state.selectedSlot === i, rej = state.rejectedSlot === i;
+    let label;
+    if (i === 0) label = t("slotFirst", title(P[0].id));
+    else if (i === n) label = t("slotLast", title(P[n - 1].id));
+    else label = t("slotBetween", title(P[i - 1].id), title(P[i].id));
+    const cls = ["slot", i === 0 ? "is-first" : "", i === n ? "is-last" : "", sel ? "selected" : "", rej ? "rejected" : ""].join(" ");
+    let inner;
+    if (rej) inner = `<span class="ghost-title">${esc(title(state.current))}</span><span class="ghost-hint">${esc(t("rejected"))}</span>`;
+    else if (sel) inner = `<span class="ghost-title">${esc(title(state.current))}</span><span class="ghost-hint">${esc(t("ghostHint"))}</span>`;
+    else inner = `<span class="slot-rule"></span><span class="slot-label">${esc(t("placeHere"))}</span>`;
+    return `<li class="${cls}"><span aria-hidden="true"></span><span class="spine" aria-hidden="true"></span>
+      <button type="button" class="slot-btn" data-slot="${i}" aria-label="${esc(label)}" aria-pressed="${sel}" ${state.current && !state.busy ? "" : "disabled"}>${inner}</button></li>`;
+  }
+
+  function viewGame() {
+    const total = state.round.events.length;
+    const remaining = state.deck.length;
+    let deck;
+    if (state.current) {
+      const edges = Math.min(2, remaining);
+      deck = `<div class="deck-stack">${edges >= 2 ? '<div class="stack-edge e2"></div>' : ""}${edges >= 1 ? '<div class="stack-edge e1"></div>' : ""}${currentCardHtml(state.current)}</div>
+        <p class="deck-count">${esc(t("cardsLeft", remaining))}</p>
+        <p class="deck-hint">${esc(state.selectedSlot == null ? t("hintPick") : t("hintConfirm"))}</p>
+        <div class="deck-actions">
+          <p class="selected-info">${esc(title(state.current))}</p>
+          ${state.selectedSlot != null ? `<button class="btn" data-act="cancel-slot" ${state.busy ? "disabled" : ""}>${esc(t("cancel"))}</button>` : ""}
+          <button class="btn primary" data-act="confirm" ${state.selectedSlot == null || state.busy ? "disabled" : ""}>${esc(t("confirm"))}</button>
+        </div>`;
+    } else {
+      deck = `<div class="deck-done"><p>${esc(t("doneText"))}</p><button class="btn primary" data-act="end">${esc(t("seeResults"))}</button></div>`;
+    }
+    return `<section class="game ${state.selectedSlot != null && state.current ? "has-selection" : ""}">
+      <div class="game-head"><h1 class="round-name">${esc(L(roundDef(state.round.id).title))}</h1><p class="progress">${esc(t("progress", state.placed.length, total))}</p></div>
+      <div class="board">
+        <aside class="deck" aria-label="${esc(t("deckLabel"))}">${deck}</aside>
+        <section class="timeline" aria-label="${esc(t("timelineLabel"))}"><ol class="tl">${timelineHtml(!!state.current)}</ol></section>
+      </div>
+    </section>`;
+  }
+
+  function scoreTotals() { return { s: state.firstTry, tot: state.placed.length - 1 }; }
+
+  function viewEnd() {
+    const { s, tot } = scoreTotals();
+    const pc = DATA.archive.postcards[state.round.postcard];
+    const obj = DATA.archive.objects[pc.object];
+    return `<section class="end">
+      <header class="end-head">
+        <h1>${esc(t("endTitle"))}</h1>
+        <p class="score"><span class="score-num">${s} / ${tot}</span><span>${esc(t("scoreSub", s, tot))}</span></p>
+        <p class="conclusion">${esc(L(roundDef(state.round.id).conclusion) || t("conclusion"))}</p>
+        <div class="actions">
+          <button class="btn primary" data-act="start" data-round="${esc(state.round.id)}">${esc(t(roundDef(state.round.id).draw ? "playAgain" : "replay"))}</button>
+          ${multi() ? `<button class="btn" data-act="rounds">${esc(t("playAnother"))}</button>` : ""}
+        </div>
+      </header>
+      <div class="end-grid">
+        <section class="reward" aria-labelledby="pc-h">
+          <h2 id="pc-h">${esc(t("postcardHeading"))}</h2>
+          <p class="fine">${esc(t("postcardIntro"))}</p>
+          <figure class="postcard">
+            <div class="pc-inner ${state.flipped ? "flipped" : ""}" id="pc-inner">
+              <canvas class="pc-front" width="1500" height="1000" aria-hidden="${state.flipped}"></canvas>
+              <canvas class="pc-back" width="1500" height="1000" aria-hidden="${!state.flipped}"></canvas>
+            </div>
+            <figcaption class="sr-only">${esc(t("pcAlt", L(obj.title), L(pc.fact)))}</figcaption>
+          </figure>
+          <div class="pc-actions">
+            <button class="btn" data-act="flip">${esc(state.flipped ? t("turnFront") : t("turnOver"))}</button>
+            <button class="btn" data-act="download" id="dl-btn">${esc(t("download"))}</button>
+            <button class="btn" data-act="email" aria-expanded="${state.emailOpen}" aria-controls="email-panel">${esc(t("emailToggle"))}</button>
+            <a class="btn primary" href="${esc(DATA.config.archiveUrl)}" target="_blank" rel="noopener">${esc(t("explore"))}</a>
+          </div>
+          <p class="status-msg" id="pc-status" role="status"></p>
+          <div class="email-panel" id="email-panel" ${state.emailOpen ? "" : "hidden"}>
+            <label for="pc-email">${esc(t("emailLabel"))}</label>
+            <div class="email-row">
+              <input type="email" id="pc-email" autocomplete="email" inputmode="email" placeholder="name@example.com">
+              <a class="btn" id="mailto" href="mailto:" target="_blank" rel="noopener">${esc(t("emailOpen"))}</a>
+            </div>
+            <p class="fine">${esc(t("emailNote"))}</p>
+          </div>
+          <p class="fine"><a href="${esc(DATA.config.newsletterUrl)}" target="_blank" rel="noopener">${esc(t("newsletter"))}</a>. ${esc(t("newsletterNote"))}</p>
+          <aside class="unlocked">
+            <p class="fine">${esc(t("unlocked"))}</p>
+            <h3>${esc(L(obj.author))}. ${esc(state.lang === "ru" ? "«" + L(obj.title) + "»" : L(obj.title))}</h3>
+            <p>${esc(L(obj.description))}</p>
+            <a href="${esc(obj.link)}" target="_blank" rel="noopener">${esc(t("openObject"))}</a>
+          </aside>
+        </section>
+        <section aria-labelledby="tl-h">
+          <h2 id="tl-h">${esc(t("timelineHeading"))}</h2>
+          <ol class="tl final">${timelineHtml(false)}</ol>
+        </section>
+      </div>
+    </section>`;
+  }
+
+  function afterRender() {
+    if (state.screen === "landing") state.heroPlayed = true;
+    if (state.screen === "game") {
+      bindDrag();
+      if (state.focusSlot != null) {
+        const b = app.querySelector(`.slot-btn[data-slot="${state.focusSlot}"]`);
+        if (b) b.focus({ preventScroll: true });
+        state.focusSlot = null;
+      }
+      if (state.focusEntry) {
+        const el = document.getElementById("entry-" + state.focusEntry);
+        if (el) {
+          el.focus({ preventScroll: true });
+          const r = el.getBoundingClientRect();
+          if (r.top < 0 || r.bottom > window.innerHeight) el.scrollIntoView({ block: "center", behavior: reduceMotion.matches ? "auto" : "smooth" });
+        }
+        state.focusEntry = null;
+      }
+    }
+    if (state.screen === "end") {
+      drawPostcards();
+      updateMailto();
+      downloadsNs().then(ns => { if (ns === null) { const b = document.getElementById("dl-btn"); if (b) b.hidden = true; } });
+    }
+  }
+
+  /* ---------- placement ---------- */
+  function selectSlot(i, keyboard) {
+    if (!state.current || state.busy) return;
+    if (state.selectedSlot === i && keyboard) { confirmPlacement(); return; }
+    state.selectedSlot = i;
+    state.focusSlot = i;
+    render();
+    announce(t("annSelected", title(state.current)));
+  }
+
+  async function confirmPlacement() {
+    if (state.busy || state.selectedSlot == null || !state.current) return;
+    const id = state.current, slot = state.selectedSlot;
+    if (isValidSlot(slot, id)) {
+      commit(id, slot, "correct", null);
+      state.firstTry++;
+      announce(t("annCorrect", title(id), dateLabel(id)) + (state.current ? " " + t("annNext", title(state.current)) : ""));
+      render();
+      return;
+    }
+    state.busy = true;
+    state.rejectedSlot = slot;
+    state.selectedSlot = null;
+    render();
+    await wait(800);
+    const note = explain(id, slot);
+    const target = nearestValidSlot(id, slot);
+    state.rejectedSlot = null;
+    commit(id, target, "corrected", note);
+    const noteText = note ? t(note.rel === "before" ? "noteBefore" : "noteAfter", title(note.ref)) : "";
+    announce(t("annMoved", title(id), dateLabel(id), noteText) + (state.current ? " " + t("annNext", title(state.current)) : ""));
+    render();
+  }
+
+  function commit(id, slot, status, note) {
+    state.placed.splice(slot, 0, { id, status, note });
+    state.justPlaced = id;
+    state.focusEntry = id;
+    state.selectedSlot = null;
+    state.current = state.deck.shift() || null;
+    state.busy = false;
+    if (!state.current) {
+      const { s, tot } = scoreTotals();
+      const prev = state.best[state.round.id];
+      if (!prev || s / tot >= prev.s / prev.t) { state.best[state.round.id] = { s, t: tot }; store.set("tz-best", state.best); }
+    }
+  }
+
+  /* ---------- drag and drop (pointer events: mouse, pen, touch) ---------- */
+  // Drag state lives outside render(), and move/up listeners sit on the window, so a drag always
+  // ends cleanly even if the pointer leaves the card, the frame, or the card is re-rendered.
+  const drag = { active: null };
+  function removeClones() { document.querySelectorAll(".drag-clone").forEach(n => n.remove()); }
+  function endDrag(dropSlot) {
+    const d = drag.active;
+    drag.active = null;
+    window.removeEventListener("pointermove", onDragMove, true);
+    window.removeEventListener("pointerup", onDragUp, true);
+    window.removeEventListener("pointercancel", onDragCancel, true);
+    window.removeEventListener("blur", onDragCancel);
+    document.removeEventListener("keydown", onDragKey, true);
+    document.removeEventListener("visibilitychange", onDragCancel);
+    document.documentElement.style.userSelect = "";
+    document.documentElement.style.webkitUserSelect = "";
+    if (d) {
+      cancelAnimationFrame(d.raf);
+      if (d.target) d.target.classList.remove("drop-target");
+      if (d.card && d.card.isConnected) d.card.classList.remove("lifted");
+    }
+    removeClones();
+    if (dropSlot != null) selectSlot(dropSlot, false);
+  }
+  function pickSlot(x, y) {
+    const tlEl = app.querySelector(".timeline");
+    if (!tlEl) return null;
+    const tl = tlEl.getBoundingClientRect();
+    if (x < tl.left - 60 || x > tl.right + 60) return null;
+    let best = null, bd = Infinity;
+    app.querySelectorAll(".slot-btn").forEach(b => { const r = b.getBoundingClientRect(); const d = Math.abs(y - (r.top + r.height / 2)); if (d < bd) { bd = d; best = b; } });
+    return best && bd < 220 ? best : null;
+  }
+  function autoscroll() {
+    const d = drag.active;
+    if (!d || !d.clone) return;
+    const edge = 90, h = window.innerHeight;
+    if (d.lastY < edge) window.scrollBy(0, -Math.ceil((edge - d.lastY) / 6));
+    else if (d.lastY > h - edge) window.scrollBy(0, Math.ceil((d.lastY - (h - edge)) / 6));
+    d.raf = requestAnimationFrame(autoscroll);
+  }
+  function onDragMove(e) {
+    const d = drag.active;
+    if (!d || e.pointerId !== d.id) return;
+    if (!d.card.isConnected) { endDrag(null); return; }
+    // Button released somewhere we didn't hear about (e.g. outside the frame): drop the drag.
+    if (e.pointerType === "mouse" && e.buttons === 0) { endDrag(null); return; }
+    if (!d.clone) {
+      if (Math.hypot(e.clientX - d.x, e.clientY - d.y) <= 6) return;
+      const r = d.card.getBoundingClientRect();
+      d.offX = d.x - r.left; d.offY = d.y - r.top;
+      removeClones();
+      const clone = d.card.cloneNode(true);
+      clone.removeAttribute("id");
+      clone.setAttribute("aria-hidden", "true");
+      clone.querySelectorAll("[id]").forEach(n => n.removeAttribute("id"));
+      clone.classList.add("drag-clone");
+      clone.style.width = r.width + "px";
+      document.body.appendChild(clone);
+      d.clone = clone;
+      d.card.classList.add("lifted");
+      d.raf = requestAnimationFrame(autoscroll);
+    }
+    e.preventDefault();
+    d.lastY = e.clientY;
+    d.clone.style.left = (e.clientX - d.offX) + "px";
+    d.clone.style.top = (e.clientY - d.offY) + "px";
+    const tgt = pickSlot(e.clientX, e.clientY);
+    if (tgt !== d.target) { if (d.target) d.target.classList.remove("drop-target"); d.target = tgt; if (tgt) tgt.classList.add("drop-target"); }
+  }
+  function onDragUp(e) {
+    const d = drag.active;
+    if (!d || e.pointerId !== d.id) return;
+    endDrag(d.clone && d.target ? Number(d.target.dataset.slot) : null);
+  }
+  function onDragCancel() { if (drag.active) endDrag(null); }
+  function onDragKey(e) { if (e.key === "Escape" && drag.active) { e.preventDefault(); endDrag(null); } }
+
+  function bindDrag() {
+    const card = document.getElementById("current-card");
+    if (!card) return;
+    card.addEventListener("pointerdown", e => {
+      if (state.busy || e.button > 0 || drag.active) return;
+      if (e.target.closest("a, button, summary, input")) return;
+      if (e.pointerType === "mouse") e.preventDefault(); // stop text selection while dragging
+      drag.active = { id: e.pointerId, x: e.clientX, y: e.clientY, card, clone: null, target: null, raf: 0, lastY: e.clientY, offX: 0, offY: 0 };
+      try { card.setPointerCapture(e.pointerId); } catch (err) {}
+      document.documentElement.style.userSelect = "none";
+      document.documentElement.style.webkitUserSelect = "none";
+      window.addEventListener("pointermove", onDragMove, true);
+      window.addEventListener("pointerup", onDragUp, true);
+      window.addEventListener("pointercancel", onDragCancel, true);
+      window.addEventListener("blur", onDragCancel);
+      document.addEventListener("keydown", onDragKey, true);
+      document.addEventListener("visibilitychange", onDragCancel);
+    });
+    card.addEventListener("lostpointercapture", () => {
+      // Capture can be lost when the pointer leaves the frame; if no button is still held, end the drag.
+      setTimeout(() => { if (drag.active && drag.active.card === card && !drag.active.clone) endDrag(null); }, 0);
+    });
+  }
+
+  /* ---------- events ---------- */
+  document.getElementById("lang-group").addEventListener("click", e => {
+    const b = e.target.closest("button[data-lang]");
+    if (!b || b.dataset.lang === state.lang) return;
+    state.lang = b.dataset.lang;
+    store.set("tz-lang", state.lang);
+    render();
+    document.querySelector(`#lang-group button[data-lang="${state.lang}"]`).focus();
+  });
+
+  app.addEventListener("click", e => {
+    const slot = e.target.closest(".slot-btn");
+    if (slot) { selectSlot(Number(slot.dataset.slot), e.detail === 0); return; }
+    const a = e.target.closest("[data-act]");
+    if (!a) return;
+    const act = a.dataset.act;
+    if (act === "rules") go("rules");
+    else if (act === "rounds") go("rounds");
+    else if (act === "landing") go("landing");
+    else if (act === "start") startRound(a.dataset.round);
+    else if (act === "confirm") confirmPlacement();
+    else if (act === "cancel-slot") { state.selectedSlot = null; render(); }
+    else if (act === "end") go("end");
+    else if (act === "flip") {
+      state.flipped = !state.flipped;
+      document.getElementById("pc-inner").classList.toggle("flipped", state.flipped);
+      a.textContent = state.flipped ? t("turnFront") : t("turnOver");
+    }
+    else if (act === "download") downloadPostcard();
+    else if (act === "email") {
+      state.emailOpen = !state.emailOpen;
+      document.getElementById("email-panel").hidden = !state.emailOpen;
+      a.setAttribute("aria-expanded", String(state.emailOpen));
+      if (state.emailOpen) document.getElementById("pc-email").focus();
+    }
+  });
+
+  app.addEventListener("keydown", e => {
+    const b = e.target.closest && e.target.closest(".slot-btn");
+    if (!b || (e.key !== "ArrowDown" && e.key !== "ArrowUp")) return;
+    e.preventDefault();
+    const all = Array.from(app.querySelectorAll(".slot-btn"));
+    const i = all.indexOf(b) + (e.key === "ArrowDown" ? 1 : -1);
+    if (all[i]) { all[i].focus(); all[i].scrollIntoView({ block: "nearest" }); }
+  });
+
+  app.addEventListener("input", e => { if (e.target.id === "pc-email") updateMailto(); });
+
+  /* ---------- postcard ---------- */
+  const PCC = { slate: "#263338", paper: "#F2F0EA", ink: "#263338", violet: "#5A3E91", muted: "#6D797E", bar: "#0B0D0E" };
+  const F = { display: '"Old Standard TT", "Times New Roman", serif', text: '"PT Serif", Georgia, serif', mono: '"PT Mono", "Courier New", monospace' };
+
+  function postcardContext() {
+    const pc = DATA.archive.postcards[state.round.postcard];
+    const obj = DATA.archive.objects[pc.object];
+    const { s, tot } = scoreTotals();
+    const date = new Date().toLocaleDateString(state.lang === "ru" ? "ru-RU" : "en-GB", { day: "numeric", month: "long", year: "numeric" });
+    return { pc, obj, s, tot, date };
+  }
+
+  function wrap(ctx, text, x, y, maxW, lh) {
+    const words = text.split(/\s+/); let line = "";
+    for (const w of words) {
+      const test = line ? line + " " + w : w;
+      if (ctx.measureText(test).width > maxW && line) { ctx.fillText(line, x, y); line = w; y += lh; }
+      else line = test;
+    }
+    if (line) { ctx.fillText(line, x, y); y += lh; }
+    return y;
+  }
+  function fitFont(ctx, text, maxW, size, tpl) {
+    ctx.font = tpl(size);
+    while (ctx.measureText(text).width > maxW && size > 12) { size -= 2; ctx.font = tpl(size); }
+    return size;
+  }
+
+  function drawStamp(ctx, x, y, w, h, bg) {
+    ctx.save();
+    ctx.fillStyle = PCC.paper; ctx.fillRect(x, y, w, h);
+    ctx.fillStyle = bg;
+    const r = 7, step = 20;
+    for (let i = x + 10; i <= x + w - 5; i += step) { ctx.beginPath(); ctx.arc(i, y, r, 0, 7); ctx.arc(i, y + h, r, 0, 7); ctx.fill(); }
+    for (let j = y + 10; j <= y + h - 5; j += step) { ctx.beginPath(); ctx.arc(x, j, r, 0, 7); ctx.arc(x + w, j, r, 0, 7); ctx.fill(); }
+    const ix = x + 18, iy = y + 18, iw = w - 36, ih = h - 36;
+    ctx.fillStyle = PCC.violet; ctx.fillRect(ix, iy, iw, ih);
+    // a small cactus, after the hero of Pkhentz
+    ctx.fillStyle = PCC.paper;
+    const cx = ix + iw / 2, base = iy + ih - 58, s = iw / 170;
+    const rr = (px, py, pw, ph) => { ctx.beginPath(); ctx.roundRect(px, py, pw, ph, pw / 2); ctx.fill(); };
+    rr(cx - 16 * s, base - 112 * s, 32 * s, 112 * s);
+    rr(cx - 50 * s, base - 78 * s, 20 * s, 48 * s); ctx.fillRect(cx - 42 * s, base - 42 * s, 30 * s, 14 * s);
+    rr(cx + 30 * s, base - 96 * s, 20 * s, 54 * s); ctx.fillRect(cx + 12 * s, base - 56 * s, 30 * s, 14 * s);
+    ctx.fillRect(cx - 34 * s, base, 68 * s, 8 * s);
+    ctx.font = `${Math.round(19 * s)}px ${F.mono}`; ctx.textAlign = "center";
+    ctx.fillText("TAMIZDAT", cx, iy + ih - 20);
+    ctx.fillText("2024", cx, iy + 34 * s);
+    ctx.restore();
+  }
+
+  function drawFront(ctx, c) {
+    ctx.fillStyle = PCC.slate; ctx.fillRect(0, 0, 1500, 1000);
+    ctx.strokeStyle = "rgba(242,240,234,.35)"; ctx.lineWidth = 2; ctx.strokeRect(40, 40, 1420, 920);
+    ctx.fillStyle = PCC.paper; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+    ctx.font = `italic 58px ${F.display}`;
+    ctx.fillText(L(c.obj.author), 112, 250);
+    const titleText = state.lang === "ru" ? L(c.obj.title).toUpperCase() : L(c.obj.title).toUpperCase();
+    const size = fitFont(ctx, titleText, 1000, 250, s => `400 ${s}px ${F.display}`);
+    ctx.fillText(titleText, 100, 250 + size * .95);
+    // typed lines with censor bars
+    const y0 = 690;
+    ctx.fillStyle = "rgba(242,240,234,.28)";
+    [[112, 560], [112, 470], [112, 610], [112, 380]].forEach(([x, w], i) => ctx.fillRect(x, y0 + i * 34, w, 3));
+    ctx.fillStyle = PCC.bar;
+    ctx.fillRect(250, y0 - 14, 260, 26); ctx.fillRect(170, y0 + 54, 330, 26);
+    ctx.fillStyle = "rgba(242,240,234,.85)";
+    ctx.font = `30px ${F.mono}`;
+    ctx.fillText(L(c.obj.imprint), 112, 900);
+    drawStamp(ctx, 1180, 96, 210, 260, PCC.slate);
+  }
+
+  function drawBack(ctx, c) {
+    ctx.fillStyle = PCC.paper; ctx.fillRect(0, 0, 1500, 1000);
+    ctx.strokeStyle = PCC.muted; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(790, 90); ctx.lineTo(790, 910); ctx.stroke();
+    ctx.fillStyle = PCC.ink; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+    ctx.font = `italic 64px ${F.display}`;
+    let y = wrap(ctx, t("pcGreeting"), 90, 175, 650, 72);
+    ctx.font = `38px ${F.text}`;
+    y = wrap(ctx, L(c.pc.fact), 90, y + 44, 650, 56);
+    ctx.fillStyle = PCC.muted; ctx.font = `26px ${F.mono}`;
+    ctx.fillText("tamizdatproject.org", 90, 905);
+    // stamp + postmark
+    drawStamp(ctx, 1210, 80, 180, 225, PCC.paper);
+    ctx.save();
+    ctx.strokeStyle = "rgba(90,62,145,.8)"; ctx.fillStyle = "rgba(90,62,145,.85)"; ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.arc(1110, 300, 100, 0, Math.PI * 2); ctx.stroke();
+    ctx.beginPath(); ctx.arc(1110, 300, 84, 0, Math.PI * 2); ctx.stroke();
+    ctx.textAlign = "center";
+    ctx.font = `22px ${F.mono}`; ctx.fillText(t("pcMark"), 1110, 268);
+    fitFont(ctx, c.date, 150, 24, s => `${s}px ${F.mono}`); ctx.fillText(c.date, 1110, 312);
+    ctx.font = `20px ${F.mono}`; ctx.fillText(`${c.s}/${c.tot}`, 1110, 348);
+    for (let k = 0; k < 4; k++) {
+      ctx.beginPath();
+      for (let x = 840; x <= 1000; x += 4) { const yy = 250 + k * 26 + Math.sin((x - 840) / 18) * 7; x === 840 ? ctx.moveTo(x, yy) : ctx.lineTo(x, yy); }
+      ctx.stroke();
+    }
+    ctx.restore();
+    // address lines
+    const lines = [t("pcTo"), L(roundDef(state.round.id).title), t("pcScore", c.s, c.tot), c.date];
+    ctx.strokeStyle = PCC.muted; ctx.lineWidth = 1.5; ctx.fillStyle = PCC.ink; ctx.textAlign = "left";
+    lines.forEach((txt, i) => {
+      const ly = 560 + i * 92;
+      ctx.beginPath(); ctx.moveTo(840, ly); ctx.lineTo(1410, ly); ctx.stroke();
+      fitFont(ctx, txt, 560, 28, s => `${s}px ${F.mono}`);
+      ctx.fillText(txt, 846, ly - 14);
+    });
+  }
+
+  async function fontsReady() {
+    if (!document.fonts || !document.fonts.load) return;
+    const sample = "Пхенц Привет Abc 0123";
+    const loads = [`400 250px ${F.display}`, `italic 56px ${F.display}`, `31px ${F.text}`, `28px ${F.mono}`].map(f => document.fonts.load(f, sample).catch(() => null));
+    await Promise.race([Promise.all(loads), new Promise(r => setTimeout(r, 2500))]);
+  }
+
+  async function drawPostcards() {
+    await fontsReady();
+    if (state.screen !== "end") return;
+    const c = postcardContext();
+    const front = app.querySelector(".pc-front"), back = app.querySelector(".pc-back");
+    if (!front || !back) return;
+    drawFront(front.getContext("2d"), c);
+    drawBack(back.getContext("2d"), c);
+  }
+
+  let dlPromise = null;
+  function downloadsNs() {
+    // undefined = standalone page (use a plain download link); null = hosted view without the capability.
+    if (!dlPromise) {
+      dlPromise = (window.claude && typeof window.claude.use === "function")
+        ? window.claude.use("downloads").catch(() => null)
+        : Promise.resolve(undefined);
+    }
+    return dlPromise;
+  }
+  downloadsNs();
+
+  async function downloadPostcard() {
+    const status = document.getElementById("pc-status");
+    await fontsReady();
+    const c = postcardContext();
+    const cv = document.createElement("canvas");
+    cv.width = 1500; cv.height = 2040;
+    const ctx = cv.getContext("2d");
+    ctx.fillStyle = "#DEDCD5"; ctx.fillRect(0, 0, 1500, 2040);
+    drawFront(ctx, c);
+    ctx.save(); ctx.translate(0, 1040); drawBack(ctx, c); ctx.restore();
+    const blob = await new Promise(r => cv.toBlob(r, "image/png"));
+    const filename = state.lang === "ru" ? "otkrytka-iz-tamizdata.png" : "postcard-from-tamizdat.png";
+    const ns = await downloadsNs();
+    if (ns) {
+      try { await ns.save({ filename, data: blob }); status.textContent = t("downloadSaved"); }
+      catch (err) { status.textContent = err && err.code === "declined" ? t("downloadDeclined") : t("downloadFailed"); }
+      return;
+    }
+    if (ns === null) { status.textContent = t("downloadFailed"); return; }
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url; a.download = filename; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 4000);
+  }
+
+  function updateMailto() {
+    const link = document.getElementById("mailto");
+    if (!link) return;
+    const input = document.getElementById("pc-email");
+    const c = postcardContext();
+    const body = [
+      t("pcGreeting"), "",
+      `${L(c.obj.author)}. ${L(c.obj.title)}`,
+      L(c.pc.fact), "",
+      `${L(roundDef(state.round.id).title)}: ${t("pcScore", c.s, c.tot)}`,
+      c.date, "",
+      c.obj.link
+    ].join("\n");
+    const to = (input && input.value.trim()) || "";
+    link.href = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(t("mailSubject"))}&body=${encodeURIComponent(body)}`;
+  }
+
+  render();
+})();
+</script>
+</body>
+</html>
