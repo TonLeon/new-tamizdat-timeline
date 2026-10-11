@@ -191,13 +191,9 @@ main{max-width:var(--game-width);margin:0 auto;padding:40px var(--container-pad)
 @keyframes reveal{from{opacity:0}to{opacity:1}}
 .fine{color:var(--color-text-tertiary);font-size:var(--type-sans-d-s-reg-loose-fs);line-height:var(--type-sans-d-s-reg-loose-lh);letter-spacing:var(--type-sans-d-s-reg-loose-ls)}
 
-details.more{margin-top:1rem}
-details.more summary{cursor:pointer;display:inline-block;list-style:none;text-decoration:underline;text-decoration-color:var(--color-text-weak);text-decoration-thickness:1px;text-underline-offset:4px;font-size:var(--type-sans-d-s-reg-tight-fs);line-height:var(--type-sans-d-s-reg-tight-lh);letter-spacing:var(--type-sans-d-s-reg-tight-ls)}
-details.more summary::-webkit-details-marker{display:none}
-details.more summary:hover{text-decoration-color:var(--color-text-primary)}
-details.more[open] summary{margin-bottom:.5rem}
-details.more p{margin:.5rem 0;font-size:var(--type-sans-d-s-reg-loose-fs);line-height:var(--type-sans-d-s-reg-loose-lh);letter-spacing:var(--type-sans-d-s-reg-loose-ls)}
-details.more .src{color:var(--color-text-tertiary);font-size:var(--type-sans-d-xs-reg-normal-fs);line-height:var(--type-sans-d-xs-reg-normal-lh);letter-spacing:var(--type-sans-d-xs-reg-normal-ls)}
+.src{margin:1rem 0 0;color:var(--color-text-tertiary);font-size:var(--type-sans-d-xs-reg-normal-fs);line-height:var(--type-sans-d-xs-reg-normal-lh);letter-spacing:var(--type-sans-d-xs-reg-normal-ls)}
+.src a{text-decoration:underline;text-decoration-color:var(--color-text-weak);text-decoration-thickness:1px;text-underline-offset:4px}
+.src a:hover{text-decoration-color:var(--color-text-primary)}
 
 /* Timeline */
 .tl{list-style:none;margin:0;padding:0}
@@ -292,9 +288,8 @@ details.more .src{color:var(--color-text-tertiary);font-size:var(--type-sans-d-x
   .card-title,.entry .card-title,.round-name,.drawer-title,.end-grid h2,.unlocked h3,.ghost-title{font-size:var(--type-serif-m-2xl-fs);line-height:var(--type-serif-m-2xl-lh);letter-spacing:var(--type-serif-m-2xl-ls)}
   .entry-date .year,.drawer-no{font-size:var(--type-serif-m-2xl-fs);line-height:var(--type-serif-m-2xl-lh);letter-spacing:var(--type-serif-m-2xl-ls)}
   .entry .spine::after{top:calc(1.5rem + 6px)}
-  body,.hero-kicker,.intro,.card-desc,.entry .card-desc,.conclusion,.deck-hint,details.more p,.pencil-note{font-size:var(--type-sans-m-m-reg-loose-fs);line-height:var(--type-sans-m-m-reg-loose-lh);letter-spacing:var(--type-sans-m-m-reg-loose-ls)}
-  details.more summary{font-size:var(--type-sans-m-m-reg-tight-fs);line-height:var(--type-sans-m-m-reg-tight-lh);letter-spacing:var(--type-sans-m-m-reg-tight-ls)}
-  .section-name,.progress,.meta,.card-date,.slot-btn,.fine,.kbd-note,.deck-count,.entry-date .date-text,details.more .src,.status-msg,.ghost-hint{font-size:var(--type-sans-m-s-reg-normal-fs);line-height:var(--type-sans-m-s-reg-normal-lh);letter-spacing:var(--type-sans-m-s-reg-normal-ls)}
+  body,.hero-kicker,.intro,.card-desc,.entry .card-desc,.conclusion,.deck-hint,.pencil-note{font-size:var(--type-sans-m-m-reg-loose-fs);line-height:var(--type-sans-m-m-reg-loose-lh);letter-spacing:var(--type-sans-m-m-reg-loose-ls)}
+  .section-name,.progress,.meta,.card-date,.slot-btn,.fine,.kbd-note,.deck-count,.entry-date .date-text,.src,.status-msg,.ghost-hint{font-size:var(--type-sans-m-s-reg-normal-fs);line-height:var(--type-sans-m-s-reg-normal-lh);letter-spacing:var(--type-sans-m-s-reg-normal-ls)}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -333,155 +328,131 @@ const TAMIZDAT_DATA = {
   },
   events: {
     "babel-press": {
-      kind: "publisher",
-      date: { start: "2019-01-01", end: "2020-12-31", precision: "year", label: { ru: "2019 / 2020", en: "2019 / 2020" }, yearLabel: "2019 / 2020" },
-      title: { ru: "Издательская программа «Бабеля»", en: "Babel starts publishing" },
+      kind: "book",
+      kindLabel: { ru: "переиздание", en: "new edition" },
+      date: { start: "2020-01-31", end: "2020-01-31", precision: "day", label: { ru: "31 января 2020", en: "31 January 2020" } },
+      title: { ru: "«Город Эн» Леонида Добычина", en: "Leonid Dobychin’s The Town of N" },
       text: {
-        ru: "У тель-авивского книжного магазина «Бабель» появляется собственная издательская программа. Первый проект — переиздание «Города Эн» Леонида Добычина.",
+        ru: "У тель-авивского книжного магазина «Бабель» появляется собственная издательская программа. Первым проектом становится переиздание «Города Эн» Леонида Добычина.",
         en: "The Tel Aviv bookshop Babel launches its own publishing program. Its first project is a new edition of Leonid Dobychin’s The Town of N."
       },
-      note: {
-        ru: "Само издательство отсчитывает начало от 2019 года, но библиографически издание «Города Эн» датируется 2020-м. Поэтому здесь верна любая позиция в пределах этих двух лет.",
-        en: "The press dates its beginning to 2019, though the edition of The Town of N is catalogued as 2020. Any position within those two years counts."
-      },
-      source: { label: "Prague Book Tower, archive 2024", url: "https://praguebooktower.cz/archiv2024" },
+      sources: [
+        { label: {"ru": "Telegram: «Бабель»", "en": "Telegram: Babel"}, url: "https://t.me/babelbookstlv/662" },
+        { label: "The Blueprint", url: "https://theblueprint.ru/culture/paper/glocals-tel-aviv-babel" }
+      ],
       image: null
     },
     "ponyatye": {
       kind: "book",
-      date: { start: "2022-01-01", end: "2022-12-31", precision: "year", label: { ru: "2022", en: "2022" } },
-      title: { ru: "Антология «Понятые и свидетели»", en: "The anthology Poniatye i svideteli" },
+      kindLabel: { ru: "книги", en: "books" },
+      date: { start: "2022-04-01", end: "2022-04-30", precision: "month", label: { ru: "апрель 2022", en: "April 2022" } },
+      title: { ru: "«Понятые и свидетели. Хроники военного времени»", en: "Poniatye i svideteli. Khroniki voennogo vremeni" },
       text: {
-        ru: "«Бабель» выпускает два тома антивоенной поэтической антологии «Понятые и свидетели. Хроники военного времени». Первый том собирает стихи первых пятидесяти дней войны.",
-        en: "Babel publishes two volumes of the anti-war poetry anthology Poniatye i svideteli: Chronicles of Wartime. The first volume gathers poems from the war’s first fifty days."
+        ru: "Babel Books Tel Aviv выпускает два тома антивоенной поэтической антологии «Понятые и свидетели. Хроники военного времени». Первый том включает стихи первых пятидесяти дней войны.",
+        en: "Babel Books Tel Aviv publishes two volumes of the anti-war poetry anthology Poniatye i svideteli. Khroniki voennogo vremeni. The first volume collects poems written in the first fifty days of the war."
       },
-      note: {
-        ru: "Известен только год выхода, поэтому засчитывается любая позиция внутри этого года.",
-        en: "Only the year of publication is known, so any position within that year counts."
-      },
-      source: { label: "Apple Podcasts: interview with the publishers", url: "https://podcasts.apple.com/us/podcast/%D1%8D%D1%82%D0%BE-%D0%BF%D0%BE%D1%8D%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%81%D0%B2%D0%B8%D0%B4%D0%B5%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%B0-%D0%B4%D0%BB%D1%8F-%D0%B1%D1%83%D0%B4%D1%83%D1%89%D0%B5%D0%B3%D0%BE-%D1%81%D1%83%D0%B4%D0%B0-%D0%B8%D0%B7%D0%B4%D0%B0%D1%82%D0%B5%D0%BB%D1%8C/id1470431436?i=1000566615620" },
+      sources: [
+        { label: "RFI", url: "https://www.rfi.fr/ru/%D0%BA%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D0%B0-%D1%81%D1%82%D0%B8%D0%BB%D1%8C-%D0%B6%D0%B8%D0%B7%D0%BD%D0%B8/20220616-%D0%B8%D0%B7%D0%B4%D0%B0%D1%82%D0%B5%D0%BB%D1%8C-%D1%81%D0%B1%D0%BE%D1%80%D0%BD%D0%B8%D0%BA%D0%B0-%D0%B0%D0%BD%D1%82%D0%B8%D0%B2%D0%BE%D0%B5%D0%BD%D0%BD%D1%8B%D1%85-%D1%81%D1%82%D0%B8%D1%85%D0%BE%D0%B2-%D0%BF%D0%BE%D0%BD%D1%8F%D1%82%D1%8B%D0%B5-%D0%B8-%D1%81%D0%B2%D0%B8%D0%B4%D0%B5%D1%82%D0%B5%D0%BB%D0%B8-%D1%8D%D1%82%D0%BE-%D0%BF%D0%BE%D1%8D%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%81%D0%B2%D0%B8%D0%B4%D0%B5%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%B0-%D0%B4%D0%BB%D1%8F-%D0%B1%D1%83%D0%B4%D1%83%D1%89%D0%B5%D0%B3%D0%BE-%D1%81%D1%83%D0%B4%D0%B0" }
+      ],
       image: null
     },
     "freedom-letters": {
       kind: "publisher",
+      kindLabel: { ru: "издательство", en: "publisher" },
       date: { start: "2023-04-04", end: "2023-04-04", precision: "day", label: { ru: "4 апреля 2023", en: "4 April 2023" } },
-      title: { ru: "Основано Freedom Letters", en: "Freedom Letters is founded" },
+      title: { ru: "Основание Freedom Letters", en: "Freedom Letters is founded" },
       text: {
-        ru: "Георгий Урушадзе объявляет о создании издательства Freedom Letters, которое выпускает в том числе тексты, невозможные к публикации в России.",
-        en: "Georgy Urushadze announces Freedom Letters, a press whose list includes texts that cannot be published in Russia."
+        ru: "Георгий Урушадзе объявляет о создании издательства Freedom Letters, ориентированного в том числе на тексты, которые невозможно публиковать в России.",
+        en: "Georgy Urushadze announces the founding of Freedom Letters, a publishing house whose focus includes texts that cannot be published in Russia."
       },
-      note: {
-        ru: "Дата — день, когда Георгий Урушадзе объявил о создании издательства.",
-        en: "The date is the day Georgy Urushadze announced the new press."
-      },
-      source: { label: "Freedom Letters: about the press", url: "https://freedomletters.org/service/about" },
-      image: null
-    },
-    "vidim-books": {
-      kind: "publisher",
-      kindLabel: { ru: "издательство и дистрибуция", en: "publisher and distributor" },
-      date: { start: "2023-01-01", end: "2023-12-31", precision: "year", label: { ru: "2023", en: "2023" } },
-      title: { ru: "Vidim Books", en: "Vidim Books" },
-      text: {
-        ru: "Мария Алеф, Александр Гаврилов и Данила Стратович основывают Vidim Books — издательство и одновременно международную систему распространения неподцензурных русскоязычных книг.",
-        en: "Maria Alef, Alexander Gavrilov and Danila Stratovich found Vidim Books, a press that doubles as an international distribution network for uncensored Russian-language books."
-      },
-      note: {
-        ru: "Известен только год основания: засчитывается любая позиция среди событий этого года.",
-        en: "Only the founding year is known: any position among that year’s events counts."
-      },
-      source: { label: "Pulitzer Center: Notes From Russia’s Literary Underground", url: "https://pulitzercenter.org/stories/notes-russias-literary-underground" },
+      sources: [
+        { label: "Freedom Letters", url: "https://freedomletters.org/service/about?" }
+      ],
       image: null
     },
     "meduza-press": {
       kind: "publisher",
+      kindLabel: { ru: "издательство", en: "publisher" },
       date: { start: "2023-08-15", end: "2023-08-15", precision: "day", label: { ru: "15 августа 2023", en: "15 August 2023" } },
-      title: { ru: "У «Медузы» появляется издательство", en: "Meduza launches a press" },
+      title: { ru: "Издательство «Медузы»", en: "Meduza’s publishing house" },
       text: {
-        ru: "«Медуза» объявляет о запуске собственного книжного издательства. Книги будут доступны и читателям в России — через приложение.",
-        en: "Meduza announces its own book publishing house. Readers inside Russia will be able to get its books through the Meduza app."
+        ru: "«Медуза» объявляет о запуске собственного книжного издательства и сообщает, что книги будут доступны читателям в России через приложение.",
+        en: "Meduza announces the launch of its own book publishing house and says its books will be available to readers in Russia through its app."
       },
-      note: {
-        ru: "Дата — объявление о запуске. Первые книги вышли осенью того же года.",
-        en: "The date is the launch announcement. The first books followed that autumn."
-      },
-      source: { label: "Meduza", url: "https://meduza.io/feature/2023/08/15/meduza-zapuskaet-svoe-izdatelstvo-v-oktyabre-2023-goda-vyydet-pervaya-kniga-moya-lyubimaya-strana-eleny-kostyuchenko/" },
+      sources: [
+        { label: {"ru": "Медуза", "en": "Meduza"}, url: "https://meduza.io/feature/2023/08/15/meduza-zapuskaet-svoe-izdatelstvo-v-oktyabre-2023-goda-vyydet-pervaya-kniga-moya-lyubimaya-strana-eleny-kostyuchenko/" }
+      ],
       image: null
     },
     "babel-berlin": {
       kind: "bookshop",
+      kindLabel: { ru: "книжный магазин", en: "bookshop" },
       date: { start: "2023-09-01", end: "2023-09-30", precision: "month", label: { ru: "сентябрь 2023", en: "September 2023" } },
-      title: { ru: "Babel Books Berlin", en: "Babel Books Berlin opens" },
+      title: { ru: "Babel Books Berlin", en: "Babel Books Berlin" },
       text: {
-        ru: "В Берлине открывается книжный магазин Babel Books Berlin.",
-        en: "The bookshop Babel Books Berlin opens its doors in Berlin."
+        ru: "Благодаря Наташе Смирновой и Максиму Куренному в Берлине открывается книжный магазин Babel Books Berlin.",
+        en: "Thanks to Natasha Smirnova and Maxim Kurennoy, the bookshop Babel Books Berlin opens in Berlin."
       },
-      note: {
-        ru: "Известен месяц открытия, но не точный день.",
-        en: "The month of the opening is known, not the exact day."
-      },
-      source: { label: "Babel Books Berlin: about us", url: "https://babelbooksberlin.com/pages/about" },
+      sources: [
+        { label: "Instagram: Babel Books Berlin", url: "https://www.instagram.com/p/CushEPrMA9Z/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==" }
+      ],
       image: null
     },
     "meduza-books": {
       kind: "book",
+      kindLabel: { ru: "книги", en: "books" },
       date: { start: "2023-10-20", end: "2023-10-20", precision: "day", label: { ru: "20 октября 2023", en: "20 October 2023" } },
       title: { ru: "Первые книги «Медузы»", en: "Meduza’s first books" },
       text: {
-        ru: "Выходят первые книги издательства «Медузы»: «Моя любимая страна» Елены Костюченко и — совместно с Zygaro — «Война и наказание» Михаила Зыгаря.",
-        en: "Meduza’s press releases its first books: Elena Kostyuchenko’s Moya lyubimaya strana (My Beloved Country) and, with Zygaro, Mikhail Zygar’s Voina i nakazanie (War and Punishment)."
+        ru: "В издательстве «Медузы» выходят первые книги: «Моя любимая страна» Елены Костюченко и «Война и наказание» Михаила Зыгаря (совместно с Zygaro).",
+        en: "Meduza’s publishing house releases its first books: Elena Kostyuchenko’s Moia liubimaia strana and Mikhail Zygar’s War and Punishment (co-published with Zygaro)."
       },
-      note: {
-        ru: "Обе книги поступили в продажу в день выхода.",
-        en: "Both books went on sale on the day of release."
-      },
-      source: { label: "Meduza", url: "https://meduza.io/feature/2023/10/20/v-izdatelstve-meduzy-vyhodyat-srazu-dve-knigi-eleny-kostyuchenko-i-mihaila-zygarya-vy-mozhete-ih-kupit-uzhe-segodnya/" },
+      sources: [
+        { label: {"ru": "Медуза", "en": "Meduza"}, url: "https://meduza.io/feature/2023/10/20/v-izdatelstve-meduzy-vyhodyat-srazu-dve-knigi-eleny-kostyuchenko-i-mihaila-zygarya-vy-mozhete-ih-kupit-uzhe-segodnya/" }
+      ],
       image: null
     },
-    "fokus": {
-      kind: "book",
-      kindLabel: { ru: "книга и издательский проект", en: "book and publishing project" },
-      date: { start: "2024-01-01", end: "2024-12-31", precision: "year", label: { ru: "2024", en: "2024" } },
-      title: { ru: "«Фокус» Марии Степановой", en: "Maria Stepanova’s Fokus" },
+    "vidim-books": {
+      kind: "publisher",
+      kindLabel: { ru: "издательство", en: "publisher" },
+      date: { start: "2024-04-04", end: "2024-04-04", precision: "day", label: { ru: "4 апреля 2024", en: "4 April 2024" } },
+      title: { ru: "Основание Vidim Books", en: "Vidim Books is founded" },
       text: {
-        ru: "В рамках транснационального издательского «Проекта 24» выходит «Фокус» Марии Степановой.",
-        en: "Maria Stepanova’s Fokus appears from Project 24, a transnational publishing initiative."
+        ru: "Мария Алеф, Александр Гаврилов и Данила Стратович основывают Vidim Books — издательство и международную систему распространения русскоязычных книг, написанных авторами, которых преследуют в России по политическим мотивам.",
+        en: "Maria Alef, Alexander Gavrilov and Danila Stratovich found Vidim Books — a publisher and international distribution network for Russian-language books by authors persecuted in Russia for political reasons."
       },
-      note: {
-        ru: "Точная дата основания «Проекта 24» пока не установлена, поэтому здесь отмечен выход конкретной книги. Известен только год: засчитывается любая позиция внутри него.",
-        en: "The founding date of Project 24 has not been established, so the timeline marks this book instead. Only the year is known: any position within it counts."
-      },
-      source: { label: "24: Fokus", url: "https://24.place/books/fokus/" },
+      sources: [
+        { label: "Instagram: Vidim Books", url: "https://www.instagram.com/reel/C5Ve0XfIgpc/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==" },
+        { label: "The Moscow Times", url: "https://www.themoscowtimes.com/2024/07/28/tamizdat-the-new-world-of-russian-publishing-a85855" }
+      ],
       image: null
     },
     "prague-book-tower": {
       kind: "fair",
+      kindLabel: { ru: "книжная ярмарка", en: "book fair" },
       date: { start: "2024-09-13", end: "2024-09-15", precision: "day", label: { ru: "13–15 сентября 2024", en: "13–15 September 2024" } },
-      title: { ru: "Пражская книжная башня", en: "Prague Book Tower" },
+      title: { ru: "«Пражская книжная башня»", en: "Prague Book Tower" },
       text: {
-        ru: "В Праге проходит первая международная ярмарка новой волны русскоязычной литературы — «Пражская книжная башня».",
-        en: "Prague hosts Prague Book Tower, the first international fair of the new wave of Russian-language literature."
+        ru: "В Праге проходит первая международная ярмарка новой волны русскоязычной литературы «Пражская книжная башня» / Prague Book Tower. В ней участвуют 16 издательств и 4 литературных журнала; сами организаторы отмечают, что посетители называли её «ярмаркой нового тамиздата».",
+        en: "Prague hosts the first international fair of the new wave of Russian-language literature, Prague Book Tower. Sixteen publishers and four literary journals take part; the organisers note that visitors called it “the fair of the new tamizdat”."
       },
-      note: {
-        ru: "Участвовали 16 издательств и 4 литературных журнала. По словам организаторов, посетители называли её «ярмаркой нового тамиздата».",
-        en: "Sixteen publishers and four literary journals took part. The organisers report that visitors called it the fair of the new tamizdat."
-      },
-      source: { label: "Prague Book Tower, archive 2024", url: "https://praguebooktower.cz/archiv2024" },
+      sources: [
+        { label: "Prague Book Tower", url: "https://praguebooktower.cz/archiv2024" }
+      ],
       image: null
     },
     "dar-prize": {
       kind: "prize",
+      kindLabel: { ru: "литературная премия", en: "literary prize" },
       date: { start: "2024-09-27", end: "2024-09-27", precision: "day", label: { ru: "27 сентября 2024", en: "27 September 2024" } },
-      title: { ru: "Премия «Дар»", en: "The Dar prize" },
+      title: { ru: "Литературная премия «Дар»", en: "The Dar literary prize" },
       text: {
-        ru: "Учреждена литературная премия «Дар» — для поддержки литературы на русском языке вне зависимости от гражданства и места жительства автора.",
-        en: "The Dar literary prize is established to support writing in Russian, whatever the author’s citizenship or place of residence."
+        ru: "Швейцарская Ассоциация славистов объявляет об учреждении независимой литературной премии «Дар», предназначенной для поддержки литературы на русском языке вне зависимости от гражданства и места проживания автора.",
+        en: "The Swiss Association of Slavists announces an independent literary prize, Dar, to support literature in Russian regardless of the author’s citizenship or place of residence."
       },
-      note: {
-        ru: "Дата — объявление об учреждении премии.",
-        en: "The date is the announcement of the prize."
-      },
-      source: { label: "Dar Prize", url: "https://darprize.com/2024/09/27/literaturnaya-premiya-dar/" },
+      sources: [
+        { label: {"ru": "Литературная премия «Дар»", "en": "Dar Literary Prize"}, url: "https://darprize.com/2024/09/27/literaturnaya-premiya-dar/" }
+      ],
       image: null
     },
     "pkhentz": {
@@ -490,44 +461,71 @@ const TAMIZDAT_DATA = {
       date: { start: "2024-11-15", end: "2024-11-15", precision: "day", label: { ru: "15 ноября 2024", en: "15 November 2024" } },
       title: { ru: "«Пхенц» Абрама Терца", en: "Abram Tertz’s Pkhentz" },
       text: {
-        ru: "Нью-йоркский Tamizdat Project выпускает «Пхенц» Абрама Терца (Андрея Синявского) отдельным двуязычным изданием, в новом переводе Эйнсли Морс при участии Кевина Риса.",
-        en: "New York’s Tamizdat Project publishes Abram Tertz’s (Andrei Sinyavsky’s) Pkhentz as a freestanding bilingual edition, in a new translation by Ainsley Morse with Kevin Reese."
+        ru: "Нью-йоркский Tamizdat Project выпускает свою первую книгу — двуязычное переиздание рассказа «Пхенц» Абрама Терца (Андрея Синявского) в переводе Эйнсли Морс (при участии Кевина Риса).",
+        en: "New York’s Tamizdat Project releases its first book — a bilingual new edition of Abram Tertz’s (Andrei Sinyavsky’s) story Pkhentz, translated by Ainsley Morse (with Kevin Reese)."
       },
-      note: {
-        ru: "Рассказ написан в 1957 году и впервые вышел на Западе после процесса Синявского и Даниэля 1966 года. Эта книга связывает старый тамиздат с новым.",
-        en: "Written in 1957, the story first appeared in the West after the 1966 Sinyavsky–Daniel trial. The book links the old tamizdat with the new."
-      },
-      source: { label: "Tamizdat Project: Pkhentz", url: "https://tamizdatproject.org/programs/publishing/pkhentz/" },
+      sources: [
+        { label: "Tamizdat Project", url: "https://tamizdatproject.org/programs/publishing/pkhentz/" }
+      ],
       image: null
     },
     "idiot-books": {
       kind: "bookshop",
-      date: { start: "2025-02-01", end: "2025-02-28", precision: "month", label: { ru: "февраль 2025", en: "February 2025" } },
-      title: { ru: "Idiot Books в Лондоне", en: "Idiot Books in London" },
+      kindLabel: { ru: "книжный магазин", en: "bookshop" },
+      date: { start: "2025-02-11", end: "2025-02-11", precision: "day", label: { ru: "11 февраля 2025", en: "11 February 2025" } },
+      title: { ru: "Idiot Books", en: "Idiot Books" },
       text: {
         ru: "В Лондоне открывается русскоязычный книжный магазин Idiot Books.",
-        en: "Idiot Books, a Russian-language bookshop, opens in London."
+        en: "The Russian-language bookshop Idiot Books opens in London."
       },
-      note: {
-        ru: "Известен месяц открытия, но не точный день.",
-        en: "The month of the opening is known, not the exact day."
-      },
-      source: { label: "The Insider: Tamizdat partisans", url: "https://theins.press/en/society/282649" },
+      sources: [
+        { label: {"ru": "Слова вне себя", "en": "Slova vne sebya"}, url: "https://slova-vne.com/news/v-londone-otkryvaetsya-knizhnyy-magazin-s-knigami-na-russkom-yazyke-idiot-books" },
+        { label: "The Insider", url: "https://theins.press/en/society/282649" }
+      ],
       image: null
     },
     "bebelplatz": {
       kind: "fair",
+      kindLabel: { ru: "книжная ярмарка", en: "book fair" },
       date: { start: "2025-04-03", end: "2025-04-06", precision: "day", label: { ru: "3–6 апреля 2025", en: "3–6 April 2025" } },
-      title: { ru: "Ярмарка Berlin Bebelplatz", en: "The Berlin Bebelplatz fair" },
+      title: { ru: "Berlin Bebelplatz", en: "Berlin Bebelplatz" },
       text: {
-        ru: "В Берлине впервые проходит книжная ярмарка русскоязычной литературы Berlin Bebelplatz.",
-        en: "Berlin holds its first Berlin Bebelplatz fair of Russian-language books."
+        ru: "В Берлине впервые проходит книжная ярмарка русскоязычной литературы Berlin Bebelplatz, собравшая более 30 независимых издательств и литературных проектов.",
+        en: "Berlin hosts its first fair of Russian-language literature, Berlin Bebelplatz, bringing together more than 30 independent publishers and literary projects."
       },
-      note: {
-        ru: "В первой ярмарке участвовали около 30 независимых издательств и литературных проектов.",
-        en: "Around thirty independent publishers and literary projects took part in the first fair."
+      sources: [
+        { label: "Berlin Bebelplatz", url: "https://bookfair-berlin.de/en/bbp2025/" }
+      ],
+      image: null
+    },
+    "project-24": {
+      kind: "publisher",
+      kindLabel: { ru: "издательский проект", en: "publishing project" },
+      date: { start: "2025-06-19", end: "2025-06-19", precision: "day", label: { ru: "19 июня 2025", en: "19 June 2025" } },
+      title: { ru: "24 ⌓", en: "24 ⌓" },
+      text: {
+        ru: "Запускается платформа 24 ⌓ — цифровое пространство с фильмами и книгами, которые практически невозможно печатать и показывать в России.",
+        en: "The 24 ⌓ platform launches — a digital space for films and books that are all but impossible to print or screen in Russia."
       },
-      source: { label: "Novaya Gazeta Europe", url: "https://novayagazeta.eu/amp/articles/2025/04/07/prosto-potomu-chto-eti-knigi-dolzhny-byt" },
+      sources: [
+        { label: "Instagram: 24 ⌓", url: "https://www.instagram.com/p/DLFrNfKtRuO/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==" },
+        { label: "Facebook: 24 ⌓", url: "https://www.facebook.com/24.place/photos/%D0%BF%D0%BB%D0%B0%D1%82%D1%84%D0%BE%D1%80%D0%BC%D0%B5-24-%D0%B3%D0%BE%D0%B4-%D0%B2-%D0%B8%D1%8E%D0%BB%D0%B5-%D0%BF%D1%80%D0%BE%D1%88%D0%BB%D0%BE%D0%B3%D0%BE-%D0%B3%D0%BE%D0%B4%D0%B0-%D0%BC%D1%8B-%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D1%82%D0%B8%D0%BB%D0%B8-24-%D0%B8-%D1%81-%D1%82%D0%B5%D1%85-%D0%BF%D0%BE%D1%80-%D0%BF%D1%80%D0%BE%D0%B4%D0%BE%D0%BB%D0%B6%D0%B0%D0%B5%D0%BC-%D1%81%D0%BE%D0%B1/122190544592872506/" }
+      ],
+      image: null
+    },
+    "fokus": {
+      kind: "book",
+      kindLabel: { ru: "книги", en: "books" },
+      date: { start: "2025-12-01", end: "2025-12-31", precision: "month", label: { ru: "декабрь 2025", en: "December 2025" } },
+      title: { ru: "«Фокус»", en: "Fokus" },
+      text: {
+        ru: "В рамках «Проекта 24» выходит книга Марии Степановой «Фокус».",
+        en: "Maria Stepanova’s book Fokus comes out as part of Project 24."
+      },
+      sources: [
+        { label: {"ru": "24 ⌓: «Фокус»", "en": "24 ⌓: Fokus"}, url: "https://24.place/books/fokus/?" },
+        { label: {"ru": "24 ⌓: книжная серия", "en": "24 ⌓: the book series"}, url: "https://24.place/blog/knizhnaya-seriya-24/" }
+      ],
       image: null
     }
   },
@@ -539,7 +537,7 @@ const TAMIZDAT_DATA = {
       title: { ru: "Новый тамиздат", en: "The new Tamizdat" },
       blurb: { ru: "Независимое русскоязычное книгоиздание после 2019 года.", en: "Independent Russian-language publishing since 2019." },
       // Pool of events; each game draws `draw` of them, so every replay is a new set.
-      events: ["babel-press", "ponyatye", "freedom-letters", "vidim-books", "meduza-press", "babel-berlin", "meduza-books", "fokus", "prague-book-tower", "dar-prize", "pkhentz", "idiot-books", "bebelplatz"],
+      events: ["babel-press", "ponyatye", "freedom-letters", "meduza-press", "babel-berlin", "meduza-books", "vidim-books", "prague-book-tower", "dar-prize", "pkhentz", "idiot-books", "bebelplatz", "project-24", "fokus"],
       draw: 7,
       postcard: "random"
     }
@@ -625,8 +623,8 @@ const I18N = {
     noteBefore: t => `Not quite: it happened before “${t}”.`,
     noteAfter: t => `Not quite: it happened after “${t}”.`,
     rejected: "Not here",
-    learnMore: "Learn more",
     source: "Source:",
+    sources: "Sources:",
     doneText: "All seven events are on the timeline.",
     seeResults: "See the full timeline",
     annSelected: t => `Gap chosen. Press Enter again or use Confirm position to place “${t}”.`,
@@ -697,23 +695,23 @@ const I18N = {
     cancel: "Отменить",
     placeHere: "Поместить сюда",
     ghostHint: "Нажмите ещё раз, чтобы поместить сюда",
-    slotFirst: t => `Поместить перед «${t}»`,
-    slotLast: t => `Поместить после «${t}»`,
-    slotBetween: (a, b) => `Поместить между «${a}» и «${b}»`,
+    slotFirst: t => `Поместить перед ${q(t)}`,
+    slotLast: t => `Поместить после ${q(t)}`,
+    slotBetween: (a, b) => `Поместить между ${q(a)} и ${q(b)}`,
     selectedAt: "Позиция выбрана",
     stampCorrect: "верно",
     stampAnchor: "Точка отсчёта",
-    noteBefore: t => `Не совсем: это случилось раньше, чем «${t}».`,
-    noteAfter: t => `Не совсем: это случилось позже, чем «${t}».`,
+    noteBefore: t => `Не совсем: это случилось раньше, чем ${q(t)}.`,
+    noteAfter: t => `Не совсем: это случилось позже, чем ${q(t)}.`,
     rejected: "Не здесь",
-    learnMore: "Подробнее",
     source: "Источник:",
+    sources: "Источники:",
     doneText: "Все семь событий на шкале.",
     seeResults: "Посмотреть всю хронологию",
-    annSelected: t => `Промежуток выбран. Нажмите Enter ещё раз или «Подтвердить», чтобы поместить «${t}».`,
-    annCorrect: (t, d) => `Верно. «${t}»: ${d}.`,
+    annSelected: t => `Промежуток выбран. Нажмите Enter ещё раз или «Подтвердить», чтобы поместить ${q(t)}.`,
+    annCorrect: (t, d) => `Верно. ${q(t)}: ${d}.`,
     annMoved: (t, d, n) => `${n} Карточка перемещена на своё место. Дата: ${d}.`,
-    annNext: t => `Следующая карточка: «${t}».`,
+    annNext: t => `Следующая карточка: ${q(t)}.`,
     endTitle: "Хронология восстановлена",
     scoreSub: () => "событий на своём месте с первой попытки",
     conclusion: "Издательства, книжные магазины, ярмарки и премия в разных странах сегодня выводят русскоязычную литературу из-под власти цензора — так же, как когда-то это делал советский тамиздат. Семь карточек — одна складывающаяся экосистема.",
@@ -744,6 +742,8 @@ const I18N = {
     kinds: { publisher: "издательство", book: "книга", bookshop: "книжный магазин", fair: "книжная ярмарка", prize: "литературная премия", censorship: "цензура" }
   }
 };
+// Russian quotes around a card title, unless the title already carries its own «…» (CSV titles often do)
+function q(t) { return t.includes("«") ? t : `«${t}»`; }
 function plural(n, one, few, many) {
   const m10 = n % 10, m100 = n % 100;
   if (m10 === 1 && m100 !== 11) return one;
@@ -952,10 +952,7 @@ function plural(n, one, few, many) {
       <p class="card-desc">${esc(L(e.text))}</p>
       ${imageHtml(id)}
       ${p.status === "corrected" ? feedback : ""}
-      <details class="more"><summary>${esc(t("learnMore"))}</summary>
-        <p>${esc(L(e.note))}</p>
-        <p class="src">${esc(t("source"))} <a href="${esc(e.source.url)}" target="_blank" rel="noopener">${esc(e.source.label)}</a></p>
-      </details>
+      <p class="src">${esc(t(e.sources.length > 1 ? "sources" : "source"))} ${e.sources.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(typeof s.label === "string" ? s.label : L(s.label))}</a>`).join(", ")}</p>
     </article>`;
   }
 
