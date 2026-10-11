@@ -8,10 +8,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet">
 <style>
+/* Fonts are served by tamizdatproject.org itself, so the embed renders exactly like the site.
+   The URLs carry the site's build hash: if they change, ask Alexander for the new ones.
+   The site's Excelsior .woff2 is corrupt (browsers skip it), so the .woff/.ttf are used.
+   Local files (gitignored) and Google's Inter are fallbacks for working offline. */
 @font-face{
   font-family:"Excelsior LT Std";
-  src:url("excelsior-lt-std-3.woff2") format("woff2"),url("excelsior-lt-std-3.ttf") format("truetype");
+  src:url("https://tamizdatproject.org/static/images/excelsior-lt-std.13c9f32f8942.woff") format("woff"),url("https://tamizdatproject.org/static/images/excelsior-lt-std.13009e353ffe.ttf") format("truetype"),url("excelsior-lt-std-3.woff2") format("woff2"),url("excelsior-lt-std-3.ttf") format("truetype");
   font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+@font-face{
+  font-family:"Inter Variable";
+  src:url("https://tamizdatproject.org/static/images/InterVariable.2bf3d951bf9d.woff2") format("woff2");
+  font-weight:100 900;
   font-style:normal;
   font-display:swap;
 }
@@ -41,7 +52,8 @@
   --color-overlay:var(--alpha-black-40);
 
   /* ---- Local additions (§10: not in the shared system — report back to Tamizdat) ---- */
-  --color-signal-correct:var(--color-accent); /* "correct" stamp */
+  --color-game-ink:#3e69b7;                  /* the game's one accent, used instead of the site's indigo */
+  --color-signal-correct:var(--color-game-ink); /* "correct" stamp */
   --color-signal-adjust:#a8493c;              /* "moved to its place" note */
   --game-width:1180px;                        /* two-column board needs more than --review-content-width (970px) */
 
@@ -62,12 +74,16 @@
   --type-sans-m-m-reg-loose-fs:15px;   --type-sans-m-m-reg-loose-lh:22px;   --type-sans-m-m-reg-loose-ls:.15px;
   --type-sans-m-m-reg-tight-fs:15px;   --type-sans-m-m-reg-tight-lh:18px;   --type-sans-m-m-reg-tight-ls:.15px;
   --type-sans-m-s-reg-normal-fs:12px;  --type-sans-m-s-reg-normal-lh:18px;  --type-sans-m-s-reg-normal-ls:.12px;
+  --type-sans-d-3xl-bold-normal-fs:64px; --type-sans-d-3xl-bold-normal-lh:64px; --type-sans-d-3xl-bold-normal-ls:-.96px;
+  --type-sans-d-xl-bold-normal-fs:28px; --type-sans-d-xl-bold-normal-lh:36px; --type-sans-d-xl-bold-normal-ls:-.28px;
+  --type-sans-m-xl-bold-normal-fs:24px; --type-sans-m-xl-bold-normal-lh:26px; --type-sans-m-xl-bold-normal-ls:.048px;
   --type-serif-d-3xl-fs:64px; --type-serif-d-3xl-lh:64px; --type-serif-d-3xl-ls:-.64px;
   --type-serif-d-2xl-fs:45px; --type-serif-d-2xl-lh:48px; --type-serif-d-2xl-ls:-.9px;
   --type-serif-d-xl-fs:32px;  --type-serif-d-xl-lh:36px;  --type-serif-d-xl-ls:-.32px;
   --type-serif-d-l-fs:21px;   --type-serif-d-l-lh:32px;   --type-serif-d-l-ls:-.21px;
   --type-serif-t-2xl-fs:32px; --type-serif-t-2xl-lh:34px; --type-serif-t-2xl-ls:-.64px;
   --type-serif-t-xl-fs:24px;  --type-serif-t-xl-lh:28px;  --type-serif-t-xl-ls:-.24px;
+  --type-serif-m-l-fs:16px; --type-serif-m-l-lh:24px; --type-serif-m-l-ls:-.16px;
   --type-serif-m-2xl-fs:20px; --type-serif-m-2xl-lh:22px; --type-serif-m-2xl-ls:-.2px;
 
   box-sizing:border-box;
@@ -96,24 +112,24 @@ a{color:inherit;text-decoration:none}
 a:hover{text-decoration:underline;text-decoration-color:var(--color-text-weak);text-decoration-thickness:1px;text-underline-offset:4px}
 button{font:inherit;color:inherit;letter-spacing:inherit}
 /* focus-visible isn't defined by the system (§10) — local, uses the one accent */
-:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+:focus-visible{outline:2px solid var(--color-game-ink);outline-offset:2px}
 .sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
-/* Masthead */
-.masthead{display:flex;align-items:center;gap:1rem;justify-content:space-between;padding:.75rem var(--container-pad);border-bottom:1px solid var(--color-border)}
-.section-name{flex:1;color:var(--color-text-secondary);font-size:var(--type-sans-d-s-reg-tight-fs);line-height:var(--type-sans-d-s-reg-tight-lh);letter-spacing:var(--type-sans-d-s-reg-tight-ls);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* Language switch: the host page provides the title bar, so the game carries only this quiet toggle */
+.topbar{display:flex;justify-content:flex-end;margin:-.75rem -.5rem .25rem 0}
 .lang{display:flex;gap:.25rem}
 .lang button{background:none;border:0;min-width:40px;min-height:40px;padding:0 .5rem;font-weight:600;font-size:var(--type-sans-d-xs-bold-normal-fs);line-height:var(--type-sans-d-xs-bold-normal-lh);letter-spacing:var(--type-sans-d-xs-bold-normal-ls);color:var(--color-text-tertiary);cursor:pointer;border-bottom:2px solid transparent}
-.lang button[aria-pressed="true"]{color:var(--color-text-primary);border-bottom-color:var(--color-accent)}
+.lang button[aria-pressed="true"]{color:var(--color-text-primary);border-bottom-color:var(--color-game-ink)}
 
 main{max-width:var(--game-width);margin:0 auto;padding:40px var(--container-pad) 80px}
+
 
 /* Buttons — always pills, 1.5rem side padding (§8) */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;min-height:44px;padding:0 1.5rem;border:1px solid var(--color-border);border-radius:var(--radius-round);background:transparent;color:var(--color-text-primary);font-family:var(--font-sans);font-weight:600;font-size:var(--type-sans-d-s-bold-tight-fs);line-height:var(--type-sans-d-s-bold-tight-lh);letter-spacing:var(--type-sans-d-s-bold-tight-ls);text-decoration:none;cursor:pointer;transition:background .2s ease,border-color .2s ease,color .2s ease}
 .btn:hover{text-decoration:none;background:var(--color-surface-secondary-hover);border-color:var(--color-border-secondary)}
 .btn:active{background:var(--color-surface-secondary-active)}
 .btn.primary{background:var(--color-surface-inverse);border-color:var(--color-surface-inverse);color:var(--color-text-inverse)}
-.btn.primary:hover{background:color-mix(in srgb,var(--color-surface-inverse) 88%,var(--color-accent))}
+.btn.primary:hover{background:color-mix(in srgb,var(--color-surface-inverse) 88%,var(--color-game-ink))}
 .btn:disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
 .btn.quiet{border-color:transparent;background:transparent;text-decoration:underline;text-decoration-color:var(--color-text-weak);text-underline-offset:4px;padding-inline:.5rem}
 .btn.quiet:hover{text-decoration:underline;text-decoration-color:var(--color-text-primary)}
@@ -121,13 +137,13 @@ main{max-width:var(--game-width);margin:0 auto;padding:40px var(--container-pad)
 
 /* Landing */
 .landing{max-width:42rem}
-/* The system's largest step (serif 3xl, 64px) at every width: there is no tablet/mobile 3xl token, and Retiler (the site's display face) is off-limits (§1) */
-.hero-title{font-family:var(--font-serif);font-weight:400;font-size:var(--type-serif-d-3xl-fs);line-height:var(--type-serif-d-3xl-lh);letter-spacing:var(--type-serif-d-3xl-ls);margin:0 0 1rem}
+/* Inter semibold at the system's largest step (sans 3xl, 64px), like the site's page titles; same size at every width — there is no tablet/mobile 3xl token */
+.hero-title{font-family:var(--font-sans);font-weight:600;font-size:var(--type-sans-d-3xl-bold-normal-fs);line-height:var(--type-sans-d-3xl-bold-normal-lh);letter-spacing:var(--type-sans-d-3xl-bold-normal-ls);margin:0 0 1rem}
 .redact{position:relative;display:inline-block}
 .redact::after{content:"";position:absolute;left:-.04em;right:-.04em;top:.12em;bottom:.02em;border-radius:var(--radius-s);background:var(--color-surface-inverse);transform-origin:right center;animation:lift .4s cubic-bezier(.03,.96,.52,.98) forwards;animation-delay:calc(.5s + var(--i) * .25s)}
 .no-anim .redact::after{display:none}
 @keyframes lift{to{transform:scaleX(0)}}
-.hero-kicker{font-size:var(--type-sans-d-l-reg-loose-fs);line-height:var(--type-sans-d-l-reg-loose-lh);letter-spacing:var(--type-sans-d-l-reg-loose-ls);color:var(--color-text-secondary);margin:0 0 1.5rem}
+.hero-kicker{font-family:var(--font-serif);font-weight:400;font-size:var(--type-serif-d-l-fs);line-height:var(--type-serif-d-l-lh);letter-spacing:var(--type-serif-d-l-ls);color:var(--color-text-secondary);margin:0 0 1.5rem}
 .intro{font-size:var(--type-sans-d-m-reg-loose-fs);line-height:var(--type-sans-d-m-reg-loose-lh);letter-spacing:var(--type-sans-d-m-reg-loose-ls);max-width:34em;margin:0}
 .hero-cards{display:flex;margin:80px 0 0;padding-left:.5rem}
 .mini{width:118px;height:76px;flex:none;margin-left:-1rem;background:var(--color-surface-secondary);border-radius:var(--radius-l);position:relative;transform:rotate(var(--r));box-shadow:0 5px 10px -5px var(--alpha-black-20);outline:4px solid var(--color-surface-primary)}
@@ -149,7 +165,8 @@ main{max-width:var(--game-width);margin:0 auto;padding:40px var(--container-pad)
 
 /* Game */
 .game-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:.5rem 1.5rem;margin-bottom:2rem;border-bottom:1px solid var(--color-border);padding-bottom:.75rem}
-.round-name{font-family:var(--font-serif);font-weight:400;font-size:var(--type-serif-d-xl-fs);line-height:var(--type-serif-d-xl-lh);letter-spacing:var(--type-serif-d-xl-ls);margin:0}
+/* Inter semibold, matching the start-screen title (sans xl; the sans scale has no tablet step) */
+.round-name{font-family:var(--font-sans);font-weight:600;font-size:var(--type-sans-d-xl-bold-normal-fs);line-height:var(--type-sans-d-xl-bold-normal-lh);letter-spacing:var(--type-sans-d-xl-bold-normal-ls);margin:0}
 .progress{margin:0;color:var(--color-text-tertiary);font-size:var(--type-sans-d-s-reg-tight-fs);line-height:var(--type-sans-d-s-reg-tight-lh);letter-spacing:var(--type-sans-d-s-reg-tight-ls)}
 .board{display:grid;grid-template-columns:minmax(290px,370px) 1fr;gap:40px;align-items:start}
 .deck{position:sticky;top:calc(1.5rem + env(safe-area-inset-top,0px))}
@@ -218,12 +235,12 @@ main{max-width:var(--game-width);margin:0 auto;padding:40px var(--container-pad)
 .slot-btn{grid-column:3;display:flex;align-items:center;gap:.75rem;width:100%;min-height:44px;margin:.25rem 0;padding:.5rem .75rem;border:1px dashed transparent;border-radius:var(--radius-m);background:none;color:var(--color-text-tertiary);text-align:left;cursor:pointer;font-size:var(--type-sans-d-s-reg-tight-fs);line-height:var(--type-sans-d-s-reg-tight-lh);letter-spacing:var(--type-sans-d-s-reg-tight-ls);transition:background .2s ease,border-color .2s ease,color .2s ease}
 .slot-rule{flex:1;border-top:1px dashed var(--color-border-secondary);order:2}
 .slot-label{order:1;white-space:nowrap}
-.slot-btn:not(:disabled):hover,.slot-btn.drop-target{border-color:var(--color-accent);color:var(--color-accent);background:color-mix(in srgb,var(--color-accent) 6%,transparent)}
-.slot-btn:not(:disabled):hover .slot-rule,.slot-btn.drop-target .slot-rule{border-color:var(--color-accent)}
+.slot-btn:not(:disabled):hover,.slot-btn.drop-target{border-color:var(--color-game-ink);color:var(--color-game-ink);background:color-mix(in srgb,var(--color-game-ink) 6%,transparent)}
+.slot-btn:not(:disabled):hover .slot-rule,.slot-btn.drop-target .slot-rule{border-color:var(--color-game-ink)}
 .slot-btn:disabled{cursor:default}
-.slot.selected .slot-btn{display:block;margin:.5rem 0;padding:.75rem 1rem;border:1px dashed var(--color-accent);background:var(--color-surface-secondary);color:var(--color-text-primary)}
+.slot.selected .slot-btn{display:block;margin:.5rem 0;padding:.75rem 1rem;border:1px dashed var(--color-game-ink);background:var(--color-surface-secondary);color:var(--color-text-primary)}
 .ghost-title{display:block;font-family:var(--font-serif);font-size:var(--type-serif-d-l-fs);line-height:var(--type-serif-d-l-lh);letter-spacing:var(--type-serif-d-l-ls)}
-.ghost-hint{display:block;margin-top:.25rem;color:var(--color-accent);font-size:var(--type-sans-d-xs-reg-normal-fs);line-height:var(--type-sans-d-xs-reg-normal-lh);letter-spacing:var(--type-sans-d-xs-reg-normal-ls)}
+.ghost-hint{display:block;margin-top:.25rem;color:var(--color-game-ink);font-size:var(--type-sans-d-xs-reg-normal-fs);line-height:var(--type-sans-d-xs-reg-normal-lh);letter-spacing:var(--type-sans-d-xs-reg-normal-ls)}
 .slot.rejected .slot-btn{display:block;margin:.5rem 0;padding:.75rem 1rem;border:1px dashed var(--color-signal-adjust);background:var(--color-surface-secondary);color:var(--color-signal-adjust)}
 .slot.rejected .ghost-title{text-decoration:line-through;text-decoration-thickness:2px}
 .slot.rejected .ghost-hint{color:var(--color-signal-adjust)}
@@ -263,7 +280,7 @@ main{max-width:var(--game-width);margin:0 auto;padding:40px var(--container-pad)
 /* ---- Tablet (<1200, token tier "t") ---- */
 @media screen and (max-width:1199px){
   .rules h1,.rounds h1,.end-head h1,.score-num{font-size:var(--type-serif-t-2xl-fs);line-height:var(--type-serif-t-2xl-lh);letter-spacing:var(--type-serif-t-2xl-ls)}
-  .round-name,.card-title,.drawer-title,.end-grid h2{font-size:var(--type-serif-t-xl-fs);line-height:var(--type-serif-t-xl-lh);letter-spacing:var(--type-serif-t-xl-ls)}
+  .card-title,.drawer-title,.end-grid h2{font-size:var(--type-serif-t-xl-fs);line-height:var(--type-serif-t-xl-lh);letter-spacing:var(--type-serif-t-xl-ls)}
 }
 
 /* ---- Layout: board collapses to one column below lg (992) ---- */
@@ -285,11 +302,13 @@ main{max-width:var(--game-width);margin:0 auto;padding:40px var(--container-pad)
   .entry.status-correct .card-title{padding-right:0}
   .drawer .stamp{margin-top:.5rem}
 
-  .card-title,.entry .card-title,.round-name,.drawer-title,.end-grid h2,.unlocked h3,.ghost-title{font-size:var(--type-serif-m-2xl-fs);line-height:var(--type-serif-m-2xl-lh);letter-spacing:var(--type-serif-m-2xl-ls)}
+  .round-name{font-size:var(--type-sans-m-xl-bold-normal-fs);line-height:var(--type-sans-m-xl-bold-normal-lh);letter-spacing:var(--type-sans-m-xl-bold-normal-ls)}
+  .card-title,.entry .card-title,.drawer-title,.end-grid h2,.unlocked h3,.ghost-title{font-size:var(--type-serif-m-2xl-fs);line-height:var(--type-serif-m-2xl-lh);letter-spacing:var(--type-serif-m-2xl-ls)}
   .entry-date .year,.drawer-no{font-size:var(--type-serif-m-2xl-fs);line-height:var(--type-serif-m-2xl-lh);letter-spacing:var(--type-serif-m-2xl-ls)}
   .entry .spine::after{top:calc(1.5rem + 6px)}
-  body,.hero-kicker,.intro,.card-desc,.entry .card-desc,.conclusion,.deck-hint,.pencil-note{font-size:var(--type-sans-m-m-reg-loose-fs);line-height:var(--type-sans-m-m-reg-loose-lh);letter-spacing:var(--type-sans-m-m-reg-loose-ls)}
-  .section-name,.progress,.meta,.card-date,.slot-btn,.fine,.kbd-note,.deck-count,.entry-date .date-text,.src,.status-msg,.ghost-hint{font-size:var(--type-sans-m-s-reg-normal-fs);line-height:var(--type-sans-m-s-reg-normal-lh);letter-spacing:var(--type-sans-m-s-reg-normal-ls)}
+  .hero-kicker{font-size:var(--type-serif-m-l-fs);line-height:var(--type-serif-m-l-lh);letter-spacing:var(--type-serif-m-l-ls)}
+  body,.intro,.card-desc,.entry .card-desc,.conclusion,.deck-hint,.pencil-note{font-size:var(--type-sans-m-m-reg-loose-fs);line-height:var(--type-sans-m-m-reg-loose-lh);letter-spacing:var(--type-sans-m-m-reg-loose-ls)}
+  .progress,.meta,.card-date,.slot-btn,.fine,.kbd-note,.deck-count,.entry-date .date-text,.src,.status-msg,.ghost-hint{font-size:var(--type-sans-m-s-reg-normal-fs);line-height:var(--type-sans-m-s-reg-normal-lh);letter-spacing:var(--type-sans-m-s-reg-normal-ls)}
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -300,14 +319,15 @@ main{max-width:var(--game-width);margin:0 auto;padding:40px var(--container-pad)
 </style>
 </head>
 <body>
-<header class="masthead">
-  <span class="section-name" id="section-name"></span>
-  <div class="lang" role="group" id="lang-group">
-    <button type="button" data-lang="en" lang="en">EN</button>
-    <button type="button" data-lang="ru" lang="ru">RU</button>
+<main>
+  <div class="topbar">
+    <div class="lang" role="group" id="lang-group">
+      <button type="button" data-lang="en" lang="en">EN</button>
+      <button type="button" data-lang="ru" lang="ru">RU</button>
+    </div>
   </div>
-</header>
-<main id="app"></main>
+  <div id="app"></div>
+</main>
 <div id="live" class="sr-only" aria-live="polite"></div>
 
 <!-- =====================================================================
@@ -534,7 +554,7 @@ const TAMIZDAT_DATA = {
   rounds: [
     {
       id: "modern",
-      title: { ru: "Новый тамиздат", en: "The new Tamizdat" },
+      title: { ru: "Новый тамиздат", en: "The New Tamizdat" },
       blurb: { ru: "Независимое русскоязычное книгоиздание после 2019 года.", en: "Independent Russian-language publishing since 2019." },
       // Pool of events; each game draws `draw` of them, so every replay is a new set.
       events: ["babel-press", "ponyatye", "freedom-letters", "meduza-press", "babel-berlin", "meduza-books", "vidim-books", "prague-book-tower", "dar-prize", "pkhentz", "idiot-books", "bebelplatz", "project-24", "fokus"],
@@ -865,7 +885,6 @@ function plural(n, one, few, many) {
   function render() {
     document.documentElement.lang = state.lang;
     document.title = t("docTitle");
-    document.getElementById("section-name").textContent = t("sectionName");
     const lg = document.getElementById("lang-group");
     lg.setAttribute("aria-label", t("langGroup"));
     lg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === state.lang)));
@@ -884,8 +903,8 @@ function plural(n, one, few, many) {
       <p class="hero-kicker">${esc(t("heroSub"))}</p>
       <p class="intro">${esc(t("intro"))}</p>
       <div class="actions">
-        <button class="btn primary" data-act="rules">${esc(t("howToPlay"))}</button>
-        ${multi() ? `<button class="btn" data-act="rounds">${esc(t("chooseTimeline"))}</button>` : `<button class="btn" data-act="start" data-round="${esc(DATA.rounds[0].id)}">${esc(t("startNow"))}</button>`}
+        ${multi() ? `<button class="btn primary" data-act="rounds">${esc(t("chooseTimeline"))}</button>` : `<button class="btn primary" data-act="start" data-round="${esc(DATA.rounds[0].id)}">${esc(t("startNow"))}</button>`}
+        <button class="btn" data-act="rules">${esc(t("howToPlay"))}</button>
       </div>
       <div class="hero-cards" aria-hidden="true">${minis}</div>
     </section>`;
@@ -1291,8 +1310,8 @@ function plural(n, one, few, many) {
 
   /* ---------- postcard ----------
      Canvas can't read CSS custom properties, so these mirror the Tier‑1 primitives
-     in tamizdat-design-system.md directly: ink-950, paper, ink-900, indigo, ink-500. */
-  const PCC = { slate: "#1f2a2e", paper: "#fcfaf7", ink: "#263338", accent: "#6155f5", muted: "#8a9599" };
+     in tamizdat-design-system.md directly: ink-950, paper, ink-900, ink-500, plus the game ink (#3e69b7). */
+  const PCC = { slate: "#1f2a2e", paper: "#fcfaf7", ink: "#263338", accent: "#3e69b7", muted: "#8a9599" };
   const F = { display: '"Excelsior LT Std", "Excelsior", serif', text: '"Inter Variable", "Inter", sans-serif' };
 
   function postcardContext() {
