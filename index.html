@@ -344,7 +344,6 @@ html.help-open{overflow:hidden}
 .end-head{max-width:44rem;margin-bottom:40px}
 .score{display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;margin:0 0 1.5rem}
 .score-num{font-family:var(--font-serif);font-size:var(--type-serif-d-2xl-fs);line-height:var(--type-serif-d-2xl-lh);letter-spacing:var(--type-serif-d-2xl-ls)}
-.conclusion{max-width:36em;margin:0;font-size:var(--type-sans-d-l-reg-loose-fs);line-height:var(--type-sans-d-l-reg-loose-lh);letter-spacing:var(--type-sans-d-l-reg-loose-ls)}
 .end-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
 .end-grid h2{font-family:var(--font-serif);font-weight:400;font-size:var(--type-serif-d-xl-fs);line-height:var(--type-serif-d-xl-lh);letter-spacing:var(--type-serif-d-xl-ls);margin:0 0 .75rem;border-bottom:1px solid var(--color-border);padding-bottom:.75rem}
 .reward{position:sticky;top:calc(1.5rem + env(safe-area-inset-top,0px))}
@@ -391,7 +390,7 @@ html.help-open{overflow:hidden}
   .entry-date .year,.drawer-no{font-size:var(--type-serif-m-2xl-fs);line-height:var(--type-serif-m-2xl-lh);letter-spacing:var(--type-serif-m-2xl-ls)}
   .entry .spine::after{top:calc(1.5rem + 6px)}
   .hero-kicker{font-size:var(--type-serif-m-l-fs);line-height:var(--type-serif-m-l-lh);letter-spacing:var(--type-serif-m-l-ls)}
-  body,.intro,.card-desc,.entry .card-desc,.conclusion,.deck-hint{font-size:var(--type-sans-m-m-reg-loose-fs);line-height:var(--type-sans-m-m-reg-loose-lh);letter-spacing:var(--type-sans-m-m-reg-loose-ls)}
+  body,.intro,.card-desc,.entry .card-desc,.deck-hint{font-size:var(--type-sans-m-m-reg-loose-fs);line-height:var(--type-sans-m-m-reg-loose-lh);letter-spacing:var(--type-sans-m-m-reg-loose-ls)}
   .progress,.meta,.card-date,.slot-btn,.fine,.kbd-note,.deck-count,.entry-date .date-text,.src,.status-msg,.ghost-hint{font-size:var(--type-sans-m-s-reg-normal-fs);line-height:var(--type-sans-m-s-reg-normal-lh);letter-spacing:var(--type-sans-m-s-reg-normal-ls)}
 }
 
@@ -429,7 +428,7 @@ const TAMIZDAT_DATA = {
     "babel-press": {
       kind: "book",
       kindLabel: { ru: "переиздание", en: "new edition" },
-      date: { start: "2020-01-31", end: "2020-01-31", precision: "day", label: { ru: "31 января 2020", en: "31 January 2020" } },
+      date: { start: "2020-01-31", end: "2020-01-31", precision: "day", label: { ru: "31 января 2020", en: "January 31, 2020" } },
       title: { ru: "«Город Эн» Леонида Добычина", en: "Leonid Dobychin’s *The Town of N*" },
       text: {
         ru: "У тель-авивского книжного магазина «Бабель» появляется собственная издательская программа. Первым проектом становится переиздание «Города Эн» Леонида Добычина.",
@@ -458,7 +457,7 @@ const TAMIZDAT_DATA = {
     "freedom-letters": {
       kind: "publisher",
       kindLabel: { ru: "издательство", en: "publisher" },
-      date: { start: "2023-04-04", end: "2023-04-04", precision: "day", label: { ru: "4 апреля 2023", en: "4 April 2023" } },
+      date: { start: "2023-04-04", end: "2023-04-04", precision: "day", label: { ru: "4 апреля 2023", en: "April 4, 2023" } },
       title: { ru: "Основание Freedom Letters", en: "Freedom Letters is founded" },
       text: {
         ru: "Георгий Урушадзе объявляет о создании издательства Freedom Letters, ориентированного в том числе на тексты, которые невозможно публиковать в России.",
@@ -472,7 +471,7 @@ const TAMIZDAT_DATA = {
     "meduza-press": {
       kind: "publisher",
       kindLabel: { ru: "издательство", en: "publisher" },
-      date: { start: "2023-08-15", end: "2023-08-15", precision: "day", label: { ru: "15 августа 2023", en: "15 August 2023" } },
+      date: { start: "2023-08-15", end: "2023-08-15", precision: "day", label: { ru: "15 августа 2023", en: "August 15, 2023" } },
       title: { ru: "Издательство «Медузы»", en: "Meduza’s publishing house" },
       text: {
         ru: "«Медуза» объявляет о запуске собственного книжного издательства и сообщает, что книги будут доступны читателям в России через приложение.",
@@ -500,7 +499,7 @@ const TAMIZDAT_DATA = {
     "meduza-books": {
       kind: "book",
       kindLabel: { ru: "книги", en: "books" },
-      date: { start: "2023-10-20", end: "2023-10-20", precision: "day", label: { ru: "20 октября 2023", en: "20 October 2023" } },
+      date: { start: "2023-10-20", end: "2023-10-20", precision: "day", label: { ru: "20 октября 2023", en: "October 20, 2023" } },
       title: { ru: "Первые книги «Медузы»", en: "Meduza’s first books" },
       text: {
         ru: "В издательстве «Медузы» выходят первые книги: «Моя любимая страна» Елены Костюченко и «Война и наказание» Михаила Зыгаря (совместно с Zygaro).",
@@ -514,7 +513,7 @@ const TAMIZDAT_DATA = {
     "vidim-books": {
       kind: "publisher",
       kindLabel: { ru: "издательство", en: "publisher" },
-      date: { start: "2024-04-04", end: "2024-04-04", precision: "day", label: { ru: "4 апреля 2024", en: "4 April 2024" } },
+      date: { start: "2024-04-04", end: "2024-04-04", precision: "day", label: { ru: "4 апреля 2024", en: "April 4, 2024" } },
       title: { ru: "Основание Vidim Books", en: "Vidim Books is founded" },
       text: {
         ru: "Мария Алеф, Александр Гаврилов и Данила Стратович основывают Vidim Books — издательство и международную систему распространения русскоязычных книг, написанных авторами, которых преследуют в России по политическим мотивам.",
@@ -529,7 +528,7 @@ const TAMIZDAT_DATA = {
     "prague-book-tower": {
       kind: "fair",
       kindLabel: { ru: "книжная ярмарка", en: "book fair" },
-      date: { start: "2024-09-13", end: "2024-09-15", precision: "day", label: { ru: "13–15 сентября 2024", en: "13–15 September 2024" } },
+      date: { start: "2024-09-13", end: "2024-09-15", precision: "day", label: { ru: "13–15 сентября 2024", en: "September 13–15, 2024" } },
       title: { ru: "«Пражская книжная башня»", en: "Prague Book Tower" },
       text: {
         ru: "В Праге проходит первая международная ярмарка новой волны русскоязычной литературы «Пражская книжная башня» / Prague Book Tower. В ней участвуют 16 издательств и 4 литературных журнала; сами организаторы отмечают, что посетители назвали её «ярмаркой нового тамиздата».",
@@ -543,7 +542,7 @@ const TAMIZDAT_DATA = {
     "dar-prize": {
       kind: "prize",
       kindLabel: { ru: "литературная премия", en: "literary prize" },
-      date: { start: "2024-09-27", end: "2024-09-27", precision: "day", label: { ru: "27 сентября 2024", en: "27 September 2024" } },
+      date: { start: "2024-09-27", end: "2024-09-27", precision: "day", label: { ru: "27 сентября 2024", en: "September 27, 2024" } },
       title: { ru: "Литературная премия «Дар»", en: "The Dar literary prize" },
       text: {
         ru: "Швейцарская Ассоциация славистов объявляет об учреждении независимой литературной премии «Дар», предназначенной для поддержки литературы на русском языке вне зависимости от гражданства и места проживания автора.",
@@ -557,7 +556,7 @@ const TAMIZDAT_DATA = {
     "pkhentz": {
       kind: "book",
       kindLabel: { ru: "переиздание", en: "new edition" },
-      date: { start: "2024-11-15", end: "2024-11-15", precision: "day", label: { ru: "15 ноября 2024", en: "15 November 2024" } },
+      date: { start: "2024-11-15", end: "2024-11-15", precision: "day", label: { ru: "15 ноября 2024", en: "November 15, 2024" } },
       title: { ru: "«Пхенц» Абрама Терца", en: "Abram Tertz’s *Pkhentz*" },
       text: {
         ru: "Нью-йоркский Tamizdat Project выпускает свою первую книгу — двуязычное переиздание рассказа «Пхенц» Абрама Терца (Андрея Синявского) в переводе Эйнсли Морс (при участии Кевина Риса).",
@@ -571,7 +570,7 @@ const TAMIZDAT_DATA = {
     "idiot-books": {
       kind: "bookshop",
       kindLabel: { ru: "книжный магазин", en: "bookstore" },
-      date: { start: "2025-02-11", end: "2025-02-11", precision: "day", label: { ru: "11 февраля 2025", en: "11 February 2025" } },
+      date: { start: "2025-02-11", end: "2025-02-11", precision: "day", label: { ru: "11 февраля 2025", en: "February 11, 2025" } },
       title: { ru: "Idiot Books", en: "Idiot Books" },
       text: {
         ru: "В Лондоне открывается русскоязычный книжный магазин Idiot Books.",
@@ -586,7 +585,7 @@ const TAMIZDAT_DATA = {
     "bebelplatz": {
       kind: "fair",
       kindLabel: { ru: "книжная ярмарка", en: "book fair" },
-      date: { start: "2025-04-03", end: "2025-04-06", precision: "day", label: { ru: "3–6 апреля 2025", en: "3–6 April 2025" } },
+      date: { start: "2025-04-03", end: "2025-04-06", precision: "day", label: { ru: "3–6 апреля 2025", en: "April 3–6, 2025" } },
       title: { ru: "Berlin Bebelplatz", en: "Berlin Bebelplatz" },
       text: {
         ru: "В Берлине впервые проходит книжная ярмарка русскоязычной литературы Berlin Bebelplatz, собравшая более 30 независимых издательств и литературных проектов.",
@@ -600,7 +599,7 @@ const TAMIZDAT_DATA = {
     "project-24": {
       kind: "publisher",
       kindLabel: { ru: "издательский проект", en: "publishing project" },
-      date: { start: "2025-06-19", end: "2025-06-19", precision: "day", label: { ru: "19 июня 2025", en: "19 June 2025" } },
+      date: { start: "2025-06-19", end: "2025-06-19", precision: "day", label: { ru: "19 июня 2025", en: "June 19, 2025" } },
       title: { ru: "24 ⌓", en: "24 ⌓" },
       text: {
         ru: "Запускается платформа 24 ⌓ — цифровое пространство с фильмами и книгами, которые практически невозможно печатать и показывать в России.",
@@ -660,7 +659,7 @@ const TAMIZDAT_DATA = {
         object: "pkhentz",
         fact: {
           ru: "«Пхенц» открывает серию Tamizdat Project «XX век» под номером 1: двуязычная книга в мягкой обложке, 60 страниц, 110 × 170 мм.",
-          en: "Pkhentz is No. 1 in Tamizdat Project’s XX Century series: a bilingual paperback of 60 pages, 110 × 170 mm."
+          en: "Pkhentz is No. 1 in the Tamizdat Project’s XX Century series: a bilingual paperback of 60 pages, 110 × 170 mm."
         }
       }
     }
@@ -685,12 +684,12 @@ const I18N = {
     rules: [
       "Your goal is to reconstruct the chronology of the New Tamizdat by placing seven events on the timeline.",
       "One event is already marked on the timeline to serve as your starting point. Cards with other events will appear one by one. Place each card before or after the events already on the timeline to gradually build the correct chronological order.",
-      "To place an event on the timeline, drag the card to your chosen position, or click or tap “Place here.”",
-      "Click or tap the chosen gap again, or press the “Confirm” button to lock in your position.",
+      "To place an event on the timeline, drag the card to your chosen position, or select “Place here.”",
+      "Select the chosen gap again, or press the “Confirm” button to lock in your position.",
       "If your placement is correct, the card will stay in place and receive an “Approved” stamp. If not, it will automatically move to its correct position on the timeline and receive a “Denied” stamp.",
       "Some events are dated only to a month or a year. In these cases, any position within that period will be accepted as correct.",
       "Keep placing cards until you’ve completed the entire timeline.",
-      "Each card placed correctly earns you one point."
+      "Each card placed correctly earns you one point. You also get one point for the card that is already on the timeline at the start."
     ],
     kbdNote: "You can play with a keyboard: press Tab to move to a gap on the timeline, Enter to choose it, and Enter again to confirm. The up and down arrow keys move between gaps.",
     startFirst: "Start",
@@ -703,11 +702,11 @@ const I18N = {
     date: "Date:",
     dateHidden: "hidden until placed",
     drag: "drag",
-    hintPick: "Drag this card into a gap on the timeline, or tap “Place here.”",
-    confirm: "Confirm position",
+    hintPick: "Drag this card into a gap on the timeline, or select “Place here.”",
+    confirm: "Confirm",
     cancel: "Cancel",
     placeHere: "Place here",
-    ghostHint: "Tap again to confirm the position",
+    ghostHint: "Select again to confirm the position",
     slotFirst: t => `Place before “${t}”`,
     slotLast: t => `Place after “${t}”`,
     slotBetween: (a, b) => `Place between “${a}” and “${b}”`,
@@ -720,17 +719,16 @@ const I18N = {
     sources: "Sources:",
     doneText: "The timeline is complete.",
     seeResults: "See the result",
-    annSelected: t => `Gap chosen. Press Enter again or use Confirm position to place “${t}”.`,
+    annSelected: t => `Gap chosen. Press Enter again or use “Confirm” to place “${t}”.`,
     annCorrect: (t, d) => `Correct. “${t}”: ${d}.`,
     annMoved: (t, d) => `Denied. The card has moved to its place. Date: ${d}.`,
     annNext: t => `Next card: “${t}”.`,
     endTitle: "The timeline is complete",
     scoreSub: () => "placed correctly",
-    conclusion: "Presses, bookstores, fairs, and a prize, spread across several countries, now carry Russian-language literature beyond the reach of the censor—much as the tamizdat of the Soviet era once did. Seven cards, one emerging ecosystem.",
     playAnother: "Play another timeline",
     replay: "Replay this timeline",
     timelineHeading: "Your timeline",
-    postcardHeading: "A postcard from Tamizdat Review",
+    postcardHeading: "A postcard from the Tamizdat Review",
     turnOver: "Turn over",
     download: "Download postcard",
     downloadSaved: "Postcard saved.",
@@ -751,14 +749,13 @@ const I18N = {
     demoSteps: [
       "Drag the card into a gap on the timeline, then press “Confirm.”",
       "Right place: the card gets an “Approved” stamp.",
-      "Or tap “Place here,” then “Confirm.”",
+      "Or select “Place here,” then “Confirm.”",
       "Wrong place: the card moves to where it belongs and gets a “Denied” stamp."
     ],
     demoPause: "Pause",
     demoPlay: "Play",
     pcGreeting: "Greetings from the Tamizdat Review",
     pcTo: "To: our reader",
-    pcScore: (s, t) => `Result: ${s} of ${t}`,
     pcMark: "Tamizdat Review",
     pcAlt: (title, fact) => `Postcard. Front: the book ${title} by Abram Tertz, Tamizdat Project, 2024. Back: ${fact}`,
     kinds: { publisher: "publisher", book: "book", bookshop: "bookstore", fair: "book fair", prize: "literary prize", censorship: "censorship" }
@@ -782,7 +779,7 @@ const I18N = {
       "Если выбранная вами позиция оказалась правильной, карточка останется на своём месте, и на ней появится штамп «Одобрено». Если нет — она автоматически переместится на нужное место в хронологии, и на ней появится штамп «Отклонено».",
       "Даты некоторых событий известны только с точностью до месяца или года. Тогда засчитывается любая позиция на шкале внутри этого периода.",
       "Продолжайте размещать карточки, пока не восстановите всю хронологию.",
-      "За каждую карточку, размещённую верно, вы получаете одно очко."
+      "За каждую карточку, размещённую верно, вы получаете одно очко. Ещё одно очко вы получаете за карточку, которая отмечена на шкале с самого начала."
     ],
     kbdNote: "Можно играть с клавиатуры: клавишей Tab перейдите к промежутку на шкале, нажмите Enter, чтобы выбрать его, и Enter ещё раз, чтобы подтвердить. Стрелки вверх и вниз переключают промежутки.",
     startFirst: "Начать",
@@ -818,7 +815,6 @@ const I18N = {
     annNext: t => `Следующая карточка: ${q(t)}.`,
     endTitle: "Хронология восстановлена",
     scoreSub: () => "событий на своём месте",
-    conclusion: "Издательства, книжные магазины, ярмарки и премия в разных странах сегодня выводят русскоязычную литературу из-под власти цензора — так же, как когда-то это делал советский тамиздат. Семь карточек — одна складывающаяся экосистема.",
     playAnother: "Сыграть другую хронологию",
     replay: "Сыграть эту ещё раз",
     timelineHeading: "Ваша хронология",
@@ -850,7 +846,6 @@ const I18N = {
     demoPlay: "Смотреть",
     pcGreeting: "Привет от Tamizdat Review",
     pcTo: "Кому: нашему читателю",
-    pcScore: (s, t) => `Результат: ${s} из ${t}`,
     pcMark: "Tamizdat Review",
     pcAlt: (title, fact) => `Открытка. Лицевая сторона: книга «${title}» Абрама Терца, Tamizdat Project, 2024. Оборот: ${fact}`,
     kinds: { publisher: "издательство", book: "книга", bookshop: "книжный магазин", fair: "книжная ярмарка", prize: "литературная премия", censorship: "цензура" }
@@ -1323,7 +1318,6 @@ function plural(n, one, few, many) {
         ${homeCrumb()}
         <h1>${esc(t("endTitle"))}</h1>
         <p class="score"><span class="score-num">${s} / ${tot}</span><span>${esc(t("scoreSub", s, tot))}</span></p>
-        <p class="conclusion">${esc(L(roundDef(state.round.id).conclusion) || t("conclusion"))}</p>
         <div class="actions">
           <button class="btn primary" data-act="start" data-round="${esc(state.round.id)}">${esc(t(roundDef(state.round.id).draw ? "playAgain" : "replay"))}</button>
           ${multi() ? `<button class="btn" data-act="rounds">${esc(t("playAnother"))}</button>` : ""}
@@ -1622,9 +1616,8 @@ function plural(n, one, few, many) {
   function postcardContext() {
     const pc = DATA.archive.postcards[state.round.postcard];
     const obj = DATA.archive.objects[pc.object];
-    const { s, tot } = scoreTotals();
-    const date = new Date().toLocaleDateString(state.lang === "ru" ? "ru-RU" : "en-GB", { day: "numeric", month: "long", year: "numeric" });
-    return { pc, obj, s, tot, date };
+    const date = new Date().toLocaleDateString(state.lang === "ru" ? "ru-RU" : "en-US", { day: "numeric", month: "long", year: "numeric" });
+    return { pc, obj, date };
   }
 
   function wrap(ctx, text, x, y, maxW, lh) {
@@ -1705,9 +1698,8 @@ function plural(n, one, few, many) {
     ctx.beginPath(); ctx.arc(1110, 300, 100, 0, Math.PI * 2); ctx.stroke();
     ctx.beginPath(); ctx.arc(1110, 300, 84, 0, Math.PI * 2); ctx.stroke();
     ctx.textAlign = "center";
-    ctx.font = `600 22px ${F.text}`; ctx.fillText(t("pcMark"), 1110, 268);
-    fitFont(ctx, c.date, 150, 24, s => `${s}px ${F.text}`); ctx.fillText(c.date, 1110, 312);
-    ctx.font = `20px ${F.text}`; ctx.fillText(`${c.s}/${c.tot}`, 1110, 348);
+    ctx.font = `600 22px ${F.text}`; ctx.fillText(t("pcMark"), 1110, 286);
+    fitFont(ctx, c.date, 150, 24, s => `${s}px ${F.text}`); ctx.fillText(c.date, 1110, 330);
     for (let k = 0; k < 4; k++) {
       ctx.beginPath();
       for (let x = 840; x <= 1000; x += 4) { const yy = 250 + k * 26 + Math.sin((x - 840) / 18) * 7; x === 840 ? ctx.moveTo(x, yy) : ctx.lineTo(x, yy); }
@@ -1715,10 +1707,10 @@ function plural(n, one, few, many) {
     }
     ctx.restore();
     // address lines
-    const lines = [t("pcTo"), L(roundDef(state.round.id).title), t("pcScore", c.s, c.tot), c.date];
+    const lines = [t("pcTo"), L(roundDef(state.round.id).title), c.date];
     ctx.strokeStyle = PCC.muted; ctx.lineWidth = 1.5; ctx.fillStyle = PCC.ink; ctx.textAlign = "left";
     lines.forEach((txt, i) => {
-      const ly = 560 + i * 92;
+      const ly = 652 + i * 92;
       ctx.beginPath(); ctx.moveTo(840, ly); ctx.lineTo(1410, ly); ctx.stroke();
       fitFont(ctx, txt, 560, 28, s => `${s}px ${F.text}`);
       ctx.fillText(txt, 846, ly - 14);
