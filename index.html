@@ -54,7 +54,7 @@
   /* ---- Local additions (§10: not in the shared system — report back to Tamizdat) ---- */
   --color-game-ink:#3e69b7;                  /* the game's one accent, used instead of the site's indigo */
   --color-signal-correct:var(--color-game-ink); /* "correct" stamp */
-  --color-signal-adjust:#a8493c;              /* "moved to its place" note */
+  --color-signal-adjust:#b3322b;              /* «Отклонено» stamp and moved-card marks — local, reddish */
   --game-width:1180px;                        /* two-column board needs more than --review-content-width (970px) */
 
   --radius-s:4px; --radius-m:6px; --radius-l:8px; --radius-round:999px;
@@ -161,6 +161,8 @@ main{max-width:var(--game-width);margin:0 auto;padding:40px var(--container-pad)
 .rule-list{list-style:none;margin:0;padding:0;counter-reset:r}
 .rule-list li{counter-increment:r;display:grid;grid-template-columns:2.5rem 1fr;gap:.75rem;padding:1rem 0;border-top:1px solid var(--color-border)}
 .rule-list li::before{content:counter(r);font-family:var(--font-serif);font-size:var(--type-serif-d-l-fs);line-height:var(--type-sans-d-m-reg-loose-lh);letter-spacing:var(--type-serif-d-l-ls);color:var(--color-text-tertiary)}
+/* Hidden (but read by screen readers) until the player presses Tab */
+html:not(.kbd-user) .kbd-note{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .kbd-note{color:var(--color-text-tertiary);font-size:var(--type-sans-d-s-reg-loose-fs);line-height:var(--type-sans-d-s-reg-loose-lh);letter-spacing:var(--type-sans-d-s-reg-loose-ls);border-top:1px solid var(--color-border);padding-top:1rem;margin:0}
 
 /* Game */
@@ -199,12 +201,11 @@ main{max-width:var(--game-width);margin:0 auto;padding:40px var(--container-pad)
 .card.current.lifted{opacity:.3}
 .drag-clone{position:fixed;z-index:60;pointer-events:none;margin:0;transform:rotate(-1.5deg);box-shadow:0 5px 15px 0 var(--color-overlay)}
 
-/* "Correct" stamp and "moved" note — the stamp is a game element, not a system component */
+/* «Одобрено» / «Отклонено» stamps — game elements, not system components */
 .stamp{position:absolute;right:1.5rem;top:calc(2.5rem + 1rem);transform:rotate(-6deg);border:2px solid var(--color-signal-correct);border-radius:var(--radius-s);background:transparent;color:var(--color-signal-correct);padding:.25rem .5rem;font-weight:600;font-size:var(--type-sans-d-xs-bold-normal-fs);line-height:var(--type-sans-d-xs-bold-normal-lh);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
 .just-placed .stamp{animation:press .2s ease}
 @keyframes press{from{transform:rotate(-6deg) scale(1.2);opacity:0}to{transform:rotate(-6deg) scale(1);opacity:1}}
-.pencil-note{margin:.75rem 0 0;padding-left:.75rem;border-left:2px solid var(--color-signal-adjust);color:var(--color-signal-adjust);font-size:var(--type-sans-d-s-reg-loose-fs);line-height:var(--type-sans-d-s-reg-loose-lh);letter-spacing:var(--type-sans-d-s-reg-loose-ls)}
-.just-placed .pencil-note{animation:reveal .2s ease}
+.stamp.denied{border-color:var(--color-signal-adjust);color:var(--color-signal-adjust)}
 @keyframes reveal{from{opacity:0}to{opacity:1}}
 .fine{color:var(--color-text-tertiary);font-size:var(--type-sans-d-s-reg-loose-fs);line-height:var(--type-sans-d-s-reg-loose-lh);letter-spacing:var(--type-sans-d-s-reg-loose-ls)}
 
@@ -230,7 +231,7 @@ main{max-width:var(--game-width);margin:0 auto;padding:40px var(--container-pad)
 /* Placed cards: serif l title over sans s text keeps the title clearly the louder of the two */
 .entry .card-title{font-size:var(--type-serif-d-l-fs);line-height:var(--type-serif-d-l-lh);letter-spacing:var(--type-serif-d-l-ls);margin:.75rem 0 .25rem}
 .entry .card-desc{font-size:var(--type-sans-d-s-reg-loose-fs);line-height:var(--type-sans-d-s-reg-loose-lh);letter-spacing:var(--type-sans-d-s-reg-loose-ls)}
-.entry.status-correct .card-title{padding-right:6.5rem}
+.entry.status-correct .card-title,.entry.status-corrected .card-title{padding-right:8rem}
 
 .slot-btn{grid-column:3;display:flex;align-items:center;gap:.75rem;width:100%;min-height:44px;margin:.25rem 0;padding:.5rem .75rem;border:1px dashed transparent;border-radius:var(--radius-m);background:none;color:var(--color-text-tertiary);text-align:left;cursor:pointer;font-size:var(--type-sans-d-s-reg-tight-fs);line-height:var(--type-sans-d-s-reg-tight-lh);letter-spacing:var(--type-sans-d-s-reg-tight-ls);transition:background .2s ease,border-color .2s ease,color .2s ease}
 .slot-rule{flex:1;border-top:1px dashed var(--color-border-secondary);order:2}
@@ -245,6 +246,9 @@ main{max-width:var(--game-width);margin:0 auto;padding:40px var(--container-pad)
 .slot.rejected .ghost-title{text-decoration:line-through;text-decoration-thickness:2px}
 .slot.rejected .ghost-hint{color:var(--color-signal-adjust)}
 .tl.final .entry{padding:.5rem 0}
+/* The end-screen timeline is a half-width column: stamps sit in the flow above the title, as on mobile, so titles keep their width */
+.tl.final .stamp{position:static;display:inline-block;margin-top:.75rem;transform:rotate(-4deg)}
+.tl.final .entry .card-title{padding-right:0}
 
 /* Rounds */
 .rounds{max-width:44rem}
@@ -253,7 +257,6 @@ main{max-width:var(--game-width);margin:0 auto;padding:40px var(--container-pad)
 .drawer:hover .drawer-title{text-decoration:underline;text-decoration-color:var(--color-text-weak);text-decoration-thickness:1px;text-underline-offset:4px}
 .drawer-no{font-family:var(--font-serif);font-size:var(--type-serif-d-l-fs);line-height:var(--type-serif-d-l-lh);letter-spacing:var(--type-serif-d-l-ls);color:var(--color-text-tertiary)}
 .drawer-title{display:block;font-family:var(--font-serif);font-size:var(--type-serif-d-xl-fs);line-height:var(--type-serif-d-xl-lh);letter-spacing:var(--type-serif-d-xl-ls)}
-.drawer-blurb{display:block;margin-top:.5rem;color:var(--color-text-secondary)}
 .drawer .stamp{top:1.5rem;right:0}
 
 /* End */
@@ -299,7 +302,7 @@ main{max-width:var(--game-width);margin:0 auto;padding:40px var(--container-pad)
   .entry,.slot{grid-template-columns:4.5rem 1rem minmax(0,1fr);column-gap:.5rem}
   .stamp{position:static;display:inline-block;margin-top:.75rem;transform:rotate(-4deg)}
   @keyframes press{from{transform:rotate(-4deg) scale(1.2);opacity:0}to{transform:rotate(-4deg) scale(1);opacity:1}}
-  .entry.status-correct .card-title{padding-right:0}
+  .entry.status-correct .card-title,.entry.status-corrected .card-title{padding-right:0}
   .drawer .stamp{margin-top:.5rem}
 
   .round-name{font-size:var(--type-sans-m-xl-bold-normal-fs);line-height:var(--type-sans-m-xl-bold-normal-lh);letter-spacing:var(--type-sans-m-xl-bold-normal-ls)}
@@ -307,7 +310,7 @@ main{max-width:var(--game-width);margin:0 auto;padding:40px var(--container-pad)
   .entry-date .year,.drawer-no{font-size:var(--type-serif-m-2xl-fs);line-height:var(--type-serif-m-2xl-lh);letter-spacing:var(--type-serif-m-2xl-ls)}
   .entry .spine::after{top:calc(1.5rem + 6px)}
   .hero-kicker{font-size:var(--type-serif-m-l-fs);line-height:var(--type-serif-m-l-lh);letter-spacing:var(--type-serif-m-l-ls)}
-  body,.intro,.card-desc,.entry .card-desc,.conclusion,.deck-hint,.pencil-note{font-size:var(--type-sans-m-m-reg-loose-fs);line-height:var(--type-sans-m-m-reg-loose-lh);letter-spacing:var(--type-sans-m-m-reg-loose-ls)}
+  body,.intro,.card-desc,.entry .card-desc,.conclusion,.deck-hint{font-size:var(--type-sans-m-m-reg-loose-fs);line-height:var(--type-sans-m-m-reg-loose-lh);letter-spacing:var(--type-sans-m-m-reg-loose-ls)}
   .progress,.meta,.card-date,.slot-btn,.fine,.kbd-note,.deck-count,.entry-date .date-text,.src,.status-msg,.ghost-hint{font-size:var(--type-sans-m-s-reg-normal-fs);line-height:var(--type-sans-m-s-reg-normal-lh);letter-spacing:var(--type-sans-m-s-reg-normal-ls)}
 }
 
@@ -555,7 +558,6 @@ const TAMIZDAT_DATA = {
     {
       id: "modern",
       title: { ru: "Новый тамиздат", en: "The New Tamizdat" },
-      blurb: { ru: "Независимое русскоязычное книгоиздание после 2019 года.", en: "Independent Russian-language publishing since 2019." },
       // Pool of events; each game draws `draw` of them, so every replay is a new set.
       events: ["babel-press", "ponyatye", "freedom-letters", "meduza-press", "babel-berlin", "meduza-books", "vidim-books", "prague-book-tower", "dar-prize", "pkhentz", "idiot-books", "bebelplatz", "project-24", "fokus"],
       draw: 7,
@@ -569,21 +571,15 @@ const TAMIZDAT_DATA = {
         title: { ru: "Пхенц", en: "Pkhentz" },
         imprint: { ru: "Нью-Йорк: Tamizdat Project, 2024", en: "New York: Tamizdat Project, 2024" },
         description: {
-          ru: "Рассказ эпохи оттепели о советском бухгалтере, который на самом деле — пришелец с другой планеты: он прячет своё похожее на кактус тело и бережёт обрывки забытого языка. Издание Tamizdat Project впервые публикует текст отдельной книгой, вместе с новым английским переводом.",
-          en: "A Thaw-era story about a Soviet accountant who is secretly an alien, hiding a cactus-like body and holding on to scraps of a forgotten language. Tamizdat Project’s edition is the first to publish it as a book of its own, with a new English translation."
+          // Line breaks (\n) separate paragraphs
+          ru: "Рассказ эпохи оттепели о советском бухгалтере, который на самом деле оказывается пришельцем с другой планеты. Скрывая своё похожее на кактус тело, он пытается сохранить память о родной планете и её языке, пока жизнь в советской коммуналке медленно разрушает его нечеловеческую природу.\nНаписанный в 1957 году, рассказ впервые был опубликован на Западе в 1966-м, после показательного процесса над советскими писателями Андреем Синявским (Абрамом Терцем) и Юлием Даниэлем (Николаем Аржаком). За публикацию своих «клеветнических» произведений в тамиздате они были приговорены к семи и пяти годам лагерей соответственно.\nTamizdat Project впервые публикует текст отдельной книгой, вместе с новым английским переводом.",
+          en: "A Thaw-era tale about a Soviet accountant who turns out to be an alien from another planet. Hiding his cactus-like body, he struggles to preserve memories of his home planet and its language, while life in a Soviet communal apartment gradually erodes his alien nature.\nWritten in 1957, the story was first published in the West in 1966, following the show trial of Soviet writers Andrei Sinyavsky (Abram Tertz) and Yuli Daniel (Nikolai Arzhak). The two were sentenced to seven and five years in labor camps, respectively, for publishing their “slanderous” works in tamizdat.\nThe Tamizdat Project now brings the story into print as a standalone book, alongside a new English translation, for the first time."
         },
         link: "https://tamizdatproject.org/programs/publishing/pkhentz/",
         image: null
       }
     },
     postcards: {
-      "pkhentz-trial": {
-        object: "pkhentz",
-        fact: {
-          ru: "Написанный в 1957 году «Пхенц» впервые вышел на Западе после показательного процесса 1966 года, когда Андрея Синявского (Абрама Терца) и Юлия Даниэля осудили за публикации за границей.",
-          en: "Written in 1957, Pkhentz first appeared in the West after the 1966 show trial in Moscow, when Andrei Sinyavsky (Abram Tertz) and Yuli Daniel were sentenced for publishing their work abroad."
-        }
-      },
       "pkhentz-series": {
         object: "pkhentz",
         fact: {
@@ -605,51 +601,49 @@ const I18N = {
     langGroup: "Language",
     heroWords: ["The New", "Tamizdat"],
     heroSub: "A timeline in seven cards",
-    intro: "Can you reconstruct the history of the new Tamizdat? Place seven events from the world of independent publishing, censorship, and literary exile in chronological order.",
+    intro: "Can you reconstruct the chronology of the New Tamizdat?\nPut seven events from the history of the literary process and independent publishing in exile in the correct order.",
     howToPlay: "How to play",
     chooseTimeline: "Choose a timeline",
     rulesTitle: "How to play",
     rules: [
-      "Each timeline has seven event cards. One is already in place to start you off.",
-      "Drag the top card into a gap on the timeline, or tap a gap to choose it.",
-      "Check the position, then confirm it.",
-      "If you’re right, the card stays and its date is revealed. If not, it moves to where it belongs, with a note saying why.",
-      "Some dates are known only to the year. Any position within that year counts.",
-      "Keep going until all seven events form a complete timeline."
+      "Your goal is to arrange events from the history of the New Tamizdat in chronological order. Event cards appear on the left, while a timeline with one event already in place appears on the right. Use this event as a reference point to gradually build the timeline.",
+      "To place an event on the timeline, click “Place here” or drag the card to your chosen position.",
+      "Confirm your choice or adjust the card’s position.",
+      "If your placement is correct, the card will stay in place and receive an “Approved” stamp. If not, it will automatically move to its correct position on the timeline and receive a “Denied” stamp.",
+      "Some events are dated only to a specific year. In these cases, any position within that year will be accepted as correct.",
+      "Keep placing cards until you’ve completed the entire timeline."
     ],
-    kbdNote: "With a keyboard: Tab to a gap, press Enter to choose it, then Enter again to confirm. The arrow keys move between gaps.",
+    kbdNote: "You can play with a keyboard: press Tab to move to a gap on the timeline, Enter to choose it, and Enter again to confirm. The up and down arrow keys move between gaps.",
     startFirst: "Start",
     startNow: "Start playing",
     playAgain: "Play again with new cards",
-    progress: (n, t) => `${n} of ${t} events on the timeline`,
-    cardsLeft: n => n === 0 ? "This is the last card" : (n === 1 ? "1 more card after this one" : `${n} more cards after this one`),
+    progress: (n, t) => `${n} of ${t} events`,
+    cardsLeft: n => n === 0 ? "This is the last card" : (n === 1 ? "1 more card left" : `${n} more cards left`),
     deckLabel: "Card to place",
     timelineLabel: "Timeline",
     date: "Date:",
     dateHidden: "hidden until placed",
     drag: "drag",
-    hintPick: "Drag this card into a gap on the timeline, or tap a gap.",
-    hintConfirm: "Tap the highlighted gap again or press Confirm — or choose another gap.",
+    hintPick: "Drag this card into a gap on the timeline, or tap “Place here”.",
     confirm: "Confirm position",
     cancel: "Cancel",
     placeHere: "Place here",
-    ghostHint: "Tap again to place it here",
+    ghostHint: "Tap again to confirm the position",
     slotFirst: t => `Place before “${t}”`,
     slotLast: t => `Place after “${t}”`,
     slotBetween: (a, b) => `Place between “${a}” and “${b}”`,
     selectedAt: "Position chosen",
-    stampCorrect: "correct",
+    stampCorrect: "Approved",
+    stampDenied: "Denied",
     stampAnchor: "Starting point",
-    noteBefore: t => `Not quite: it happened before “${t}”.`,
-    noteAfter: t => `Not quite: it happened after “${t}”.`,
-    rejected: "Not here",
+    rejected: "You missed",
     source: "Source:",
     sources: "Sources:",
-    doneText: "All seven events are on the timeline.",
-    seeResults: "See the full timeline",
+    doneText: "The timeline is complete.",
+    seeResults: "See the result",
     annSelected: t => `Gap chosen. Press Enter again or use Confirm position to place “${t}”.`,
     annCorrect: (t, d) => `Correct. “${t}”: ${d}.`,
-    annMoved: (t, d, n) => `${n} Moved to its place. Date: ${d}.`,
+    annMoved: (t, d) => `Denied. The card has moved to its place. Date: ${d}.`,
     annNext: t => `Next card: “${t}”.`,
     endTitle: "The timeline is complete",
     scoreSub: () => "placed correctly on the first try",
@@ -657,10 +651,8 @@ const I18N = {
     playAnother: "Play another timeline",
     replay: "Replay this timeline",
     timelineHeading: "Your timeline",
-    postcardHeading: "A postcard from Tamizdat",
-    postcardIntro: "Your reward: a card from the Tamizdat Project collection. Nothing to fill in.",
+    postcardHeading: "A postcard from Tamizdat Review",
     turnOver: "Turn over",
-    turnFront: "Turn to the front",
     download: "Download postcard",
     downloadSaved: "Postcard saved.",
     downloadDeclined: "Download cancelled.",
@@ -668,15 +660,15 @@ const I18N = {
     explore: "Explore the archive",
     newsletter: "Subscribe to the Tamizdat Project newsletter",
     newsletterNote: "A separate sign-up on tamizdatproject.org.",
-    unlocked: "Unlocked from the archive",
+    unlocked: "The book on your postcard",
     openObject: "Open this book in the archive",
     roundsTitle: "Choose a timeline",
     best: (s, t) => `best ${s}/${t}`,
     backStart: "Back to the start",
-    pcGreeting: "Greetings from the new Tamizdat",
-    pcTo: "To: a reader of the new tamizdat",
-    pcScore: (s, t) => `First try: ${s} of ${t}`,
-    pcMark: "New Tamizdat",
+    pcGreeting: "Greetings from the Tamizdat Review",
+    pcTo: "To: our reader",
+    pcScore: (s, t) => `Result: ${s} of ${t}`,
+    pcMark: "Tamizdat Review",
     pcAlt: (title, fact) => `Postcard. Front: the book ${title} by Abram Tertz, Tamizdat Project, 2024. Back: ${fact}`,
     kinds: { publisher: "publisher", book: "book", bookshop: "bookshop", fair: "book fair", prize: "literary prize", censorship: "censorship" }
   },
@@ -686,51 +678,49 @@ const I18N = {
     langGroup: "Язык",
     heroWords: ["Новый", "тамиздат"],
     heroSub: "Хронология в семи карточках",
-    intro: "Сможете восстановить историю нового тамиздата? Расположите семь событий из истории независимого книгоиздания, цензуры и литературной эмиграции в правильном порядке.",
+    intro: "Сможете ли вы восстановить хронологию нового тамиздата?\nРасположите семь событий из истории литературного процесса и независимого книгоиздательства в эмиграции в правильном порядке.",
     howToPlay: "Как играть",
     chooseTimeline: "Выбрать хронологию",
     rulesTitle: "Как играть",
     rules: [
-      "В каждой хронологии семь карточек с событиями. Одна уже лежит на шкале — от неё и начнём.",
-      "Перетащите верхнюю карточку в промежуток на шкале или просто нажмите на промежуток.",
-      "Проверьте позицию и подтвердите её.",
-      "Если вы правы, карточка остаётся на месте и открывается дата. Если нет — она переместится туда, где должна быть, с пометкой почему.",
-      "Некоторые даты известны только с точностью до года. Тогда засчитывается любая позиция внутри этого года.",
-      "Продолжайте, пока все семь событий не сложатся в хронологию."
+      "Ваша задача — расположить события из истории нового тамиздата в хронологическом порядке. Слева появляются карточки с событиями, справа — временная шкала, на которой уже отмечено одно событие. Размещайте карточки относительно него, постепенно выстраивая хронологию.",
+      "Чтобы разместить событие на шкале, нажмите «Поместить сюда» или перетащите карточку в выбранное вами место.",
+      "Подтвердите выбранную вами позицию или поменяйте её.",
+      "Если выбранная вами позиция оказалась правильной, карточка останется на своём месте и на ней появится штамп «Одобрено». Если нет — она автоматически переместится на нужное место в хронологии и на ней появится штамп «Отклонено».",
+      "Даты некоторых событий известны только с точностью до года. Тогда засчитывается любая позиция на шкале внутри этого года.",
+      "Продолжайте размещать карточки, пока не восстановите всю хронологию."
     ],
-    kbdNote: "С клавиатуры: Tab — к промежутку, Enter — выбрать, Enter ещё раз — подтвердить. Стрелки переключают промежутки.",
+    kbdNote: "Можно играть с клавиатуры: клавишей Tab перейдите к промежутку на шкале, нажмите Enter, чтобы выбрать его, и Enter ещё раз, чтобы подтвердить. Стрелки вверх и вниз переключают промежутки.",
     startFirst: "Начать",
     startNow: "Начать игру",
     playAgain: "Сыграть ещё раз с новыми карточками",
-    progress: (n, t) => `На шкале ${n} из ${t} событий`,
-    cardsLeft: n => n === 0 ? "Это последняя карточка" : `После этой — ещё ${n} ${plural(n, "карточка", "карточки", "карточек")}`,
+    progress: (n, t) => `${n} из ${t} событий`,
+    cardsLeft: n => n === 0 ? "Это последняя карточка" : `${plural(n, "Осталась", "Осталось", "Осталось")} ещё ${n} ${plural(n, "карточка", "карточки", "карточек")}`,
     deckLabel: "Карточка для размещения",
     timelineLabel: "Хронология",
     date: "Дата:",
     dateHidden: "скрыта до размещения",
     drag: "тянуть",
-    hintPick: "Перетащите карточку в промежуток на шкале или нажмите на промежуток.",
-    hintConfirm: "Нажмите на выделенный промежуток ещё раз или на «Подтвердить» — или выберите другой промежуток.",
+    hintPick: "Перетащите карточку в выбранный временной промежуток или нажмите «Поместить сюда».",
     confirm: "Подтвердить",
     cancel: "Отменить",
     placeHere: "Поместить сюда",
-    ghostHint: "Нажмите ещё раз, чтобы поместить сюда",
+    ghostHint: "Нажмите ещё раз, чтобы подтвердить позицию",
     slotFirst: t => `Поместить перед ${q(t)}`,
     slotLast: t => `Поместить после ${q(t)}`,
     slotBetween: (a, b) => `Поместить между ${q(a)} и ${q(b)}`,
     selectedAt: "Позиция выбрана",
-    stampCorrect: "верно",
+    stampCorrect: "Одобрено",
+    stampDenied: "Отклонено",
     stampAnchor: "Точка отсчёта",
-    noteBefore: t => `Не совсем: это случилось раньше, чем ${q(t)}.`,
-    noteAfter: t => `Не совсем: это случилось позже, чем ${q(t)}.`,
-    rejected: "Не здесь",
+    rejected: "Мимо",
     source: "Источник:",
     sources: "Источники:",
-    doneText: "Все семь событий на шкале.",
-    seeResults: "Посмотреть всю хронологию",
+    doneText: "Хронология восстановлена.",
+    seeResults: "Посмотреть результат",
     annSelected: t => `Промежуток выбран. Нажмите Enter ещё раз или «Подтвердить», чтобы поместить ${q(t)}.`,
     annCorrect: (t, d) => `Верно. ${q(t)}: ${d}.`,
-    annMoved: (t, d, n) => `${n} Карточка перемещена на своё место. Дата: ${d}.`,
+    annMoved: (t, d) => `Отклонено. Карточка перемещена на своё место. Дата: ${d}.`,
     annNext: t => `Следующая карточка: ${q(t)}.`,
     endTitle: "Хронология восстановлена",
     scoreSub: () => "событий на своём месте с первой попытки",
@@ -738,10 +728,8 @@ const I18N = {
     playAnother: "Сыграть другую хронологию",
     replay: "Сыграть эту ещё раз",
     timelineHeading: "Ваша хронология",
-    postcardHeading: "Открытка из тамиздата",
-    postcardIntro: "Ваша награда — открытка с книгой из коллекции Tamizdat Project. Ничего заполнять не нужно.",
+    postcardHeading: "Открытка от Tamizdat Review",
     turnOver: "Перевернуть",
-    turnFront: "Лицевой стороной",
     download: "Скачать открытку",
     downloadSaved: "Открытка сохранена.",
     downloadDeclined: "Загрузка отменена.",
@@ -749,15 +737,15 @@ const I18N = {
     explore: "Открыть архив",
     newsletter: "Подписаться на рассылку Tamizdat Project",
     newsletterNote: "Отдельная подписка на сайте tamizdatproject.org.",
-    unlocked: "Открыто в архиве",
-    openObject: "Эта книга в архиве",
+    unlocked: "Книга с вашей открытки",
+    openObject: "Посмотреть эту книгу в архиве",
     roundsTitle: "Выберите хронологию",
     best: (s, t) => `лучший результат ${s}/${t}`,
     backStart: "В начало",
-    pcGreeting: "Привет из нового тамиздата",
-    pcTo: "Кому: читателю нового тамиздата",
-    pcScore: (s, t) => `С первой попытки: ${s} из ${t}`,
-    pcMark: "Новый тамиздат",
+    pcGreeting: "Привет от Tamizdat Review",
+    pcTo: "Кому: нашему читателю",
+    pcScore: (s, t) => `Результат: ${s} из ${t}`,
+    pcMark: "Tamizdat Review",
     pcAlt: (title, fact) => `Открытка. Лицевая сторона: книга «${title}» Абрама Терца, Tamizdat Project, 2024. Оборот: ${fact}`,
     kinds: { publisher: "издательство", book: "книга", bookshop: "книжный магазин", fair: "книжная ярмарка", prize: "литературная премия", censorship: "цензура" }
   }
@@ -841,12 +829,6 @@ function plural(n, one, few, many) {
     }
     return best;
   }
-  function explain(id, slot) {
-    const P = state.placed;
-    for (let i = 0; i < slot; i++) if (before(id, P[i].id)) return { rel: "before", ref: P[i].id };
-    for (let i = P.length - 1; i >= slot; i--) if (before(P[i].id, id)) return { rel: "after", ref: P[i].id };
-    return null;
-  }
   const sortChrono = ids => ids.slice().sort((a, b) => EV[a].date.start.localeCompare(EV[b].date.start) || EV[a].date.end.localeCompare(EV[b].date.end));
 
   /* ---------- rounds ---------- */
@@ -901,7 +883,7 @@ function plural(n, one, few, many) {
     return `<section class="landing ${state.heroPlayed ? "no-anim" : ""}">
       <h1 class="hero-title">${w.map((x, i) => `<span class="redact" style="--i:${i}">${esc(x)}</span>`).join(" ")}</h1>
       <p class="hero-kicker">${esc(t("heroSub"))}</p>
-      <p class="intro">${esc(t("intro"))}</p>
+      <p class="intro">${esc(t("intro")).replace(/\n/g, "<br>")}</p>
       <div class="actions">
         ${multi() ? `<button class="btn primary" data-act="rounds">${esc(t("chooseTimeline"))}</button>` : `<button class="btn primary" data-act="start" data-round="${esc(DATA.rounds[0].id)}">${esc(t("startNow"))}</button>`}
         <button class="btn" data-act="rules">${esc(t("howToPlay"))}</button>
@@ -930,7 +912,7 @@ function plural(n, one, few, many) {
         const b = state.best[r.id];
         return `<li><button class="drawer" data-act="start" data-round="${esc(r.id)}">
           <span class="drawer-no" aria-hidden="true">${roman[i] || i + 1}</span>
-          <span><span class="drawer-title">${esc(L(r.title))}</span><span class="drawer-blurb">${esc(L(r.blurb))}</span></span>
+          <span class="drawer-title">${esc(L(r.title))}</span>
           ${b ? `<span class="stamp">${esc(t("best", b.s, b.t))}</span>` : ""}
         </button></li>`;
       }).join("")}</ul>
@@ -963,14 +945,13 @@ function plural(n, one, few, many) {
     const anchorBit = p.status === "anchor" ? `<span class="item anchor-label">${esc(t("stampAnchor").toLowerCase())}</span>` : "";
     let feedback = "";
     if (p.status === "correct") feedback = `<span class="stamp">${esc(t("stampCorrect"))}</span>`;
-    if (p.status === "corrected" && p.note) feedback = `<p class="pencil-note">${esc(t(p.note.rel === "before" ? "noteBefore" : "noteAfter", title(p.note.ref)))}</p>`;
+    if (p.status === "corrected") feedback = `<span class="stamp denied">${esc(t("stampDenied"))}</span>`;
     return `<article class="card placed" tabindex="-1" id="entry-${esc(id)}" aria-labelledby="t-${esc(id)}">
       ${cardHead(id, anchorBit)}
-      ${p.status === "correct" ? feedback : ""}
+      ${feedback}
       <h3 class="card-title" id="t-${esc(id)}">${esc(title(id))}</h3>
       <p class="card-desc">${esc(L(e.text))}</p>
       ${imageHtml(id)}
-      ${p.status === "corrected" ? feedback : ""}
       <p class="src">${esc(t(e.sources.length > 1 ? "sources" : "source"))} ${e.sources.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(typeof s.label === "string" ? s.label : L(s.label))}</a>`).join(", ")}</p>
     </article>`;
   }
@@ -1017,7 +998,7 @@ function plural(n, one, few, many) {
       const edges = Math.min(2, remaining);
       deck = `<div class="deck-stack">${edges >= 2 ? '<div class="stack-edge e2"></div>' : ""}${edges >= 1 ? '<div class="stack-edge e1"></div>' : ""}${currentCardHtml(state.current)}</div>
         <p class="deck-count">${esc(t("cardsLeft", remaining))}</p>
-        <p class="deck-hint">${esc(state.selectedSlot == null ? t("hintPick") : t("hintConfirm"))}</p>
+        ${state.selectedSlot == null ? `<p class="deck-hint">${esc(t("hintPick"))}</p>` : ""}
         <div class="deck-actions">
           <p class="selected-info">${esc(title(state.current))}</p>
           ${state.selectedSlot != null ? `<button class="btn" data-act="cancel-slot" ${state.busy ? "disabled" : ""}>${esc(t("cancel"))}</button>` : ""}
@@ -1054,7 +1035,6 @@ function plural(n, one, few, many) {
       <div class="end-grid">
         <section class="reward" aria-labelledby="pc-h">
           <h2 id="pc-h">${esc(t("postcardHeading"))}</h2>
-          <p class="fine">${esc(t("postcardIntro"))}</p>
           <figure class="postcard">
             <div class="pc-inner ${state.flipped ? "flipped" : ""}" id="pc-inner">
               <canvas class="pc-front" width="1500" height="1000" aria-hidden="${state.flipped}"></canvas>
@@ -1063,7 +1043,7 @@ function plural(n, one, few, many) {
             <figcaption class="sr-only">${esc(t("pcAlt", L(obj.title), L(pc.fact)))}</figcaption>
           </figure>
           <div class="pc-actions">
-            <button class="btn" data-act="flip">${esc(state.flipped ? t("turnFront") : t("turnOver"))}</button>
+            <button class="btn" data-act="flip">${esc(t("turnOver"))}</button>
             <button class="btn" data-act="download" id="dl-btn">${esc(t("download"))}</button>
             <a class="btn primary" href="${esc(DATA.config.archiveUrl)}" target="_blank" rel="noopener">${esc(t("explore"))}</a>
           </div>
@@ -1072,7 +1052,7 @@ function plural(n, one, few, many) {
           <aside class="unlocked">
             <p class="fine">${esc(t("unlocked"))}</p>
             <h3>${esc(L(obj.author))}. ${esc(state.lang === "ru" ? "«" + L(obj.title) + "»" : L(obj.title))}</h3>
-            <p>${esc(L(obj.description))}</p>
+            ${L(obj.description).split("\n").map(x => `<p>${esc(x)}</p>`).join("")}
             <a href="${esc(obj.link)}" target="_blank" rel="noopener">${esc(t("openObject"))}</a>
           </aside>
         </section>
@@ -1142,12 +1122,10 @@ function plural(n, one, few, many) {
     state.selectedSlot = null;
     render();
     await wait(800);
-    const note = explain(id, slot);
     const target = nearestValidSlot(id, slot);
     state.rejectedSlot = null;
-    commit(id, target, "corrected", note);
-    const noteText = note ? t(note.rel === "before" ? "noteBefore" : "noteAfter", title(note.ref)) : "";
-    announce(t("annMoved", title(id), dateLabel(id), noteText) + (state.current ? " " + t("annNext", title(state.current)) : ""));
+    commit(id, target, "corrected", null);
+    announce(t("annMoved", title(id), dateLabel(id)) + (state.current ? " " + t("annNext", title(state.current)) : ""));
     render();
   }
 
@@ -1294,11 +1272,11 @@ function plural(n, one, few, many) {
     else if (act === "flip") {
       state.flipped = !state.flipped;
       document.getElementById("pc-inner").classList.toggle("flipped", state.flipped);
-      a.textContent = state.flipped ? t("turnFront") : t("turnOver");
     }
     else if (act === "download") downloadPostcard();
   });
 
+  document.addEventListener("keydown", e => { if (e.key === "Tab") document.documentElement.classList.add("kbd-user"); });
   app.addEventListener("keydown", e => {
     const b = e.target.closest && e.target.closest(".slot-btn");
     if (!b || (e.key !== "ArrowDown" && e.key !== "ArrowUp")) return;
