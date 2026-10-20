@@ -650,12 +650,13 @@ const I18N = {
     chooseTimeline: "Choose a timeline",
     rulesTitle: "How to play",
     rules: [
-      "Your goal is to arrange events from the history of the New Tamizdat in chronological order. Event cards appear on the left, while a timeline with one event already in place appears on the right. Use this event as a reference point to gradually build the timeline.",
-      "To place an event on the timeline, click “Place here” or drag the card to your chosen position.",
-      "Confirm your choice or adjust the card’s position.",
+      "One event is already marked on the timeline to serve as your starting point. Cards with other events will appear one by one. Place each card before or after the events already on the timeline to gradually build the correct chronological order.",
+      "To place an event on the timeline, drag the card to your chosen position, or click or tap “Place here”.",
+      "Click or tap the chosen gap again, or press the “Confirm” button to lock in your position.",
       "If your placement is correct, the card will stay in place and receive an “Approved” stamp. If not, it will automatically move to its correct position on the timeline and receive a “Denied” stamp.",
-      "Some events are dated only to a specific year. In these cases, any position within that year will be accepted as correct.",
-      "Keep placing cards until you’ve completed the entire timeline."
+      "Some events are dated only to a month or a year. In these cases, any position within that period will be accepted as correct.",
+      "Keep placing cards until you’ve completed the entire timeline.",
+      "Each card placed correctly earns you one point."
     ],
     kbdNote: "You can play with a keyboard: press Tab to move to a gap on the timeline, Enter to choose it, and Enter again to confirm. The up and down arrow keys move between gaps.",
     startFirst: "Start",
@@ -714,7 +715,7 @@ const I18N = {
     exitNo: "Stay",
     demoLabel: "Demonstration: how to place a card on the timeline",
     demoSteps: [
-      "Drag the card into a gap on the timeline.",
+      "Drag the card into a gap on the timeline, then press “Confirm”.",
       "Right place: the card gets an “Approved” stamp.",
       "Or tap “Place here”, then “Confirm”.",
       "Wrong place: the card moves to where it belongs and gets a “Denied” stamp."
@@ -739,12 +740,13 @@ const I18N = {
     chooseTimeline: "Выбрать хронологию",
     rulesTitle: "Как играть",
     rules: [
-      "Ваша задача — расположить события из истории нового тамиздата в хронологическом порядке. Слева появляются карточки с событиями, справа — временная шкала, на которой уже отмечено одно событие. Размещайте карточки относительно него, постепенно выстраивая хронологию.",
-      "Чтобы разместить событие на шкале, нажмите «Поместить сюда» или перетащите карточку в выбранное вами место.",
-      "Подтвердите выбранную вами позицию или поменяйте её.",
-      "Если выбранная вами позиция оказалась правильной, карточка останется на своём месте и на ней появится штамп «Одобрено». Если нет — она автоматически переместится на нужное место в хронологии и на ней появится штамп «Отклонено».",
-      "Даты некоторых событий известны только с точностью до года. Тогда засчитывается любая позиция на шкале внутри этого года.",
-      "Продолжайте размещать карточки, пока не восстановите всю хронологию."
+      "На временной шкале уже отмечено одно событие — оно станет вашим ориентиром. Рядом по очереди будут появляться карточки с другими событиями. Размещайте их до или после уже отмеченных событий, постепенно выстраивая хронологию.",
+      "Чтобы разместить событие на шкале, перетащите карточку в выбранное вами место или нажмите «Поместить сюда».",
+      "Нажмите на выбранный промежуток ещё раз либо нажмите кнопку «Подтвердить», чтобы закрепить позицию.",
+      "Если выбранная вами позиция оказалась правильной, карточка останется на своём месте, и на ней появится штамп «Одобрено». Если нет — она автоматически переместится на нужное место в хронологии, и на ней появится штамп «Отклонено».",
+      "Даты некоторых событий известны только с точностью до месяца или года. Тогда засчитывается любая позиция на шкале внутри этого периода.",
+      "Продолжайте размещать карточки, пока не восстановите всю хронологию.",
+      "За каждую карточку, размещённую верно, вы получаете одно очко."
     ],
     kbdNote: "Можно играть с клавиатуры: клавишей Tab перейдите к промежутку на шкале, нажмите Enter, чтобы выбрать его, и Enter ещё раз, чтобы подтвердить. Стрелки вверх и вниз переключают промежутки.",
     startFirst: "Начать",
@@ -803,7 +805,7 @@ const I18N = {
     exitNo: "Остаться",
     demoLabel: "Демонстрация: как разместить карточку на шкале",
     demoSteps: [
-      "Перетащите карточку в промежуток на шкале.",
+      "Перетащите карточку в промежуток на шкале и нажмите «Подтвердить».",
       "Верная позиция: на карточке появится штамп «Одобрено».",
       "Или нажмите «Поместить сюда», а затем «Подтвердить».",
       "Неверная позиция: карточка переместится на своё место, и на ней появится штамп «Отклонено»."
@@ -1035,10 +1037,13 @@ function plural(n, one, few, many) {
   };
   // Each step: the board's state after it, its caption (index into demoSteps) and how long to hold it.
   const DEMO_STEPS = [
-    { ms: 900,  cap: 0, a: "deck", b: null, hand: null, gaps: ["g0", "g1"] },
-    { ms: 700,  cap: 0, a: "deck", b: null, hand: [20, 17], gaps: ["g0", "g1"] },
-    { ms: 450,  cap: 0, a: "deck", lift: true, b: null, hand: [20, 17], press: true, gaps: ["g0", "g1"] },
-    { ms: 1100, cap: 0, a: "slotA", lift: true, b: null, hand: [73, 44], press: true, gaps: ["g0", "g1"], on: "g1" },
+    { ms: 900,  cap: 0, a: "deck", b: null, btn: true, hand: null, gaps: ["g0", "g1"] },
+    { ms: 700,  cap: 0, a: "deck", b: null, btn: true, hand: [20, 17], gaps: ["g0", "g1"] },
+    { ms: 450,  cap: 0, a: "deck", lift: true, b: null, btn: true, hand: [20, 17], press: true, gaps: ["g0", "g1"] },
+    { ms: 1100, cap: 0, a: "slotA", lift: true, b: null, btn: true, hand: [73, 44], press: true, gaps: ["g0", "g1"], on: "g1" },
+    { ms: 500,  cap: 0, a: "slotA", b: null, btn: true, hand: [73, 44], gaps: ["g0"], ready: true },
+    { ms: 1000, cap: 0, a: "slotA", b: null, btn: true, hand: DP.btnTip, gaps: ["g0"], ready: true },
+    { ms: 600,  cap: 0, a: "slotA", b: null, btn: true, hand: DP.btnTip, press: true, btnPress: true, gaps: ["g0"], ready: true },
     { ms: 2300, cap: 1, a: "slotA", placedA: true, b: null, hand: null, gaps: ["g0", "g1", "g2"] },
     { ms: 1000, cap: 2, a: "slotA", placedA: true, b: "deck", hand: [64, 3.7], gaps: ["g0", "g1", "g2"] },
     { ms: 700,  cap: 2, a: "slotA", placedA: true, b: "deck", hand: [64, 3.7], press: true, gaps: ["g0", "g1", "g2"], on: "g0", ready: true },
@@ -1071,7 +1076,7 @@ function plural(n, one, few, many) {
       g.firstChild.textContent = st.miss === k ? t("rejected") : t("placeHere");
     });
     const btn = q("btn");
-    btn.style.opacity = st.b === "deck" ? "" : 0; // only while a card waits in the hand
+    btn.style.opacity = st.btn || st.b === "deck" ? "" : 0; // only while a card waits to be placed
     btn.classList.toggle("ready", !!st.ready);
     btn.classList.toggle("press", !!st.btnPress);
     const hand = q("hand");
