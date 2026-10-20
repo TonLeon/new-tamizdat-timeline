@@ -73,6 +73,7 @@
   /* ---- Typography tokens used below (§3; full catalogue in tamizdat-design-system.md) ---- */
   --type-sans-d-l-reg-loose-fs:18px;   --type-sans-d-l-reg-loose-lh:26px;   --type-sans-d-l-reg-loose-ls:0px;
   --type-sans-d-m-reg-loose-fs:16px;   --type-sans-d-m-reg-loose-lh:24px;   --type-sans-d-m-reg-loose-ls:.1px;
+  --type-sans-d-m-bold-loose-fs:16px;  --type-sans-d-m-bold-loose-lh:24px;  --type-sans-d-m-bold-loose-ls:0px;
   --type-sans-d-s-reg-loose-fs:14px;   --type-sans-d-s-reg-loose-lh:20px;   --type-sans-d-s-reg-loose-ls:.11px;
   --type-sans-d-s-reg-tight-fs:14px;   --type-sans-d-s-reg-tight-lh:18px;   --type-sans-d-s-reg-tight-ls:.11px;
   --type-sans-d-s-bold-tight-fs:14px;  --type-sans-d-s-bold-tight-lh:18px;  --type-sans-d-s-bold-tight-ls:.112px;
@@ -80,6 +81,7 @@
   --type-sans-d-xs-bold-normal-fs:12px; --type-sans-d-xs-bold-normal-lh:16px; --type-sans-d-xs-bold-normal-ls:0px;
   --type-sans-m-m-reg-loose-fs:15px;   --type-sans-m-m-reg-loose-lh:22px;   --type-sans-m-m-reg-loose-ls:.15px;
   --type-sans-m-m-reg-tight-fs:15px;   --type-sans-m-m-reg-tight-lh:18px;   --type-sans-m-m-reg-tight-ls:.15px;
+  --type-sans-m-m-bold-tight-fs:15px;  --type-sans-m-m-bold-tight-lh:18px;  --type-sans-m-m-bold-tight-ls:.15px;
   --type-sans-m-s-reg-normal-fs:12px;  --type-sans-m-s-reg-normal-lh:18px;  --type-sans-m-s-reg-normal-ls:.12px;
   --type-sans-d-3xl-bold-normal-fs:64px; --type-sans-d-3xl-bold-normal-lh:64px; --type-sans-d-3xl-bold-normal-ls:-.96px;
   --type-sans-d-xl-bold-normal-fs:28px; --type-sans-d-xl-bold-normal-lh:36px; --type-sans-d-xl-bold-normal-ls:-.28px;
@@ -180,6 +182,7 @@ main{max-width:var(--game-width);margin:0 auto;padding:40px var(--container-pad)
 /* How-to demo: a miniature board drawn in container units (cqw), so it scales with its column.
    A small step sequencer (JS) sets data-step; positions move by CSS transitions. */
 .rules-demo{position:sticky;top:calc(1.5rem + env(safe-area-inset-top,0px))}
+@media screen and (max-width:991px){.rules-demo{position:static}} /* one column: the demo sits above the text, not over it */
 .demo{container-type:inline-size;background:var(--color-surface-secondary);border-radius:var(--radius-l);padding:1.5rem}
 .demo-stage{position:relative;aspect-ratio:100/74;transition:opacity .3s ease}
 .demo-stage.fade{opacity:0}
@@ -214,6 +217,12 @@ main{max-width:var(--game-width);margin:0 auto;padding:40px var(--container-pad)
 .demo-toggle:hover{color:var(--color-text-primary)}
 .demo-caption ol{margin:0;padding-left:1.1rem}
 @media (prefers-reduced-motion:reduce){.demo-toggle{display:none}}
+/* Lead paragraph: the system's serif lead (serif-d-l → serif-m-l), like the start-screen subtitle */
+.rules-intro{font-family:var(--font-serif);font-weight:400;font-size:var(--type-serif-d-l-fs);line-height:var(--type-serif-d-l-lh);letter-spacing:var(--type-serif-d-l-ls);margin:0 0 2.5rem}
+/* "Gameplay" heading: serif xl like the end screen's column headings; in the panel, sans m bold under the panel's own serif title */
+.rules-steps{font-family:var(--font-serif);font-weight:400;font-size:var(--type-serif-d-xl-fs);line-height:var(--type-serif-d-xl-lh);letter-spacing:var(--type-serif-d-xl-ls);margin:0 0 .75rem}
+.help-panel .rules-steps{font-family:var(--font-sans);font-weight:600;font-size:var(--type-sans-d-m-bold-loose-fs);line-height:var(--type-sans-d-m-bold-loose-lh);letter-spacing:var(--type-sans-d-m-bold-loose-ls);margin:0 0 .25rem}
+.help-panel .rules-intro{margin-bottom:2rem}
 .rule-list{list-style:none;margin:0;padding:0;counter-reset:r}
 .rule-list li{counter-increment:r;display:grid;grid-template-columns:2.5rem 1fr;gap:.75rem;padding:1rem 0;border-top:1px solid var(--color-border)}
 .rule-list li::before{content:counter(r);font-family:var(--font-serif);font-size:var(--type-serif-d-l-fs);line-height:var(--type-sans-d-m-reg-loose-lh);letter-spacing:var(--type-serif-d-l-ls);color:var(--color-text-tertiary)}
@@ -363,7 +372,7 @@ html.help-open{overflow:hidden}
 /* ---- Tablet (<1200, token tier "t") ---- */
 @media screen and (max-width:1199px){
   .rules h1,.rounds h1,.end-head h1,.score-num{font-size:var(--type-serif-t-2xl-fs);line-height:var(--type-serif-t-2xl-lh);letter-spacing:var(--type-serif-t-2xl-ls)}
-  .card-title,.drawer-title,.end-grid h2{font-size:var(--type-serif-t-xl-fs);line-height:var(--type-serif-t-xl-lh);letter-spacing:var(--type-serif-t-xl-ls)}
+  .card-title,.drawer-title,.end-grid h2,.rules-steps{font-size:var(--type-serif-t-xl-fs);line-height:var(--type-serif-t-xl-lh);letter-spacing:var(--type-serif-t-xl-ls)}
 }
 
 /* ---- Layout: board collapses to one column below lg (992) ---- */
@@ -386,10 +395,11 @@ html.help-open{overflow:hidden}
   .drawer .stamp{margin-top:.5rem}
 
   .round-name{font-size:var(--type-sans-m-xl-bold-normal-fs);line-height:var(--type-sans-m-xl-bold-normal-lh);letter-spacing:var(--type-sans-m-xl-bold-normal-ls)}
-  .card-title,.entry .card-title,.drawer-title,.end-grid h2,.unlocked h3,.ghost-title{font-size:var(--type-serif-m-2xl-fs);line-height:var(--type-serif-m-2xl-lh);letter-spacing:var(--type-serif-m-2xl-ls)}
+  .card-title,.entry .card-title,.drawer-title,.end-grid h2,.unlocked h3,.ghost-title,.rules-steps{font-size:var(--type-serif-m-2xl-fs);line-height:var(--type-serif-m-2xl-lh);letter-spacing:var(--type-serif-m-2xl-ls)}
   .entry-date .year,.drawer-no{font-size:var(--type-serif-m-2xl-fs);line-height:var(--type-serif-m-2xl-lh);letter-spacing:var(--type-serif-m-2xl-ls)}
   .entry .spine::after{top:calc(1.5rem + 6px)}
-  .hero-kicker{font-size:var(--type-serif-m-l-fs);line-height:var(--type-serif-m-l-lh);letter-spacing:var(--type-serif-m-l-ls)}
+  .hero-kicker,.rules-intro{font-size:var(--type-serif-m-l-fs);line-height:var(--type-serif-m-l-lh);letter-spacing:var(--type-serif-m-l-ls)}
+  .help-panel .rules-steps{font-size:var(--type-sans-m-m-bold-tight-fs);line-height:var(--type-sans-m-m-bold-tight-lh);letter-spacing:var(--type-sans-m-m-bold-tight-ls)}
   body,.intro,.card-desc,.entry .card-desc,.deck-hint{font-size:var(--type-sans-m-m-reg-loose-fs);line-height:var(--type-sans-m-m-reg-loose-lh);letter-spacing:var(--type-sans-m-m-reg-loose-ls)}
   .progress,.meta,.card-date,.slot-btn,.fine,.kbd-note,.deck-count,.entry-date .date-text,.src,.status-msg,.ghost-hint{font-size:var(--type-sans-m-s-reg-normal-fs);line-height:var(--type-sans-m-s-reg-normal-lh);letter-spacing:var(--type-sans-m-s-reg-normal-ls)}
 }
@@ -677,14 +687,13 @@ const I18N = {
     chooseTimeline: "Choose a timeline",
     rulesTitle: "How to play",
     close: "Close",
+    rulesIntro: "Your goal is to reconstruct the chronology of the New Tamizdat by placing seven events on the timeline. One event is already marked to serve as your starting point. Cards with other events will appear one by one. Place each card before or after the events already on the timeline to gradually build the correct chronological order.",
+    rulesSteps: "Gameplay",
     rules: [
-      "Your goal is to reconstruct the chronology of the New Tamizdat by placing seven events on the timeline.",
-      "One event is already marked on the timeline to serve as your starting point. Cards with other events will appear one by one. Place each card before or after the events already on the timeline to gradually build the correct chronological order.",
       "To place an event on the timeline, drag the card to your chosen position, or select “Place here.”",
       "Select the chosen gap again, or press the “Confirm” button to lock in your position.",
       "If your placement is correct, the card will stay in place and receive an “Approved” stamp. If not, it will automatically move to its correct position on the timeline and receive a “Denied” stamp.",
       "Some events are dated only to a month or a year. In these cases, any position within that period will be accepted as correct.",
-      "Keep placing cards until you’ve completed the entire timeline.",
       "Each card placed correctly earns you one point. You also get one point for the card that is already on the timeline at the start."
     ],
     kbdNote: "You can play with a keyboard: press Tab to move to a gap on the timeline, Enter to choose it, and Enter again to confirm. The up and down arrow keys move between gaps.",
@@ -767,14 +776,13 @@ const I18N = {
     chooseTimeline: "Выбрать хронологию",
     rulesTitle: "Как играть",
     close: "Закрыть",
+    rulesIntro: "Ваша цель — восстановить хронологию нового тамиздата, расположив на временной шкале семь событий. Одно событие уже отмечено — оно станет вашим ориентиром. Рядом по очереди будут появляться карточки с другими событиями. Размещайте их до или после уже отмеченных событий, постепенно выстраивая хронологию.",
+    rulesSteps: "Ход игры",
     rules: [
-      "Ваша цель — восстановить хронологию нового тамиздата, расположив на временной шкале семь событий.",
-      "На временной шкале уже отмечено одно событие — оно станет вашим ориентиром. Рядом по очереди будут появляться карточки с другими событиями. Размещайте их до или после уже отмеченных событий, постепенно выстраивая хронологию.",
       "Чтобы разместить событие на шкале, перетащите карточку в выбранное вами место или нажмите «Поместить сюда».",
       "Нажмите на выбранный промежуток ещё раз либо нажмите кнопку «Подтвердить», чтобы закрепить позицию.",
       "Если выбранная вами позиция оказалась правильной, карточка останется на своём месте, и на ней появится штамп «Одобрено». Если нет — она автоматически переместится на нужное место в хронологии, и на ней появится штамп «Отклонено».",
       "Даты некоторых событий известны только с точностью до месяца или года. Тогда засчитывается любая позиция на шкале внутри этого периода.",
-      "Продолжайте размещать карточки, пока не восстановите всю хронологию.",
       "За каждую карточку, размещённую верно, вы получаете одно очко. Ещё одно очко вы получаете за карточку, которая отмечена на шкале с самого начала."
     ],
     kbdNote: "Можно играть с клавиатуры: клавишей Tab перейдите к промежутку на шкале, нажмите Enter, чтобы выбрать его, и Enter ещё раз, чтобы подтвердить. Стрелки вверх и вниз переключают промежутки.",
@@ -1013,8 +1021,7 @@ function plural(n, one, few, many) {
       <h1>${esc(t("rulesTitle"))}</h1>
       <div class="rules-body">
       <div class="rules-text">
-      <ol class="rule-list">${t("rules").map(r => `<li>${esc(r)}</li>`).join("")}</ol>
-      <p class="kbd-note">${esc(t("kbdNote"))}</p>
+      ${rulesTextHtml("h2")}
       <div class="actions">
         <button class="btn primary" data-act="start" data-round="${esc(DATA.rounds[0].id)}">${esc(t("startFirst"))}</button>
         ${multi() ? `<button class="btn" data-act="rounds">${esc(t("chooseTimeline"))}</button>` : ""}
@@ -1269,6 +1276,14 @@ function plural(n, one, few, many) {
     </section>`;
   }
 
+  // Rules text shared by the rules page (h2) and the in-game panel (h3): lead paragraph, then the numbered steps
+  function rulesTextHtml(h) {
+    return `<p class="rules-intro">${esc(t("rulesIntro"))}</p>
+      <${h} class="rules-steps">${esc(t("rulesSteps"))}</${h}>
+      <ol class="rule-list">${t("rules").map(r => `<li>${esc(r)}</li>`).join("")}</ol>
+      <p class="kbd-note">${esc(t("kbdNote"))}</p>`;
+  }
+
   // The rules as text only (no demo), in a panel over the timeline
   function helpPanelHtml() {
     const anim = state.helpAnim ? " in" : "";
@@ -1277,8 +1292,7 @@ function plural(n, one, few, many) {
         <div class="help-top"><h2 id="help-h">${esc(t("rulesTitle"))}</h2>
           <button type="button" class="help-close" data-act="help-close" aria-label="${esc(t("close"))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
         </div>
-        <ol class="rule-list">${t("rules").map(r => `<li>${esc(r)}</li>`).join("")}</ol>
-        <p class="kbd-note">${esc(t("kbdNote"))}</p>
+        ${rulesTextHtml("h3")}
       </aside>`;
   }
 
