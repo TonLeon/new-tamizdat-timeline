@@ -1,3 +1,13 @@
 # Licensed font — not for redistribution; ask Tamizdat for the files
 excelsior-lt-std-3.ttf
 excelsior-lt-std-3.woff2
+
+# macOS and editor clutter
+.DS_Store
+~$*
+
+# Claude Code worktrees and local settings
+.claude/
+
+# Text-review spreadsheet: a copy exported from index.html, regenerated for each review round
+tamizdat-texts.xlsx
