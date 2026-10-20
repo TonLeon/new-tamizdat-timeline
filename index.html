@@ -26,6 +26,13 @@
   font-style:normal;
   font-display:swap;
 }
+@font-face{
+  font-family:"Inter Variable";
+  src:url("https://tamizdatproject.org/static/images/InterVariable-Italic.8d1dc86da258.woff2") format("woff2");
+  font-weight:100 900;
+  font-style:italic;
+  font-display:swap;
+}
 :root{
   /* ---- Tier 1 — primitives (tamizdat-design-system.md §2; used directly only via Tier 2 and in the doc's shadow recipes) ---- */
   --ink-950:#1f2a2e; --ink-900:#263338; --ink-700:#576266; --ink-500:#8a9599; --ink-300:#c2c9cc;
@@ -398,10 +405,10 @@ const TAMIZDAT_DATA = {
       kind: "book",
       kindLabel: { ru: "переиздание", en: "new edition" },
       date: { start: "2020-01-31", end: "2020-01-31", precision: "day", label: { ru: "31 января 2020", en: "31 January 2020" } },
-      title: { ru: "«Город Эн» Леонида Добычина", en: "Leonid Dobychin’s The Town of N" },
+      title: { ru: "«Город Эн» Леонида Добычина", en: "Leonid Dobychin’s *The Town of N*" },
       text: {
         ru: "У тель-авивского книжного магазина «Бабель» появляется собственная издательская программа. Первым проектом становится переиздание «Города Эн» Леонида Добычина.",
-        en: "The Tel Aviv bookshop Babel launches its own publishing program. Its first project is a new edition of Leonid Dobychin’s The Town of N."
+        en: "The Tel Aviv bookstore Babel launches its own publishing program. Its first project is a new edition of Leonid Dobychin’s *The Town of N*."
       },
       sources: [
         { label: {"ru": "Telegram: «Бабель»", "en": "Telegram: Babel"}, url: "https://t.me/babelbookstlv/662" },
@@ -413,10 +420,10 @@ const TAMIZDAT_DATA = {
       kind: "book",
       kindLabel: { ru: "книги", en: "books" },
       date: { start: "2022-04-01", end: "2022-04-30", precision: "month", label: { ru: "апрель 2022", en: "April 2022" } },
-      title: { ru: "«Понятые и свидетели. Хроники военного времени»", en: "Poniatye i svideteli. Khroniki voennogo vremeni" },
+      title: { ru: "«Понятые и свидетели. Хроники военного времени»", en: "*Poniatye i svideteli. Khroniki voennogo vremeni*" },
       text: {
-        ru: "Babel Books Tel Aviv выпускает два тома антивоенной поэтической антологии «Понятые и свидетели. Хроники военного времени». Первый том включает стихи первых пятидесяти дней войны.",
-        en: "Babel Books Tel Aviv publishes two volumes of the anti-war poetry anthology Poniatye i svideteli. Khroniki voennogo vremeni. The first volume collects poems written in the first fifty days of the war."
+        ru: "Babel Books Tel Aviv выпускает два тома антивоенной поэтической антологии «Понятые и свидетели. Хроники военного времени». Первый том включает стихи, написанные в первые пятьдесят дней войны.",
+        en: "Babel Books Tel Aviv publishes two volumes of the antiwar poetry anthology *Poniatye i svideteli. Khroniki voennogo vremeni* (“Attesting Witnesses and Eyewitnesses: Chronicles of Wartime”). The first volume collects poems written in the first fifty days of the war."
       },
       sources: [
         { label: "RFI", url: "https://www.rfi.fr/ru/%D0%BA%D1%83%D0%BB%D1%8C%D1%82%D1%83%D1%80%D0%B0-%D1%81%D1%82%D0%B8%D0%BB%D1%8C-%D0%B6%D0%B8%D0%B7%D0%BD%D0%B8/20220616-%D0%B8%D0%B7%D0%B4%D0%B0%D1%82%D0%B5%D0%BB%D1%8C-%D1%81%D0%B1%D0%BE%D1%80%D0%BD%D0%B8%D0%BA%D0%B0-%D0%B0%D0%BD%D1%82%D0%B8%D0%B2%D0%BE%D0%B5%D0%BD%D0%BD%D1%8B%D1%85-%D1%81%D1%82%D0%B8%D1%85%D0%BE%D0%B2-%D0%BF%D0%BE%D0%BD%D1%8F%D1%82%D1%8B%D0%B5-%D0%B8-%D1%81%D0%B2%D0%B8%D0%B4%D0%B5%D1%82%D0%B5%D0%BB%D0%B8-%D1%8D%D1%82%D0%BE-%D0%BF%D0%BE%D1%8D%D1%82%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%B8%D0%B5-%D1%81%D0%B2%D0%B8%D0%B4%D0%B5%D1%82%D0%B5%D0%BB%D1%8C%D1%81%D1%82%D0%B2%D0%B0-%D0%B4%D0%BB%D1%8F-%D0%B1%D1%83%D0%B4%D1%83%D1%89%D0%B5%D0%B3%D0%BE-%D1%81%D1%83%D0%B4%D0%B0" }
@@ -430,7 +437,7 @@ const TAMIZDAT_DATA = {
       title: { ru: "Основание Freedom Letters", en: "Freedom Letters is founded" },
       text: {
         ru: "Георгий Урушадзе объявляет о создании издательства Freedom Letters, ориентированного в том числе на тексты, которые невозможно публиковать в России.",
-        en: "Georgy Urushadze announces the founding of Freedom Letters, a publishing house whose focus includes texts that cannot be published in Russia."
+        en: "Georgy Urushadze announces the launch of the publishing house Freedom Letters, which will focus, among other things, on works that cannot be published in Russia."
       },
       sources: [
         { label: "Freedom Letters", url: "https://freedomletters.org/service/about?" }
@@ -444,7 +451,7 @@ const TAMIZDAT_DATA = {
       title: { ru: "Издательство «Медузы»", en: "Meduza’s publishing house" },
       text: {
         ru: "«Медуза» объявляет о запуске собственного книжного издательства и сообщает, что книги будут доступны читателям в России через приложение.",
-        en: "Meduza announces the launch of its own book publishing house and says its books will be available to readers in Russia through its app."
+        en: "Meduza announces the launch of its own publishing house and states that the books will be available to readers in Russia through the app."
       },
       sources: [
         { label: {"ru": "Медуза", "en": "Meduza"}, url: "https://meduza.io/feature/2023/08/15/meduza-zapuskaet-svoe-izdatelstvo-v-oktyabre-2023-goda-vyydet-pervaya-kniga-moya-lyubimaya-strana-eleny-kostyuchenko/" }
@@ -453,12 +460,12 @@ const TAMIZDAT_DATA = {
     },
     "babel-berlin": {
       kind: "bookshop",
-      kindLabel: { ru: "книжный магазин", en: "bookshop" },
+      kindLabel: { ru: "книжный магазин", en: "bookstore" },
       date: { start: "2023-09-01", end: "2023-09-30", precision: "month", label: { ru: "сентябрь 2023", en: "September 2023" } },
       title: { ru: "Babel Books Berlin", en: "Babel Books Berlin" },
       text: {
         ru: "Благодаря Наташе Смирновой и Максиму Куренному в Берлине открывается книжный магазин Babel Books Berlin.",
-        en: "Thanks to Natasha Smirnova and Maxim Kurennoy, the bookshop Babel Books Berlin opens in Berlin."
+        en: "Thanks to Natasha Smirnova and Maxim Kurenny, the bookstore Babel Books Berlin opens in Berlin."
       },
       sources: [
         { label: "Instagram: Babel Books Berlin", url: "https://www.instagram.com/p/CushEPrMA9Z/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==" }
@@ -472,7 +479,7 @@ const TAMIZDAT_DATA = {
       title: { ru: "Первые книги «Медузы»", en: "Meduza’s first books" },
       text: {
         ru: "В издательстве «Медузы» выходят первые книги: «Моя любимая страна» Елены Костюченко и «Война и наказание» Михаила Зыгаря (совместно с Zygaro).",
-        en: "Meduza’s publishing house releases its first books: Elena Kostyuchenko’s Moia liubimaia strana and Mikhail Zygar’s War and Punishment (co-published with Zygaro)."
+        en: "Meduza’s publishing house releases its first books: Elena Kostyuchenko’s *Moia liubimaia strana* (“My Beloved Country”) and Mikhail Zygar’s *War and Punishment* (co-published with Zygaro)."
       },
       sources: [
         { label: {"ru": "Медуза", "en": "Meduza"}, url: "https://meduza.io/feature/2023/10/20/v-izdatelstve-meduzy-vyhodyat-srazu-dve-knigi-eleny-kostyuchenko-i-mihaila-zygarya-vy-mozhete-ih-kupit-uzhe-segodnya/" }
@@ -486,7 +493,7 @@ const TAMIZDAT_DATA = {
       title: { ru: "Основание Vidim Books", en: "Vidim Books is founded" },
       text: {
         ru: "Мария Алеф, Александр Гаврилов и Данила Стратович основывают Vidim Books — издательство и международную систему распространения русскоязычных книг, написанных авторами, которых преследуют в России по политическим мотивам.",
-        en: "Maria Alef, Alexander Gavrilov and Danila Stratovich found Vidim Books — a publisher and international distribution network for Russian-language books by authors persecuted in Russia for political reasons."
+        en: "Maria Alef, Alexander Gavrilov, and Danila Stratovich found Vidim Books—a publishing house and international distribution network for Russian-language books written by authors who are being persecuted in Russia for political reasons."
       },
       sources: [
         { label: "Instagram: Vidim Books", url: "https://www.instagram.com/reel/C5Ve0XfIgpc/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==" },
@@ -500,8 +507,8 @@ const TAMIZDAT_DATA = {
       date: { start: "2024-09-13", end: "2024-09-15", precision: "day", label: { ru: "13–15 сентября 2024", en: "13–15 September 2024" } },
       title: { ru: "«Пражская книжная башня»", en: "Prague Book Tower" },
       text: {
-        ru: "В Праге проходит первая международная ярмарка новой волны русскоязычной литературы «Пражская книжная башня» / Prague Book Tower. В ней участвуют 16 издательств и 4 литературных журнала; сами организаторы отмечают, что посетители называли её «ярмаркой нового тамиздата».",
-        en: "Prague hosts the first international fair of the new wave of Russian-language literature, Prague Book Tower. Sixteen publishers and four literary journals take part; the organisers note that visitors called it “the fair of the new tamizdat”."
+        ru: "В Праге проходит первая международная ярмарка новой волны русскоязычной литературы «Пражская книжная башня» / Prague Book Tower. В ней участвуют 16 издательств и 4 литературных журнала; сами организаторы отмечают, что посетители назвали её «ярмаркой нового тамиздата».",
+        en: "Prague hosts the first international fair dedicated to the new wave of Russian-language literature, the Prague Book Tower. Sixteen publishing houses and four literary magazines take part; the organizers themselves note that visitors called it “the fair of the new Tamizdat.”"
       },
       sources: [
         { label: "Prague Book Tower", url: "https://praguebooktower.cz/archiv2024" }
@@ -515,7 +522,7 @@ const TAMIZDAT_DATA = {
       title: { ru: "Литературная премия «Дар»", en: "The Dar literary prize" },
       text: {
         ru: "Швейцарская Ассоциация славистов объявляет об учреждении независимой литературной премии «Дар», предназначенной для поддержки литературы на русском языке вне зависимости от гражданства и места проживания автора.",
-        en: "The Swiss Association of Slavists announces an independent literary prize, Dar, to support literature in Russian regardless of the author’s citizenship or place of residence."
+        en: "The Swiss Association of Slavists announces the establishment of the Dar Prize, an independent literary prize intended to support literature written in Russian, regardless of the author’s citizenship or place of residence."
       },
       sources: [
         { label: {"ru": "Литературная премия «Дар»", "en": "Dar Literary Prize"}, url: "https://darprize.com/2024/09/27/literaturnaya-premiya-dar/" }
@@ -526,10 +533,10 @@ const TAMIZDAT_DATA = {
       kind: "book",
       kindLabel: { ru: "переиздание", en: "new edition" },
       date: { start: "2024-11-15", end: "2024-11-15", precision: "day", label: { ru: "15 ноября 2024", en: "15 November 2024" } },
-      title: { ru: "«Пхенц» Абрама Терца", en: "Abram Tertz’s Pkhentz" },
+      title: { ru: "«Пхенц» Абрама Терца", en: "Abram Tertz’s *Pkhentz*" },
       text: {
         ru: "Нью-йоркский Tamizdat Project выпускает свою первую книгу — двуязычное переиздание рассказа «Пхенц» Абрама Терца (Андрея Синявского) в переводе Эйнсли Морс (при участии Кевина Риса).",
-        en: "New York’s Tamizdat Project releases its first book — a bilingual new edition of Abram Tertz’s (Andrei Sinyavsky’s) story Pkhentz, translated by Ainsley Morse (with Kevin Reese)."
+        en: "New York’s Tamizdat Project releases its first book—a bilingual new edition of Abram Tertz’s (Andrei Sinyavsky’s) story *Pkhentz*, translated by Ainsley Morse (with Kevin Reese)."
       },
       sources: [
         { label: "Tamizdat Project", url: "https://tamizdatproject.org/programs/publishing/pkhentz/" }
@@ -538,12 +545,12 @@ const TAMIZDAT_DATA = {
     },
     "idiot-books": {
       kind: "bookshop",
-      kindLabel: { ru: "книжный магазин", en: "bookshop" },
+      kindLabel: { ru: "книжный магазин", en: "bookstore" },
       date: { start: "2025-02-11", end: "2025-02-11", precision: "day", label: { ru: "11 февраля 2025", en: "11 February 2025" } },
       title: { ru: "Idiot Books", en: "Idiot Books" },
       text: {
         ru: "В Лондоне открывается русскоязычный книжный магазин Idiot Books.",
-        en: "The Russian-language bookshop Idiot Books opens in London."
+        en: "A Russian-language bookstore called Idiot Books opens in London."
       },
       sources: [
         { label: {"ru": "Слова вне себя", "en": "Slova vne sebya"}, url: "https://slova-vne.com/news/v-londone-otkryvaetsya-knizhnyy-magazin-s-knigami-na-russkom-yazyke-idiot-books" },
@@ -558,7 +565,7 @@ const TAMIZDAT_DATA = {
       title: { ru: "Berlin Bebelplatz", en: "Berlin Bebelplatz" },
       text: {
         ru: "В Берлине впервые проходит книжная ярмарка русскоязычной литературы Berlin Bebelplatz, собравшая более 30 независимых издательств и литературных проектов.",
-        en: "Berlin hosts its first fair of Russian-language literature, Berlin Bebelplatz, bringing together more than 30 independent publishers and literary projects."
+        en: "Berlin hosts its first-ever book fair for Russian-language literature, Berlin Bebelplatz, which brings together more than 30 independent publishers and literary projects."
       },
       sources: [
         { label: "Berlin Bebelplatz", url: "https://bookfair-berlin.de/en/bbp2025/" }
@@ -572,7 +579,7 @@ const TAMIZDAT_DATA = {
       title: { ru: "24 ⌓", en: "24 ⌓" },
       text: {
         ru: "Запускается платформа 24 ⌓ — цифровое пространство с фильмами и книгами, которые практически невозможно печатать и показывать в России.",
-        en: "The 24 ⌓ platform launches — a digital space for films and books that are all but impossible to print or screen in Russia."
+        en: "The 24 ⌓ platform launches—a digital space featuring films and books that are virtually impossible to publish or screen in Russia."
       },
       sources: [
         { label: "Instagram: 24 ⌓", url: "https://www.instagram.com/p/DLFrNfKtRuO/?utm_source=ig_web_copy_link&stkn=MzRlODBiNWFlZA==" },
@@ -584,10 +591,10 @@ const TAMIZDAT_DATA = {
       kind: "book",
       kindLabel: { ru: "книги", en: "books" },
       date: { start: "2025-12-01", end: "2025-12-31", precision: "month", label: { ru: "декабрь 2025", en: "December 2025" } },
-      title: { ru: "«Фокус»", en: "Fokus" },
+      title: { ru: "«Фокус»", en: "*Fokus*" },
       text: {
         ru: "В рамках «Проекта 24» выходит книга Марии Степановой «Фокус».",
-        en: "Maria Stepanova’s book Fokus comes out as part of Project 24."
+        en: "Maria Stepanova’s book *Fokus* comes out as part of Project 24."
       },
       sources: [
         { label: {"ru": "24 ⌓: «Фокус»", "en": "24 ⌓: Fokus"}, url: "https://24.place/books/fokus/?" },
@@ -651,7 +658,7 @@ const I18N = {
     rulesTitle: "How to play",
     rules: [
       "One event is already marked on the timeline to serve as your starting point. Cards with other events will appear one by one. Place each card before or after the events already on the timeline to gradually build the correct chronological order.",
-      "To place an event on the timeline, drag the card to your chosen position, or click or tap “Place here”.",
+      "To place an event on the timeline, drag the card to your chosen position, or click or tap “Place here.”",
       "Click or tap the chosen gap again, or press the “Confirm” button to lock in your position.",
       "If your placement is correct, the card will stay in place and receive an “Approved” stamp. If not, it will automatically move to its correct position on the timeline and receive a “Denied” stamp.",
       "Some events are dated only to a month or a year. In these cases, any position within that period will be accepted as correct.",
@@ -669,7 +676,7 @@ const I18N = {
     date: "Date:",
     dateHidden: "hidden until placed",
     drag: "drag",
-    hintPick: "Drag this card into a gap on the timeline, or tap “Place here”.",
+    hintPick: "Drag this card into a gap on the timeline, or tap “Place here.”",
     confirm: "Confirm position",
     cancel: "Cancel",
     placeHere: "Place here",
@@ -692,7 +699,7 @@ const I18N = {
     annNext: t => `Next card: “${t}”.`,
     endTitle: "The timeline is complete",
     scoreSub: () => "placed correctly on the first try",
-    conclusion: "Presses, bookshops, fairs and a prize, spread across several countries, now carry Russian-language literature beyond the reach of the censor — much as the tamizdat of the Soviet era once did. Seven cards, one emerging ecosystem.",
+    conclusion: "Presses, bookstores, fairs, and a prize, spread across several countries, now carry Russian-language literature beyond the reach of the censor—much as the tamizdat of the Soviet era once did. Seven cards, one emerging ecosystem.",
     playAnother: "Play another timeline",
     replay: "Replay this timeline",
     timelineHeading: "Your timeline",
@@ -715,9 +722,9 @@ const I18N = {
     exitNo: "Stay",
     demoLabel: "Demonstration: how to place a card on the timeline",
     demoSteps: [
-      "Drag the card into a gap on the timeline, then press “Confirm”.",
+      "Drag the card into a gap on the timeline, then press “Confirm.”",
       "Right place: the card gets an “Approved” stamp.",
-      "Or tap “Place here”, then “Confirm”.",
+      "Or tap “Place here,” then “Confirm.”",
       "Wrong place: the card moves to where it belongs and gets a “Denied” stamp."
     ],
     demoPause: "Pause",
@@ -727,7 +734,7 @@ const I18N = {
     pcScore: (s, t) => `Result: ${s} of ${t}`,
     pcMark: "Tamizdat Review",
     pcAlt: (title, fact) => `Postcard. Front: the book ${title} by Abram Tertz, Tamizdat Project, 2024. Back: ${fact}`,
-    kinds: { publisher: "publisher", book: "book", bookshop: "bookshop", fair: "book fair", prize: "literary prize", censorship: "censorship" }
+    kinds: { publisher: "publisher", book: "book", bookshop: "bookstore", fair: "book fair", prize: "literary prize", censorship: "censorship" }
   },
   ru: {
     docTitle: "Новый тамиздат: хронология",
@@ -879,7 +886,11 @@ function plural(n, one, few, many) {
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const t = (key, ...a) => { const v = I18N[state.lang][key]; return typeof v === "function" ? v(...a) : v; };
   const L = o => (o ? (o[state.lang] ?? o.en ?? o.ru ?? "") : "");
-  const title = id => L(EV[id].title);
+  // Titles of works are marked *like this* in the English texts: shown in italics, read without the marks
+  const plain = s => String(s).replace(/\*/g, "");
+  const rich = s => esc(s).replace(/\*([^*]+)\*/g, "<em>$1</em>");
+  const title = id => plain(L(EV[id].title));
+  const titleHtml = id => rich(L(EV[id].title));
   const dateLabel = id => L(EV[id].date.label);
   const yearKey = id => EV[id].date.yearLabel || EV[id].date.start.slice(0, 4);
   function announce(msg) { live.textContent = ""; setTimeout(() => { live.textContent = msg; }, 40); }
@@ -997,7 +1008,7 @@ function plural(n, one, few, many) {
   const HAND_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 13.5V4.8a1.5 1.5 0 0 1 3 0v6.7m0-1.7a1.5 1.5 0 0 1 3 0v1.7m0-1a1.5 1.5 0 0 1 3 0v1.5m0-.6a1.5 1.5 0 0 1 3 0v4.1c0 3.5-2.7 6.5-6.2 6.5h-1.6c-2 0-3.8-1-4.9-2.7l-2.6-4.1a1.6 1.6 0 0 1 2.5-2l1.8 1.9"/></svg>';
   function demoCardHtml(id, cls, stamp) {
     const e = EV[id];
-    return `<div class="d-card ${cls}" data-d="${cls}"><span class="d-meta">${esc(L(e.kindLabel))}</span><span class="d-title">${esc(L(e.title))}</span><span class="d-line"></span>${stamp ? `<span class="d-stamp ${stamp === "denied" ? "denied" : ""}">${esc(t(stamp === "denied" ? "stampDenied" : "stampCorrect"))}</span>` : ""}</div>`;
+    return `<div class="d-card ${cls}" data-d="${cls}"><span class="d-meta">${esc(L(e.kindLabel))}</span><span class="d-title">${rich(L(e.title))}</span><span class="d-line"></span>${stamp ? `<span class="d-stamp ${stamp === "denied" ? "denied" : ""}">${esc(t(stamp === "denied" ? "stampDenied" : "stampCorrect"))}</span>` : ""}</div>`;
   }
   function demoHtml() {
     if (DEMO_IDS.length < 3) return "";
@@ -1143,8 +1154,8 @@ function plural(n, one, few, many) {
   function currentCardHtml(id) {
     return `<article class="card current" id="current-card" aria-labelledby="current-title">
       ${cardHead(id)}
-      <h2 class="card-title" id="current-title">${esc(title(id))}</h2>
-      <p class="card-desc">${esc(L(EV[id].text))}</p>
+      <h2 class="card-title" id="current-title">${titleHtml(id)}</h2>
+      <p class="card-desc">${rich(L(EV[id].text))}</p>
       ${imageHtml(id)}
       <p class="card-date"><span>${esc(t("date"))}</span><span class="bar" role="img" aria-label="${esc(t("dateHidden"))}"></span></p>
     </article>`;
@@ -1159,8 +1170,8 @@ function plural(n, one, few, many) {
     return `<article class="card placed" tabindex="-1" id="entry-${esc(id)}" aria-labelledby="t-${esc(id)}">
       ${cardHead(id, anchorBit)}
       ${feedback}
-      <h3 class="card-title" id="t-${esc(id)}">${esc(title(id))}</h3>
-      <p class="card-desc">${esc(L(e.text))}</p>
+      <h3 class="card-title" id="t-${esc(id)}">${titleHtml(id)}</h3>
+      <p class="card-desc">${rich(L(e.text))}</p>
       ${imageHtml(id)}
       <p class="src">${esc(t(e.sources.length > 1 ? "sources" : "source"))} ${e.sources.map(s => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(typeof s.label === "string" ? s.label : L(s.label))}</a>`).join(", ")}</p>
     </article>`;
@@ -1193,8 +1204,8 @@ function plural(n, one, few, many) {
     else label = t("slotBetween", title(P[i - 1].id), title(P[i].id));
     const cls = ["slot", i === 0 ? "is-first" : "", i === n ? "is-last" : "", sel ? "selected" : "", rej ? "rejected" : ""].join(" ");
     let inner;
-    if (rej) inner = `<span class="ghost-title">${esc(title(state.current))}</span><span class="ghost-hint">${esc(t("rejected"))}</span>`;
-    else if (sel) inner = `<span class="ghost-title">${esc(title(state.current))}</span><span class="ghost-hint">${esc(t("ghostHint"))}</span>`;
+    if (rej) inner = `<span class="ghost-title">${titleHtml(state.current)}</span><span class="ghost-hint">${esc(t("rejected"))}</span>`;
+    else if (sel) inner = `<span class="ghost-title">${titleHtml(state.current)}</span><span class="ghost-hint">${esc(t("ghostHint"))}</span>`;
     else inner = `<span class="slot-rule"></span><span class="slot-label">${esc(t("placeHere"))}</span>`;
     return `<li class="${cls}"><span aria-hidden="true"></span><span class="spine" aria-hidden="true"></span>
       <button type="button" class="slot-btn" data-slot="${i}" aria-label="${esc(label)}" aria-pressed="${sel}" ${state.current && !state.busy ? "" : "disabled"}>${inner}</button></li>`;
@@ -1210,7 +1221,7 @@ function plural(n, one, few, many) {
         <p class="deck-count">${esc(t("cardsLeft", remaining))}</p>
         ${state.selectedSlot == null ? `<p class="deck-hint">${esc(t("hintPick"))}</p>` : ""}
         <div class="deck-actions">
-          <p class="selected-info">${esc(title(state.current))}</p>
+          <p class="selected-info">${titleHtml(state.current)}</p>
           ${state.selectedSlot != null ? `<button class="btn" data-act="cancel-slot" ${state.busy ? "disabled" : ""}>${esc(t("cancel"))}</button>` : ""}
           <button class="btn primary" data-act="confirm" ${state.selectedSlot == null || state.busy ? "disabled" : ""}>${esc(t("confirm"))}</button>
         </div>`;
@@ -1266,7 +1277,7 @@ function plural(n, one, few, many) {
           <p class="fine"><a href="${esc(DATA.config.newsletterUrl)}" target="_blank" rel="noopener">${esc(t("newsletter"))}</a>. ${esc(t("newsletterNote"))}</p>
           <aside class="unlocked">
             <p class="fine">${esc(t("unlocked"))}</p>
-            <h3>${esc(L(obj.author))}. ${esc(state.lang === "ru" ? "«" + L(obj.title) + "»" : L(obj.title))}</h3>
+            <h3>${esc(L(obj.author))}. ${state.lang === "ru" ? esc("«" + L(obj.title) + "»") : `<em>${esc(L(obj.title))}</em>`}</h3>
             ${L(obj.description).split("\n").map(x => `<p>${esc(x)}</p>`).join("")}
             <a href="${esc(obj.link)}" target="_blank" rel="noopener">${esc(t("openObject"))}</a>
           </aside>
