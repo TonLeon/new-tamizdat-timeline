@@ -226,6 +226,30 @@ html:not(.kbd-user) .kbd-note{position:absolute;width:1px;height:1px;margin:-1px
 /* Inter semibold, matching the start-screen title (sans xl; the sans scale has no tablet step) */
 .round-name{font-family:var(--font-sans);font-weight:600;font-size:var(--type-sans-d-xl-bold-normal-fs);line-height:var(--type-sans-d-xl-bold-normal-lh);letter-spacing:var(--type-sans-d-xl-bold-normal-ls);margin:0}
 .progress{margin:0;color:var(--color-text-tertiary);font-size:var(--type-sans-d-s-reg-tight-fs);line-height:var(--type-sans-d-s-reg-tight-lh);letter-spacing:var(--type-sans-d-s-reg-tight-ls)}
+.head-meta{display:flex;align-items:center;gap:.25rem;align-self:center}
+/* "?" next to the counter opens the rules in a side panel */
+.help-btn{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;margin:-8px -8px -8px 0;padding:0;border:0;border-radius:var(--radius-round);background:none;color:var(--color-text-tertiary);cursor:pointer}
+.help-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+/* Rules panel: slides in from the right over the timeline; the scrim dims the cards on the left */
+html.help-open{overflow:hidden}
+.help-scrim{position:fixed;inset:0;z-index:50;background:var(--color-overlay)}
+.help-panel{position:fixed;top:0;right:0;bottom:0;z-index:51;display:flex;flex-direction:column;width:min(36rem,calc(100vw - 2.5rem));background:var(--color-surface-primary);box-shadow:-5px 0 15px 0 var(--alpha-black-20);overflow-y:auto;overscroll-behavior:contain;padding:calc(1.5rem + env(safe-area-inset-top,0px)) 2rem calc(2rem + env(safe-area-inset-bottom,0px))}
+.help-panel:focus{outline:none}
+.help-top{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin:0 0 1rem}
+.help-top h2{margin:0;font-family:var(--font-serif);font-weight:400;font-size:var(--type-serif-d-xl-fs);line-height:var(--type-serif-d-xl-lh);letter-spacing:var(--type-serif-d-xl-ls)}
+.help-close{display:inline-flex;align-items:center;justify-content:center;flex:none;width:44px;height:44px;margin-right:-10px;padding:0;border:0;border-radius:var(--radius-round);background:none;color:var(--color-text-secondary);cursor:pointer}
+.help-close:hover{color:var(--color-text-primary);background:var(--color-surface-secondary-hover)}
+.help-close svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
+.help-panel .kbd-note{margin-top:0}
+.help-scrim.in{animation:reveal .25s ease}
+.help-panel.in{animation:slide-in .3s cubic-bezier(.2,.8,.2,1)}
+.help-scrim.out{opacity:0;transition:opacity .2s ease}
+.help-panel.out{transform:translateX(100%);transition:transform .2s ease-in}
+@keyframes slide-in{from{transform:translateX(100%)}to{transform:none}}
+@media screen and (max-width:768px){
+  .help-panel{width:100vw;box-shadow:none;padding-inline:1.25rem}
+  .help-top h2{font-size:var(--type-serif-m-2xl-fs);line-height:var(--type-serif-m-2xl-lh);letter-spacing:var(--type-serif-m-2xl-ls)}
+}
 .board{display:grid;grid-template-columns:minmax(290px,370px) 1fr;gap:40px;align-items:start}
 .deck{position:sticky;top:calc(1.5rem + env(safe-area-inset-top,0px))}
 .deck-stack{position:relative;margin:0 0 1.5rem}
@@ -656,6 +680,7 @@ const I18N = {
     howToPlay: "How to play",
     chooseTimeline: "Choose a timeline",
     rulesTitle: "How to play",
+    close: "Close",
     rules: [
       "Your goal is to reconstruct the chronology of the New Tamizdat by placing seven events on the timeline.",
       "One event is already marked on the timeline to serve as your starting point. Cards with other events will appear one by one. Place each card before or after the events already on the timeline to gradually build the correct chronological order.",
@@ -699,7 +724,7 @@ const I18N = {
     annMoved: (t, d) => `Denied. The card has moved to its place. Date: ${d}.`,
     annNext: t => `Next card: “${t}”.`,
     endTitle: "The timeline is complete",
-    scoreSub: () => "placed correctly on the first try",
+    scoreSub: () => "placed correctly",
     conclusion: "Presses, bookstores, fairs, and a prize, spread across several countries, now carry Russian-language literature beyond the reach of the censor—much as the tamizdat of the Soviet era once did. Seven cards, one emerging ecosystem.",
     playAnother: "Play another timeline",
     replay: "Replay this timeline",
@@ -747,6 +772,7 @@ const I18N = {
     howToPlay: "Как играть",
     chooseTimeline: "Выбрать хронологию",
     rulesTitle: "Как играть",
+    close: "Закрыть",
     rules: [
       "Ваша цель — восстановить хронологию нового тамиздата, расположив на временной шкале семь событий.",
       "На временной шкале уже отмечено одно событие — оно станет вашим ориентиром. Рядом по очереди будут появляться карточки с другими событиями. Размещайте их до или после уже отмеченных событий, постепенно выстраивая хронологию.",
@@ -790,7 +816,7 @@ const I18N = {
     annMoved: (t, d) => `Отклонено. Карточка перемещена на своё место. Дата: ${d}.`,
     annNext: t => `Следующая карточка: ${q(t)}.`,
     endTitle: "Хронология восстановлена",
-    scoreSub: () => "событий на своём месте с первой попытки",
+    scoreSub: () => "событий на своём месте",
     conclusion: "Издательства, книжные магазины, ярмарки и премия в разных странах сегодня выводят русскоязычную литературу из-под власти цензора — так же, как когда-то это делал советский тамиздат. Семь карточек — одна складывающаяся экосистема.",
     playAnother: "Сыграть другую хронологию",
     replay: "Сыграть эту ещё раз",
@@ -877,6 +903,8 @@ function plural(n, one, few, many) {
     rejectedSlot: null,
     justPlaced: null,
     firstTry: 0,
+    helpOpen: false,    // rules panel on the game screen
+    helpAnim: false,
     busy: false,
     focusSlot: null,
     focusEntry: null,
@@ -936,12 +964,13 @@ function plural(n, one, few, many) {
     state.placed = [{ id: anchor, status: "anchor" }];
     state.deck = shuffle(events.filter(e => e !== anchor));
     state.current = state.deck.shift();
-    Object.assign(state, { selectedSlot: null, rejectedSlot: null, justPlaced: null, firstTry: 0, busy: false, flipped: false, focusSlot: null, focusEntry: null });
+    Object.assign(state, { selectedSlot: null, rejectedSlot: null, justPlaced: null, firstTry: 0, busy: false, flipped: false, helpOpen: false, focusSlot: null, focusEntry: null });
     go("game");
     announce(t("annNext", title(state.current)));
   }
   function go(screen) {
     state.screen = screen;
+    state.helpOpen = false;
     render();
     window.scrollTo({ top: 0, behavior: "auto" });
     const h = app.querySelector("h1");
@@ -1231,19 +1260,58 @@ function plural(n, one, few, many) {
       deck = `<div class="deck-done"><p>${esc(t("doneText"))}</p><button class="btn primary" data-act="end">${esc(t("seeResults"))}</button></div>`;
     }
     return `<section class="game ${state.selectedSlot != null && state.current ? "has-selection" : ""}">
-      <div class="game-head"><h1 class="round-name">${homeLink(L(roundDef(state.round.id).title))}</h1><p class="progress">${esc(t("progress", state.placed.length, total))}</p></div>
+      <div class="game-head" ${state.helpOpen ? "inert" : ""}><h1 class="round-name">${homeLink(L(roundDef(state.round.id).title))}</h1>
+        <div class="head-meta"><p class="progress">${esc(t("progress", state.placed.length, total))}</p>
+          <button type="button" class="help-btn" data-act="help" aria-haspopup="dialog" aria-label="${esc(t("rulesTitle"))}" title="${esc(t("rulesTitle"))}"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.25"/><path d="M9.5 9.4a2.6 2.6 0 0 1 5.05.85c0 1.75-2.55 2.3-2.55 3.95"/><path d="M12 17.1v.01" stroke-width="2.2"/></svg></button>
+        </div>
+      </div>
       ${state.confirmExit ? `<div class="exit-confirm" role="alertdialog" aria-labelledby="exit-q">
         <p id="exit-q">${esc(t("exitQuestion"))}</p>
         <div class="btns"><button class="btn primary" data-act="exit-stay">${esc(t("exitNo"))}</button><button class="btn" data-act="exit-leave">${esc(t("exitYes"))}</button></div>
       </div>` : ""}
-      <div class="board">
+      <div class="board" ${state.helpOpen ? "inert" : ""}>
         <aside class="deck" aria-label="${esc(t("deckLabel"))}">${deck}</aside>
         <section class="timeline" aria-label="${esc(t("timelineLabel"))}"><ol class="tl">${timelineHtml(!!state.current)}</ol></section>
       </div>
+      ${state.helpOpen ? helpPanelHtml() : ""}
     </section>`;
   }
 
-  function scoreTotals() { return { s: state.firstTry, tot: state.placed.length - 1 }; }
+  // The rules as text only (no demo), in a panel over the timeline
+  function helpPanelHtml() {
+    const anim = state.helpAnim ? " in" : "";
+    return `<div class="help-scrim${anim}" data-act="help-close"></div>
+      <aside class="help-panel${anim}" role="dialog" aria-modal="true" aria-labelledby="help-h" tabindex="-1">
+        <div class="help-top"><h2 id="help-h">${esc(t("rulesTitle"))}</h2>
+          <button type="button" class="help-close" data-act="help-close" aria-label="${esc(t("close"))}"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+        </div>
+        <ol class="rule-list">${t("rules").map(r => `<li>${esc(r)}</li>`).join("")}</ol>
+        <p class="kbd-note">${esc(t("kbdNote"))}</p>
+      </aside>`;
+  }
+
+  function openHelp() {
+    state.helpOpen = true;
+    state.helpAnim = !reduceMotion.matches;
+    render();
+    app.querySelector(".help-close").focus({ preventScroll: true });
+  }
+
+  function closeHelp() {
+    if (!state.helpOpen) return;
+    const finish = () => { state.helpOpen = false; render(); const b = app.querySelector(".help-btn"); if (b) b.focus({ preventScroll: true }); };
+    const panel = app.querySelector(".help-panel");
+    if (!panel || reduceMotion.matches) { finish(); return; }
+    let done = false;
+    const once = () => { if (!done) { done = true; finish(); } };
+    panel.addEventListener("transitionend", once, { once: true });
+    setTimeout(once, 300); // in case transitionend never fires
+    panel.classList.remove("in"); panel.classList.add("out");
+    app.querySelector(".help-scrim").classList.add("out");
+  }
+
+  // The starting card counts as an event in its right place, so the score is out of every event on the timeline
+  function scoreTotals() { return { s: state.firstTry + 1, tot: state.placed.length }; }
 
   function viewEnd() {
     const { s, tot } = scoreTotals();
@@ -1294,6 +1362,8 @@ function plural(n, one, few, many) {
 
   function afterRender() {
     if (state.screen === "landing") state.heroPlayed = true;
+    document.documentElement.classList.toggle("help-open", state.screen === "game" && state.helpOpen);
+    state.helpAnim = false; // slide the rules panel in once, not on every later re-render
     if (state.screen === "rules") startDemo();
     state.justPlaced = null; // animate a newly placed card once, not on every later re-render
     if (state.screen === "game") {
@@ -1508,6 +1578,8 @@ function plural(n, one, few, many) {
     else if (act === "rounds") go("rounds");
     else if (act === "landing") go("landing");
     else if (act === "home") goHome();
+    else if (act === "help") openHelp();
+    else if (act === "help-close") closeHelp();
     else if (act === "exit-leave") { state.confirmExit = false; go("landing"); }
     else if (act === "exit-stay") { state.confirmExit = false; render(); app.querySelector(".round-name .home-link").focus(); }
     else if (act === "demo-toggle") {
@@ -1527,7 +1599,10 @@ function plural(n, one, few, many) {
     else if (act === "download") downloadPostcard();
   });
 
-  document.addEventListener("keydown", e => { if (e.key === "Tab") document.documentElement.classList.add("kbd-user"); });
+  document.addEventListener("keydown", e => {
+    if (e.key === "Tab") document.documentElement.classList.add("kbd-user");
+    if (e.key === "Escape" && state.helpOpen) { e.preventDefault(); closeHelp(); }
+  });
   app.addEventListener("keydown", e => {
     const b = e.target.closest && e.target.closest(".slot-btn");
     if (!b || (e.key !== "ArrowDown" && e.key !== "ArrowUp")) return;
