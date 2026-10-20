@@ -656,11 +656,7 @@ const TAMIZDAT_DATA = {
     },
     postcards: {
       "pkhentz-series": {
-        object: "pkhentz",
-        fact: {
-          ru: "«Пхенц» открывает серию Tamizdat Project «XX век» под номером 1: двуязычная книга в мягкой обложке, 60 страниц, 110 × 170 мм.",
-          en: "Pkhentz is No. 1 in the Tamizdat Project’s XX Century series: a bilingual paperback of 60 pages, 110 × 170 mm."
-        }
+        object: "pkhentz"
       }
     }
   }
@@ -755,9 +751,9 @@ const I18N = {
     demoPause: "Pause",
     demoPlay: "Play",
     pcGreeting: "Greetings from the Tamizdat Review",
-    pcTo: "To: our reader",
+    pcTo: "To: Our reader",
     pcMark: "Tamizdat Review",
-    pcAlt: (title, fact) => `Postcard. Front: the book ${title} by Abram Tertz, Tamizdat Project, 2024. Back: ${fact}`,
+    pcAlt: title => `Postcard. Front: the book ${title} by Abram Tertz, Tamizdat Project, 2024.`,
     kinds: { publisher: "publisher", book: "book", bookshop: "bookstore", fair: "book fair", prize: "literary prize", censorship: "censorship" }
   },
   ru: {
@@ -847,7 +843,7 @@ const I18N = {
     pcGreeting: "Привет от Tamizdat Review",
     pcTo: "Кому: нашему читателю",
     pcMark: "Tamizdat Review",
-    pcAlt: (title, fact) => `Открытка. Лицевая сторона: книга «${title}» Абрама Терца, Tamizdat Project, 2024. Оборот: ${fact}`,
+    pcAlt: title => `Открытка. Лицевая сторона: книга «${title}» Абрама Терца, Tamizdat Project, 2024.`,
     kinds: { publisher: "издательство", book: "книга", bookshop: "книжный магазин", fair: "книжная ярмарка", prize: "литературная премия", censorship: "цензура" }
   }
 };
@@ -1331,7 +1327,7 @@ function plural(n, one, few, many) {
               <canvas class="pc-front" width="1500" height="1000" aria-hidden="${state.flipped}"></canvas>
               <canvas class="pc-back" width="1500" height="1000" aria-hidden="${!state.flipped}"></canvas>
             </div>
-            <figcaption class="sr-only">${esc(t("pcAlt", L(obj.title), L(pc.fact)))}</figcaption>
+            <figcaption class="sr-only">${esc(t("pcAlt", L(obj.title)))}</figcaption>
           </figure>
           <div class="pc-actions">
             <button class="btn" data-act="flip">${esc(t("turnOver"))}</button>
@@ -1616,7 +1612,8 @@ function plural(n, one, few, many) {
   function postcardContext() {
     const pc = DATA.archive.postcards[state.round.postcard];
     const obj = DATA.archive.objects[pc.object];
-    const date = new Date().toLocaleDateString(state.lang === "ru" ? "ru-RU" : "en-US", { day: "numeric", month: "long", year: "numeric" });
+    const date = new Date().toLocaleDateString(state.lang === "ru" ? "ru-RU" : "en-US", { day: "numeric", month: "long", year: "numeric" })
+      .replace(/\s*г\.$/, ""); // "20 октября 2026", like the card dates
     return { pc, obj, date };
   }
 
@@ -1686,9 +1683,7 @@ function plural(n, one, few, many) {
     ctx.beginPath(); ctx.moveTo(790, 90); ctx.lineTo(790, 910); ctx.stroke();
     ctx.fillStyle = PCC.ink; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
     ctx.font = `64px ${F.display}`;
-    let y = wrap(ctx, t("pcGreeting"), 90, 175, 650, 72);
-    ctx.font = `38px ${F.text}`;
-    y = wrap(ctx, L(c.pc.fact), 90, y + 44, 650, 56);
+    wrap(ctx, t("pcGreeting"), 90, 175, 650, 72);
     ctx.fillStyle = PCC.muted; ctx.font = `26px ${F.text}`;
     ctx.fillText("tamizdatproject.org", 90, 905);
     // stamp + postmark
@@ -1707,10 +1702,10 @@ function plural(n, one, few, many) {
     }
     ctx.restore();
     // address lines
-    const lines = [t("pcTo"), L(roundDef(state.round.id).title), c.date];
+    const lines = [t("pcTo"), `${t("date")} ${c.date}`];
     ctx.strokeStyle = PCC.muted; ctx.lineWidth = 1.5; ctx.fillStyle = PCC.ink; ctx.textAlign = "left";
     lines.forEach((txt, i) => {
-      const ly = 652 + i * 92;
+      const ly = 744 + i * 92;
       ctx.beginPath(); ctx.moveTo(840, ly); ctx.lineTo(1410, ly); ctx.stroke();
       fitFont(ctx, txt, 560, 28, s => `${s}px ${F.text}`);
       ctx.fillText(txt, 846, ly - 14);
