@@ -117,6 +117,15 @@ button{font:inherit;color:inherit;letter-spacing:inherit}
 
 /* Language switch: the host page provides the title bar, so the game carries only this quiet toggle */
 .topbar{display:flex;justify-content:flex-end;margin:-.75rem -.5rem .25rem 0}
+/* «The New Tamizdat» leads back to the start: the game heading itself, or a small line above other headings */
+.home-link{display:inline;padding:0;border:0;background:none;font:inherit;letter-spacing:inherit;color:inherit;text-align:left;cursor:pointer}
+.home-link:hover{text-decoration:underline;text-decoration-color:var(--color-text-weak);text-decoration-thickness:1px;text-underline-offset:4px}
+.home-crumb{margin:0 0 1rem;color:var(--color-text-tertiary);font-weight:600;font-size:var(--type-sans-d-s-bold-tight-fs);line-height:var(--type-sans-d-s-bold-tight-lh);letter-spacing:var(--type-sans-d-s-bold-tight-ls)}
+.home-crumb .home-link:hover{color:var(--color-text-primary)}
+/* Leave-the-round confirmation, inline (a browser confirm() can be blocked inside the site's frame) */
+.exit-confirm{display:flex;flex-wrap:wrap;align-items:center;gap:.75rem 1.5rem;margin:0 0 1.5rem;padding:1rem 1.5rem;border-radius:var(--radius-l);background:var(--color-surface-secondary)}
+.exit-confirm p{flex:1 1 16rem;margin:0}
+.exit-confirm .btns{display:flex;gap:.75rem}
 .lang{display:flex;gap:.25rem}
 .lang button{background:none;border:0;min-width:40px;min-height:40px;padding:0 .5rem;font-weight:600;font-size:var(--type-sans-d-xs-bold-normal-fs);line-height:var(--type-sans-d-xs-bold-normal-lh);letter-spacing:var(--type-sans-d-xs-bold-normal-ls);color:var(--color-text-tertiary);cursor:pointer;border-bottom:2px solid transparent}
 .lang button[aria-pressed="true"]{color:var(--color-text-primary);border-bottom-color:var(--color-game-ink)}
@@ -363,12 +372,7 @@ html:not(.kbd-user) .kbd-note{position:absolute;width:1px;height:1px;margin:-1px
 </head>
 <body>
 <main>
-  <div class="topbar">
-    <div class="lang" role="group" id="lang-group">
-      <button type="button" data-lang="en" lang="en">EN</button>
-      <button type="button" data-lang="ru" lang="ru">RU</button>
-    </div>
-  </div>
+  <div class="topbar" id="topbar"></div>
   <div id="app"></div>
 </main>
 <div id="live" class="sr-only" aria-live="polite"></div>
@@ -705,6 +709,9 @@ const I18N = {
     roundsTitle: "Choose a timeline",
     best: (s, t) => `best ${s}/${t}`,
     backStart: "Back to the start",
+    exitQuestion: "Back to the start? This round won’t be saved.",
+    exitYes: "Leave",
+    exitNo: "Stay",
     demoLabel: "Demonstration: how to place a card on the timeline",
     demoSteps: [
       "Drag the card into a gap on the timeline.",
@@ -791,6 +798,9 @@ const I18N = {
     roundsTitle: "Выберите хронологию",
     best: (s, t) => `лучший результат ${s}/${t}`,
     backStart: "В начало",
+    exitQuestion: "Вернуться в начало? Ход игры не сохранится.",
+    exitYes: "Выйти",
+    exitNo: "Остаться",
     demoLabel: "Демонстрация: как разместить карточку на шкале",
     demoSteps: [
       "Перетащите карточку в промежуток на шкале.",
@@ -845,6 +855,7 @@ function plural(n, one, few, many) {
   const state = {
     lang: store.get("tz-lang", null) || ((navigator.language || "").toLowerCase().startsWith("ru") ? "ru" : "en"),
     screen: "landing",
+    confirmExit: false,
     demoPaused: false,
     heroPlayed: false,
     round: null,        // {id, events:[], anchor}
@@ -926,9 +937,7 @@ function plural(n, one, few, many) {
   function render() {
     document.documentElement.lang = state.lang;
     document.title = t("docTitle");
-    const lg = document.getElementById("lang-group");
-    lg.setAttribute("aria-label", t("langGroup"));
-    lg.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === state.lang)));
+    document.getElementById("topbar").innerHTML = langHtml();
     const views = { landing: viewLanding, rules: viewRules, game: viewGame, end: viewEnd, rounds: viewRounds };
     if (drag.active) endDrag(null);
     removeClones();
@@ -936,6 +945,16 @@ function plural(n, one, few, many) {
     app.innerHTML = views[state.screen]();
     afterRender();
   }
+
+  function langHtml() {
+    return `<div class="lang" role="group" aria-label="${esc(t("langGroup"))}">${["en", "ru"].map(l =>
+      `<button type="button" data-lang="${l}" lang="${l}" aria-pressed="${l === state.lang}">${l.toUpperCase()}</button>`).join("")}</div>`;
+  }
+  const homeName = () => L(DATA.rounds[0].title);
+  function homeLink(text) {
+    return `<button type="button" class="home-link" data-act="home" aria-label="${esc(homeName() + " — " + t("backStart"))}">${esc(text)}</button>`;
+  }
+  const homeCrumb = () => `<p class="home-crumb">${homeLink("← " + homeName())}</p>`;
 
   function viewLanding() {
     const w = t("heroWords");
@@ -954,6 +973,7 @@ function plural(n, one, few, many) {
 
   function viewRules() {
     return `<section class="rules">
+      ${homeCrumb()}
       <h1>${esc(t("rulesTitle"))}</h1>
       <div class="rules-body">
       <div class="rules-text">
@@ -1193,7 +1213,11 @@ function plural(n, one, few, many) {
       deck = `<div class="deck-done"><p>${esc(t("doneText"))}</p><button class="btn primary" data-act="end">${esc(t("seeResults"))}</button></div>`;
     }
     return `<section class="game ${state.selectedSlot != null && state.current ? "has-selection" : ""}">
-      <div class="game-head"><h1 class="round-name">${esc(L(roundDef(state.round.id).title))}</h1><p class="progress">${esc(t("progress", state.placed.length, total))}</p></div>
+      <div class="game-head"><h1 class="round-name">${homeLink(L(roundDef(state.round.id).title))}</h1><p class="progress">${esc(t("progress", state.placed.length, total))}</p></div>
+      ${state.confirmExit ? `<div class="exit-confirm" role="alertdialog" aria-labelledby="exit-q">
+        <p id="exit-q">${esc(t("exitQuestion"))}</p>
+        <div class="btns"><button class="btn primary" data-act="exit-stay">${esc(t("exitNo"))}</button><button class="btn" data-act="exit-leave">${esc(t("exitYes"))}</button></div>
+      </div>` : ""}
       <div class="board">
         <aside class="deck" aria-label="${esc(t("deckLabel"))}">${deck}</aside>
         <section class="timeline" aria-label="${esc(t("timelineLabel"))}"><ol class="tl">${timelineHtml(!!state.current)}</ol></section>
@@ -1209,6 +1233,7 @@ function plural(n, one, few, many) {
     const obj = DATA.archive.objects[pc.object];
     return `<section class="end">
       <header class="end-head">
+        ${homeCrumb()}
         <h1>${esc(t("endTitle"))}</h1>
         <p class="score"><span class="score-num">${s} / ${tot}</span><span>${esc(t("scoreSub", s, tot))}</span></p>
         <p class="conclusion">${esc(L(roundDef(state.round.id).conclusion) || t("conclusion"))}</p>
@@ -1433,13 +1458,26 @@ function plural(n, one, few, many) {
   }
 
   /* ---------- events ---------- */
-  document.getElementById("lang-group").addEventListener("click", e => {
-    const b = e.target.closest("button[data-lang]");
-    if (!b || b.dataset.lang === state.lang) return;
-    state.lang = b.dataset.lang;
+  // Leaving mid-round asks first, once the player has placed at least one card
+  function goHome() {
+    const inRound = state.screen === "game" && state.placed.length > 1;
+    if (inRound && !state.confirmExit) {
+      state.confirmExit = true;
+      render();
+      app.querySelector('[data-act="exit-stay"]').focus();
+      return;
+    }
+    state.confirmExit = false;
+    go("landing");
+  }
+
+  document.getElementById("topbar").addEventListener("click", e => {
+    const lb = e.target.closest("button[data-lang]");
+    if (!lb || lb.dataset.lang === state.lang) return;
+    state.lang = lb.dataset.lang;
     store.set("tz-lang", state.lang);
     render();
-    document.querySelector(`#lang-group button[data-lang="${state.lang}"]`).focus();
+    document.querySelector(`#topbar button[data-lang="${state.lang}"]`).focus();
   });
 
   app.addEventListener("click", e => {
@@ -1451,6 +1489,9 @@ function plural(n, one, few, many) {
     if (act === "rules") go("rules");
     else if (act === "rounds") go("rounds");
     else if (act === "landing") go("landing");
+    else if (act === "home") goHome();
+    else if (act === "exit-leave") { state.confirmExit = false; go("landing"); }
+    else if (act === "exit-stay") { state.confirmExit = false; render(); app.querySelector(".round-name .home-link").focus(); }
     else if (act === "demo-toggle") {
       state.demoPaused = !state.demoPaused;
       a.setAttribute("aria-pressed", String(state.demoPaused));
