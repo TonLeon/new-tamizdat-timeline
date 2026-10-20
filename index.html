@@ -157,7 +157,47 @@ main{max-width:var(--game-width);margin:0 auto;padding:40px var(--container-pad)
 .rules h1,.rounds h1,.end-head h1{font-family:var(--font-serif);font-weight:400;font-size:var(--type-serif-d-2xl-fs);line-height:var(--type-serif-d-2xl-lh);letter-spacing:var(--type-serif-d-2xl-ls);margin:0 0 1.5rem}
 
 /* Rules */
-.rules{max-width:38rem}
+.rules-body{display:grid;grid-template-columns:minmax(0,38rem) minmax(0,1fr);gap:40px;align-items:start}
+.rules-text{max-width:38rem}
+@media screen and (max-width:991px){.rules-body{grid-template-columns:1fr}.rules-demo{order:-1}}
+
+/* How-to demo: a miniature board drawn in container units (cqw), so it scales with its column.
+   A small step sequencer (JS) sets data-step; positions move by CSS transitions. */
+.rules-demo{position:sticky;top:calc(1.5rem + env(safe-area-inset-top,0px))}
+.demo{container-type:inline-size;background:var(--color-surface-secondary);border-radius:var(--radius-l);padding:1.5rem}
+.demo-stage{position:relative;aspect-ratio:100/74;transition:opacity .3s ease}
+.demo-stage.fade{opacity:0}
+.demo-stage>*{position:absolute;transition:left .8s cubic-bezier(.45,0,.25,1),top .8s cubic-bezier(.45,0,.25,1),opacity .25s ease,transform .2s ease,box-shadow .2s ease,border-color .2s ease,background .2s ease,color .2s ease}
+.demo-stage .d-spine{left:50%;top:0;bottom:0;width:1px;background:var(--color-text-weak)}
+.d-card{width:38%;height:18%;padding:1.6cqw 2cqw;border-radius:1.2cqw;background:var(--color-surface-primary);box-shadow:0 .6cqw 1.2cqw -.6cqw var(--alpha-black-20);overflow:hidden}
+.d-card.lifted{transform:rotate(-1.5deg);box-shadow:0 1.6cqw 3cqw -.8cqw var(--alpha-black-40)}
+.d-card .d-meta{display:block;padding-bottom:.9cqw;border-bottom:1px solid var(--color-border);color:var(--color-text-tertiary);font-size:2.2cqw;line-height:1.3}
+.d-card .d-title{display:block;margin-top:1.2cqw;font-family:var(--font-serif);font-size:2.9cqw;line-height:1.15;color:var(--color-text-primary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.d-card .d-line{display:block;height:1cqw;margin-top:1.3cqw;width:80%;border-radius:1cqw;background:var(--color-border-secondary)}
+.d-card .d-stamp{position:absolute;right:1.6cqw;top:1.2cqw;transform:rotate(-6deg) scale(1.2);opacity:0;border:.25cqw solid var(--color-signal-correct);border-radius:.5cqw;padding:.1cqw .6cqw;color:var(--color-signal-correct);font-weight:600;font-size:1.5cqw;line-height:1.3;letter-spacing:.08em;text-transform:uppercase;background:var(--color-surface-primary);transition:opacity .2s ease,transform .2s ease}
+.d-card .d-stamp.denied{border-color:var(--color-signal-adjust);color:var(--color-signal-adjust)}
+.d-card.stamped .d-stamp{opacity:1;transform:rotate(-6deg) scale(1)}
+.d-year{width:8%;text-align:right;font-family:var(--font-serif);font-size:2.9cqw;line-height:1;color:var(--color-text-primary)}
+.d-dot{width:1.6cqw;height:1.6cqw;margin:-.8cqw 0 0 -.8cqw;border-radius:50%;background:var(--color-text-primary)}
+.d-dot.denied{background:var(--color-surface-secondary);border:.35cqw solid var(--color-signal-adjust)}
+.d-gap{left:54%;width:40%;height:5.5%;display:flex;align-items:center;gap:1.2cqw;padding:0 1.2cqw;border:1px dashed transparent;border-radius:.9cqw;color:var(--color-text-tertiary);font-size:2.3cqw;white-space:nowrap}
+.d-gap::after{content:"";flex:1;border-top:1px dashed var(--color-border-secondary)}
+.d-gap.on{border-color:var(--color-game-ink);color:var(--color-game-ink);background:color-mix(in srgb,var(--color-game-ink) 6%,transparent)}
+.d-gap.on::after,.d-gap.miss::after{border-color:transparent}
+.d-gap.miss{border-color:var(--color-signal-adjust);color:var(--color-signal-adjust)}
+.d-btn{left:1%;top:31%;height:7%;padding:0 3cqw;display:flex;align-items:center;border-radius:10cqw;background:var(--color-surface-inverse);color:var(--color-text-inverse);font-weight:600;font-size:2.4cqw;opacity:.35}
+.d-btn.ready{opacity:1}
+.d-btn.press{transform:scale(.94)}
+.d-hand{width:8cqw;height:8cqw;margin:-1.1cqw 0 0 -3.4cqw;opacity:0;pointer-events:none;z-index:3}
+.d-hand svg{width:100%;height:100%;fill:var(--color-surface-primary);stroke:var(--color-text-primary);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;transition:transform .15s ease}
+.d-hand.show{opacity:1}
+.d-hand.press svg{transform:scale(.88) translateY(4%)}
+.demo-foot{display:flex;align-items:flex-start;gap:1rem;margin-top:1rem}
+.demo-caption{flex:1;margin:0;min-height:2lh;color:var(--color-text-secondary);font-size:var(--type-sans-d-s-reg-loose-fs);line-height:var(--type-sans-d-s-reg-loose-lh);letter-spacing:var(--type-sans-d-s-reg-loose-ls)}
+.demo-toggle{flex:none;background:none;border:0;padding:0;color:var(--color-text-tertiary);cursor:pointer;text-decoration:underline;text-decoration-color:var(--color-text-weak);text-underline-offset:4px;font-size:var(--type-sans-d-s-reg-tight-fs);line-height:var(--type-sans-d-s-reg-loose-lh)}
+.demo-toggle:hover{color:var(--color-text-primary)}
+.demo-caption ol{margin:0;padding-left:1.1rem}
+@media (prefers-reduced-motion:reduce){.demo-toggle{display:none}}
 .rule-list{list-style:none;margin:0;padding:0;counter-reset:r}
 .rule-list li{counter-increment:r;display:grid;grid-template-columns:2.5rem 1fr;gap:.75rem;padding:1rem 0;border-top:1px solid var(--color-border)}
 .rule-list li::before{content:counter(r);font-family:var(--font-serif);font-size:var(--type-serif-d-l-fs);line-height:var(--type-sans-d-m-reg-loose-lh);letter-spacing:var(--type-serif-d-l-ls);color:var(--color-text-tertiary)}
@@ -665,6 +705,15 @@ const I18N = {
     roundsTitle: "Choose a timeline",
     best: (s, t) => `best ${s}/${t}`,
     backStart: "Back to the start",
+    demoLabel: "Demonstration: how to place a card on the timeline",
+    demoSteps: [
+      "Drag the card into a gap on the timeline.",
+      "Right place: the card gets an “Approved” stamp.",
+      "Or tap “Place here”, then “Confirm”.",
+      "Wrong place: the card moves to where it belongs and gets a “Denied” stamp."
+    ],
+    demoPause: "Pause",
+    demoPlay: "Play",
     pcGreeting: "Greetings from the Tamizdat Review",
     pcTo: "To: our reader",
     pcScore: (s, t) => `Result: ${s} of ${t}`,
@@ -742,6 +791,15 @@ const I18N = {
     roundsTitle: "Выберите хронологию",
     best: (s, t) => `лучший результат ${s}/${t}`,
     backStart: "В начало",
+    demoLabel: "Демонстрация: как разместить карточку на шкале",
+    demoSteps: [
+      "Перетащите карточку в промежуток на шкале.",
+      "Верная позиция: на карточке появится штамп «Одобрено».",
+      "Или нажмите «Поместить сюда», а затем «Подтвердить».",
+      "Неверная позиция: карточка переместится на своё место, и на ней появится штамп «Отклонено»."
+    ],
+    demoPause: "Пауза",
+    demoPlay: "Смотреть",
     pcGreeting: "Привет от Tamizdat Review",
     pcTo: "Кому: нашему читателю",
     pcScore: (s, t) => `Результат: ${s} из ${t}`,
@@ -787,6 +845,7 @@ function plural(n, one, few, many) {
   const state = {
     lang: store.get("tz-lang", null) || ((navigator.language || "").toLowerCase().startsWith("ru") ? "ru" : "en"),
     screen: "landing",
+    demoPaused: false,
     heroPlayed: false,
     round: null,        // {id, events:[], anchor}
     placed: [],         // [{id, status:'anchor'|'correct'|'corrected', note}]
@@ -873,6 +932,7 @@ function plural(n, one, few, many) {
     const views = { landing: viewLanding, rules: viewRules, game: viewGame, end: viewEnd, rounds: viewRounds };
     if (drag.active) endDrag(null);
     removeClones();
+    stopDemo();
     app.innerHTML = views[state.screen]();
     afterRender();
   }
@@ -895,13 +955,138 @@ function plural(n, one, few, many) {
   function viewRules() {
     return `<section class="rules">
       <h1>${esc(t("rulesTitle"))}</h1>
+      <div class="rules-body">
+      <div class="rules-text">
       <ol class="rule-list">${t("rules").map(r => `<li>${esc(r)}</li>`).join("")}</ol>
       <p class="kbd-note">${esc(t("kbdNote"))}</p>
       <div class="actions">
         <button class="btn primary" data-act="start" data-round="${esc(DATA.rounds[0].id)}">${esc(t("startFirst"))}</button>
         ${multi() ? `<button class="btn" data-act="rounds">${esc(t("chooseTimeline"))}</button>` : ""}
       </div>
+      </div>
+      ${demoHtml()}
+      </div>
     </section>`;
+  }
+
+  /* ---------- how-to demo (rules page) ---------- */
+  // Three real events in true order: the anchor, one placed right (drag), one placed wrong (tap)
+  const DEMO_IDS = ["freedom-letters", "meduza-press", "idiot-books"].filter(id => EV[id]);
+  const HAND_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 13.5V4.8a1.5 1.5 0 0 1 3 0v6.7m0-1.7a1.5 1.5 0 0 1 3 0v1.7m0-1a1.5 1.5 0 0 1 3 0v1.5m0-.6a1.5 1.5 0 0 1 3 0v4.1c0 3.5-2.7 6.5-6.2 6.5h-1.6c-2 0-3.8-1-4.9-2.7l-2.6-4.1a1.6 1.6 0 0 1 2.5-2l1.8 1.9"/></svg>';
+  function demoCardHtml(id, cls, stamp) {
+    const e = EV[id];
+    return `<div class="d-card ${cls}" data-d="${cls}"><span class="d-meta">${esc(L(e.kindLabel))}</span><span class="d-title">${esc(L(e.title))}</span><span class="d-line"></span>${stamp ? `<span class="d-stamp ${stamp === "denied" ? "denied" : ""}">${esc(t(stamp === "denied" ? "stampDenied" : "stampCorrect"))}</span>` : ""}</div>`;
+  }
+  function demoHtml() {
+    if (DEMO_IDS.length < 3) return "";
+    const [anchor, a, b] = DEMO_IDS;
+    const yr = id => EV[id].date.start.slice(0, 4);
+    const steps = t("demoSteps");
+    return `<aside class="rules-demo" aria-label="${esc(t("demoLabel"))}">
+      <div class="demo">
+        <div class="demo-stage" aria-hidden="true">
+          <span class="d-spine"></span>
+          <span class="d-gap" data-d="g0">${esc(t("placeHere"))}</span>
+          <span class="d-year" data-d="y0" style="left:40.5%;top:15.5%">${yr(anchor)}</span><span class="d-dot" data-d="o0" style="left:50%;top:17%"></span>
+          ${demoCardHtml(anchor, "anchor")}
+          <span class="d-gap" data-d="g1">${esc(t("placeHere"))}</span>
+          <span class="d-gap" data-d="g2">${esc(t("placeHere"))}</span>
+          <span class="d-gap" data-d="g3">${esc(t("placeHere"))}</span>
+          <span class="d-year" data-d="ya" style="left:40.5%;top:42.5%">${yr(a)}</span><span class="d-dot" data-d="oa" style="left:50%;top:44%"></span>
+          <span class="d-year" data-d="yb" style="left:40.5%;top:69.5%">${yr(b)}</span><span class="d-dot denied" data-d="ob" style="left:50%;top:71%"></span>
+          ${demoCardHtml(a, "a", "ok")}
+          ${demoCardHtml(b, "b", "denied")}
+          <span class="d-btn" data-d="btn">${esc(t("confirm"))}</span>
+          <span class="d-hand" data-d="hand">${HAND_SVG}</span>
+        </div>
+        <div class="demo-foot">
+          <p class="demo-caption" id="demo-caption">${reduceMotion.matches ? `<ol>${steps.map(x => `<li>${esc(x)}</li>`).join("")}</ol>` : esc(steps[0])}</p>
+          <button type="button" class="demo-toggle" data-act="demo-toggle" aria-pressed="${state.demoPaused}">${esc(t(state.demoPaused ? "demoPlay" : "demoPause"))}</button>
+        </div>
+      </div>
+    </aside>`;
+  }
+
+  // Positions in % of the stage. Rows: gap above the anchor, anchor, then two slots below it.
+  const DP = {
+    deck: [1, 8], anchor: [54, 8], slotA: [54, 35], slotB: [54, 62],
+    g0: 1, g1: 28, g2: 55, g3: 82,
+    btnTip: [12, 34.5]
+  };
+  // Each step: the board's state after it, its caption (index into demoSteps) and how long to hold it.
+  const DEMO_STEPS = [
+    { ms: 900,  cap: 0, a: "deck", b: null, hand: null, gaps: ["g0", "g1"] },
+    { ms: 700,  cap: 0, a: "deck", b: null, hand: [20, 17], gaps: ["g0", "g1"] },
+    { ms: 450,  cap: 0, a: "deck", lift: true, b: null, hand: [20, 17], press: true, gaps: ["g0", "g1"] },
+    { ms: 1100, cap: 0, a: "slotA", lift: true, b: null, hand: [73, 44], press: true, gaps: ["g0", "g1"], on: "g1" },
+    { ms: 2300, cap: 1, a: "slotA", placedA: true, b: null, hand: null, gaps: ["g0", "g1", "g2"] },
+    { ms: 1000, cap: 2, a: "slotA", placedA: true, b: "deck", hand: [64, 3.7], gaps: ["g0", "g1", "g2"] },
+    { ms: 700,  cap: 2, a: "slotA", placedA: true, b: "deck", hand: [64, 3.7], press: true, gaps: ["g0", "g1", "g2"], on: "g0", ready: true },
+    { ms: 1000, cap: 2, a: "slotA", placedA: true, b: "deck", hand: DP.btnTip, gaps: ["g0", "g1", "g2"], on: "g0", ready: true },
+    { ms: 700,  cap: 2, a: "slotA", placedA: true, b: "deck", hand: DP.btnTip, press: true, btnPress: true, gaps: ["g0", "g1", "g2"], miss: "g0", ready: true },
+    { ms: 2800, cap: 3, a: "slotA", placedA: true, b: "slotB", placedB: true, hand: null, gaps: ["g0", "g1", "g2", "g3"] },
+    { ms: 450,  cap: 3, fade: true, a: "slotA", placedA: true, b: "slotB", placedB: true, hand: null, gaps: ["g0", "g1", "g2", "g3"] }
+  ];
+  let demoTimer = null, demoStep = 0;
+  function stopDemo() { clearTimeout(demoTimer); demoTimer = null; }
+  function demoApply(st) {
+    const root = app.querySelector(".demo-stage");
+    if (!root) return false;
+    const q = k => root.querySelector(`[data-d="${k}"]`);
+    const put = (el, xy) => { el.style.left = xy[0] + "%"; el.style.top = xy[1] + "%"; };
+    root.classList.toggle("fade", !!st.fade);
+    put(q("anchor"), DP.anchor);
+    const a = q("a"), b = q("b");
+    put(a, DP[st.a]); a.classList.toggle("lifted", !!st.lift); a.classList.toggle("stamped", !!st.placedA);
+    b.style.opacity = st.b ? 1 : 0; put(b, DP[st.b || "deck"]); b.classList.toggle("stamped", !!st.placedB);
+    a.style.zIndex = st.lift ? 2 : 1;
+    ["ya", "oa"].forEach(k => q(k).style.opacity = st.placedA ? 1 : 0);
+    ["yb", "ob"].forEach(k => q(k).style.opacity = st.placedB ? 1 : 0);
+    [["g0", DP.g0], ["g1", DP.g1], ["g2", DP.g2], ["g3", DP.g3]].forEach(([k, y]) => {
+      const g = q(k);
+      g.style.top = y + "%";
+      g.style.opacity = st.gaps.includes(k) ? 1 : 0;
+      g.classList.toggle("on", st.on === k);
+      g.classList.toggle("miss", st.miss === k);
+      g.firstChild.textContent = st.miss === k ? t("rejected") : t("placeHere");
+    });
+    const btn = q("btn");
+    btn.style.opacity = st.b === "deck" ? "" : 0; // only while a card waits in the hand
+    btn.classList.toggle("ready", !!st.ready);
+    btn.classList.toggle("press", !!st.btnPress);
+    const hand = q("hand");
+    if (st.hand) put(hand, st.hand);
+    hand.classList.toggle("show", !!st.hand);
+    hand.classList.toggle("press", !!st.press);
+    const cap = document.getElementById("demo-caption");
+    if (cap) cap.textContent = t("demoSteps")[st.cap];
+    return true;
+  }
+  // Jump to a step with no transitions (first frame, and the reset between loops while the board is faded out)
+  function demoApplyInstant(st) {
+    const stage = app.querySelector(".demo-stage");
+    if (!stage) return false;
+    const els = [stage, ...stage.querySelectorAll("*")];
+    els.forEach(el => el.style.transition = "none");
+    demoApply({ ...st, fade: true });
+    stage.offsetWidth; // commit the layout before transitions come back
+    els.forEach(el => el.style.transition = "");
+    stage.classList.toggle("fade", !!st.fade); // the board itself still fades back in
+    return true;
+  }
+  function runDemo() {
+    stopDemo();
+    if (state.demoPaused) return;
+    const st = DEMO_STEPS[demoStep];
+    if (!(demoStep === 0 ? demoApplyInstant(st) : demoApply(st))) return;
+    demoTimer = setTimeout(() => { demoStep = (demoStep + 1) % DEMO_STEPS.length; runDemo(); }, st.ms);
+  }
+  function startDemo() {
+    if (!app.querySelector(".demo-stage")) return;
+    if (reduceMotion.matches) { demoApply(DEMO_STEPS[DEMO_STEPS.length - 2]); document.getElementById("demo-caption").innerHTML = `<ol>${t("demoSteps").map(x => `<li>${esc(x)}</li>`).join("")}</ol>`; return; }
+    if (state.demoPaused) { demoApplyInstant(DEMO_STEPS[demoStep]); return; }
+    demoStep = 0;
+    runDemo();
   }
 
   function viewRounds() {
@@ -1066,6 +1251,7 @@ function plural(n, one, few, many) {
 
   function afterRender() {
     if (state.screen === "landing") state.heroPlayed = true;
+    if (state.screen === "rules") startDemo();
     state.justPlaced = null; // animate a newly placed card once, not on every later re-render
     if (state.screen === "game") {
       bindDrag();
@@ -1265,6 +1451,12 @@ function plural(n, one, few, many) {
     if (act === "rules") go("rules");
     else if (act === "rounds") go("rounds");
     else if (act === "landing") go("landing");
+    else if (act === "demo-toggle") {
+      state.demoPaused = !state.demoPaused;
+      a.setAttribute("aria-pressed", String(state.demoPaused));
+      a.textContent = t(state.demoPaused ? "demoPlay" : "demoPause");
+      if (state.demoPaused) stopDemo(); else runDemo();
+    }
     else if (act === "start") startRound(a.dataset.round);
     else if (act === "confirm") confirmPlacement();
     else if (act === "cancel-slot") { state.selectedSlot = null; render(); }
