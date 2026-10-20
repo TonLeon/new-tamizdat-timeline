@@ -229,7 +229,6 @@ html:not(.kbd-user) .kbd-note{position:absolute;width:1px;height:1px;margin:-1px
 .head-meta{display:flex;align-items:center;gap:.25rem;align-self:center}
 /* "?" next to the counter opens the rules in a side panel */
 .help-btn{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;margin:-8px -8px -8px 0;padding:0;border:0;border-radius:var(--radius-round);background:none;color:var(--color-text-tertiary);cursor:pointer}
-.help-btn:hover{color:var(--color-text-primary);background:var(--color-surface-secondary-hover)}
 .help-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 /* Rules panel: slides in from the right over the timeline; the scrim dims the cards on the left */
 html.help-open{overflow:hidden}
@@ -248,7 +247,7 @@ html.help-open{overflow:hidden}
 .help-panel.out{transform:translateX(100%);transition:transform .2s ease-in}
 @keyframes slide-in{from{transform:translateX(100%)}to{transform:none}}
 @media screen and (max-width:768px){
-  .help-panel{padding-inline:1.25rem}
+  .help-panel{width:100vw;box-shadow:none;padding-inline:1.25rem}
   .help-top h2{font-size:var(--type-serif-m-2xl-fs);line-height:var(--type-serif-m-2xl-lh);letter-spacing:var(--type-serif-m-2xl-ls)}
 }
 .board{display:grid;grid-template-columns:minmax(290px,370px) 1fr;gap:40px;align-items:start}
@@ -725,7 +724,7 @@ const I18N = {
     annMoved: (t, d) => `Denied. The card has moved to its place. Date: ${d}.`,
     annNext: t => `Next card: “${t}”.`,
     endTitle: "The timeline is complete",
-    scoreSub: () => "placed correctly on the first try",
+    scoreSub: () => "placed correctly",
     conclusion: "Presses, bookstores, fairs, and a prize, spread across several countries, now carry Russian-language literature beyond the reach of the censor—much as the tamizdat of the Soviet era once did. Seven cards, one emerging ecosystem.",
     playAnother: "Play another timeline",
     replay: "Replay this timeline",
@@ -817,7 +816,7 @@ const I18N = {
     annMoved: (t, d) => `Отклонено. Карточка перемещена на своё место. Дата: ${d}.`,
     annNext: t => `Следующая карточка: ${q(t)}.`,
     endTitle: "Хронология восстановлена",
-    scoreSub: () => "событий на своём месте с первой попытки",
+    scoreSub: () => "событий на своём месте",
     conclusion: "Издательства, книжные магазины, ярмарки и премия в разных странах сегодня выводят русскоязычную литературу из-под власти цензора — так же, как когда-то это делал советский тамиздат. Семь карточек — одна складывающаяся экосистема.",
     playAnother: "Сыграть другую хронологию",
     replay: "Сыграть эту ещё раз",
